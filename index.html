@@ -2435,7 +2435,31 @@
             }
         }
 
+	            /* Skrytí play buttonu pouze pro hero video */
+            .hero .video-background video::-webkit-media-controls-play-button,
+            .hero .video-background video::-webkit-media-controls-start-playback-button {
+                display: none !important;
+               -webkit-appearance: none;
+            }
 
+        /* Skrytí všech controls pouze pro hero video */
+            .hero .video-background video::-webkit-media-controls {
+                display: none !important;
+                -webkit-appearance: none;
+            }
+
+            .hero .video-background video::-webkit-media-controls-enclosure {
+                display: none !important;
+                -webkit-appearance: none;
+            }
+
+        /* Dodatečné zajištění pro Safari */
+            .hero .video-background video {
+                -webkit-playsinline: true;
+                -webkit-media-controls-panel: none;
+        }
+	
+	
     </style>
 </head>
 <body>
