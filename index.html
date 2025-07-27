@@ -2458,11 +2458,71 @@
                 -webkit-playsinline: true;
                 -webkit-media-controls-panel: none;
         }
+
+	/* Preloader */
+	.preloader {
+	    position: fixed;
+	    top: 0;
+	    left: 0;
+	    width: 100%;
+	    height: 100%;
+	    background: linear-gradient(135deg, #FF0080 0%, #FF33A0 50%, #CC0066 100%);
+	    display: flex;
+	    align-items: center;
+	    justify-content: center;
+	    z-index: 9999;
+	    transition: all 0.8s cubic-bezier(0.23, 1, 0.320, 1);
+	}
 	
+	.preloader.hidden {
+	    opacity: 0;
+	    visibility: hidden;
+	    transform: scale(1.1);
+	}
+	
+	.loader {
+	    width: 80px;
+	    height: 80px;
+	    position: relative;
+	}
+	
+	.loader::before,
+	.loader::after {
+	    content: '';
+	    position: absolute;
+	    border-radius: 50%;
+	    border: 3px solid transparent;
+	    border-top-color: #ffffff;
+	    animation: spin 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+	}
+	
+	.loader::before {
+	    width: 80px;
+	    height: 80px;
+	}
+	
+	.loader::after {
+	    width: 60px;
+	    height: 60px;
+	    top: 10px;
+	    left: 10px;
+	    animation-direction: reverse;
+	    animation-duration: 1s;
+	}
+	
+	@keyframes spin {
+	    from { transform: rotate(0deg); }
+	    to { transform: rotate(360deg); }
+	}
 	
     </style>
 </head>
 <body>
+   <!-- Preloader -->
+    <div class="preloader" id="preloader">
+	<div class="loader"></div>
+    </div>
+
     <div id="canvas-container"></div>
 
     <nav id="navbar">
@@ -3229,10 +3289,21 @@
             renderer.setSize(window.innerWidth, window.innerHeight);
         });
 
-        // Initialize animations directly without preloader
-        window.addEventListener('load', () => {
-            initAnimations();
-        });
+	// Preloader and animations
+	window.addEventListener('load', () => {
+	    const preloader = document.getElementById('preloader');
+	    setTimeout(() => {
+	        preloader.classList.add('hidden');
+	        setTimeout(() => {
+	            preloader.style.display = 'none';
+	        }, 800);
+	    }, 800);
+	    
+	    // Initialize animations after preloader
+	    setTimeout(() => {
+	        initAnimations();
+	    }, 1000);
+	});
 
         // Stop all videos helper function
         function stopAllVideos() {
