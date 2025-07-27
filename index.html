@@ -2493,18 +2493,15 @@
 	    position: absolute;
 	    border-radius: 50%;
 	    border: 3px solid transparent;
-	    background: linear-gradient(135deg, #FF0080 0%, #FF33A0 25%, #FFFFFF 50%, #FF33A0 75%, #FF0080 100%);
-	    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 3px));
-	    mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 3px));
+	    border-top: 3px solid;
 	    animation: spin 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
 	}
 	
 	.loader::before {
 	    width: 80px;
 	    height: 80px;
-	    box-shadow: 
-	        0 0 15px rgba(255, 0, 128, 0.6),
-	        inset 0 0 15px rgba(255, 0, 128, 0.3);
+	    border-top-color: #FF0080;
+	    box-shadow: 0 -3px 15px rgba(255, 0, 128, 0.6);
 	}
 	
 	.loader::after {
@@ -2512,34 +2509,28 @@
 	    height: 60px;
 	    top: 10px;
 	    left: 10px;
-	    background: linear-gradient(135deg, #FFFFFF 0%, #FF33A0 25%, #FF0080 50%, #FF33A0 75%, #FFFFFF 100%);
+	    border-top-color: #FFFFFF;
+	    box-shadow: 0 -3px 10px rgba(255, 255, 255, 0.8);
 	    animation-direction: reverse;
 	    animation-duration: 1s;
-	    box-shadow: 
-	        0 0 10px rgba(255, 255, 255, 0.5),
-	        inset 0 0 10px rgba(255, 0, 128, 0.2);
 	}
 	
 	@keyframes spin {
-	    from { 
-	        transform: rotate(0deg);
-	    }
-	    to { 
-	        transform: rotate(360deg);
-	    }
+	    from { transform: rotate(0deg); }
+	    to { transform: rotate(360deg); }
 	}
 	
-	/* Přidání pulzujícího efektu */
+	/* Přidání pulzujícího glow efektu */
 	.loader {
 	    animation: pulse 2s ease-in-out infinite;
 	}
 	
 	@keyframes pulse {
 	    0%, 100% {
-	        transform: scale(1);
+	        filter: drop-shadow(0 0 20px rgba(255, 0, 128, 0.6));
 	    }
 	    50% {
-	        transform: scale(1.05);
+	        filter: drop-shadow(0 0 40px rgba(255, 0, 128, 1));
 	    }
 	}
 	
