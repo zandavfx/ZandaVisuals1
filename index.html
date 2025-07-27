@@ -2473,7 +2473,18 @@
 	    z-index: 9999;
 	    transition: all 0.8s cubic-bezier(0.23, 1, 0.320, 1);
 	}
-	
+
+	.loader-logo {
+	    position: absolute;
+	    top: 50%;
+	    left: 50%;
+	    transform: translate(-50%, -50%);
+	    width: 40px;
+	    height: 40px;
+	    object-fit: contain;
+	    z-index: 10;
+	}
+	    
 	.preloader.hidden {
 	    opacity: 0;
 	    visibility: hidden;
@@ -2537,10 +2548,12 @@
     </style>
 </head>
 <body>
-   <!-- Preloader -->
-    <div class="preloader" id="preloader">
-	<div class="loader"></div>
-    </div>
+   		<!-- Preloader -->
+	<div class="preloader" id="preloader">
+	    <div class="loader">
+	        <img src="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/4c6d7bd3-a001-4cd3-90b6-53769831b900/public" alt="Z" class="loader-logo">
+	    </div>
+	</div>
 
     <div id="canvas-container"></div>
 
