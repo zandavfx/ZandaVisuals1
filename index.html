@@ -1086,12 +1086,15 @@
             border: 1px solid var(--gray-900);
             border-radius: var(--radius-2xl);
             padding: 48px;
-            transition: all 0.5s var(--ease-out-expo);
             opacity: 0;
             transform: translateY(30px);
             position: relative;
             overflow: hidden;
             cursor: pointer;
+            /* OPTIMIZATION: Nahrazeno transition:all za specifické vlastnosti */
+            transition: transform 0.5s var(--ease-out-expo), border-color 0.5s var(--ease-out-expo), box-shadow 0.5s var(--ease-out-expo);
+            /* OPTIMIZATION: Přidán will-change pro hardwarovou akceleraci animací */
+            will-change: transform, box-shadow;
         }
 
         .service-card::before {
@@ -1107,21 +1110,6 @@
             transition: all 0.7s var(--ease-out-expo);
         }
 
-        /* ÚPRAVA 1: Následující dva selektory byly odstraněny, aby se zrušila růžová čára */
-        /* .service-card::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--gradient-pink-white);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.5s var(--ease-out-expo);
-        }
-        */
-
         .service-card:hover {
             border-color: rgba(255, 0, 128, 0.3);
             transform: translateY(-12px);
@@ -1132,12 +1120,6 @@
             opacity: 0.05;
             transform: translateY(0);
         }
-
-        /*
-        .service-card:hover::after {
-            transform: scaleX(1);
-        }
-        */
 
         .service-icon {
             width: 100%;
@@ -2553,8 +2535,7 @@
     </style>
 </head>
 <body>
-   		<!-- Preloader -->
-	<div class="preloader" id="preloader">
+   		<div class="preloader" id="preloader">
 	    <div class="loader">
 	        <img src="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/4c6d7bd3-a001-4cd3-90b6-53769831b900/public" alt="Z" class="loader-logo">
 	    </div>
@@ -2824,7 +2805,7 @@
             <div class="services-grid">
                 <div class="service-card">
                     <div class="service-icon">
-                        <img src="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/39d95c50-2f30-4791-9504-5e6782042b00/public" alt="Editace">
+                        <img src="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/39d95c50-2f30-4791-9504-5e6782042b00/public" alt="Editace" loading="lazy">
                     </div>
                     <h3 class="service-title">Editing</h3>
                     <p class="service-description">
@@ -2846,7 +2827,7 @@
 
                 <div class="service-card">
                     <div class="service-icon">
-                        <img src="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/51c5f849-a8f8-4920-2228-ae5ed8fb4b00/public" alt="Motion Design">
+                        <img src="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/51c5f849-a8f8-4920-2228-ae5ed8fb4b00/public" alt="Motion Design" loading="lazy">
                     </div>
                     <h3 class="service-title">Branding</h3>
                     <p class="service-description">
@@ -2871,7 +2852,7 @@
 
                 <div class="service-card">
                     <div class="service-icon">
-                        <img src="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/56a9fb9f-3418-4987-2b35-b87cf44cb900/public" alt="Color Grading">
+                        <img src="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/56a9fb9f-3418-4987-2b35-b87cf44cb900/public" alt="Color Grading" loading="lazy">
                     </div>
                     <h3 class="service-title">Skriptování</h3>
                     <p class="service-description">
@@ -3605,7 +3586,8 @@
                 const label = section.querySelector('.section-label');
                 const title = section.querySelector('.section-title');
                 const description = section.querySelector('.section-description');
-                const elements = section.querySelectorAll('.stat-card, .timeline-item, .service-card, .portfolio-item, .contact-info-card');
+                // OPTIMIZATION: Odebrán '.service-card' z generického selektoru pro individuální animaci
+                const elements = section.querySelectorAll('.stat-card, .timeline-item, .portfolio-item, .contact-info-card');
 
                 const tl = gsap.timeline({
                     scrollTrigger: {
@@ -3651,6 +3633,24 @@
                     }, '-=0.4');
                 }
             });
+            
+            // OPTIMIZATION: Nová, výkonnější animace pro karty služeb.
+            // Každá karta se animuje individuálně, což je plynulejší.
+            gsap.utils.toArray('.service-card').forEach(card => {
+                gsap.to(card, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: card,
+                        start: 'top 85%', // Animace se spustí, když je karta z 85% viditelná
+                        toggleActions: 'play none none none',
+                        once: true // Animace se spustí pouze jednou
+                    }
+                });
+            });
+
 
             // Contact animations
             const contactTl = gsap.timeline({
