@@ -116,6 +116,22 @@ const state = {
 let bot = null;
 let clearTimer = 0;
 
+// ── Rozšíření (23. 9. 2026 večer) ────────────────────────────────────────────
+// Nové typy otázek, dlaždice s obrázky, vlastní vzhled a režim „jedna otázka"
+// žijí v /formular-app/spolecne.js (+ jedna-otazka.js). Stahují se JEN když
+// je formulář potřebuje — u formuláře bez nich (Book Therapy) zůstává `rozsireni`
+// null a všechny větve níže se přeskočí, stránka je beze změny.
+let rozsireni = null;
+/** Řízení režimu jedna otázka (jen když ho formulář má). */
+let joCtl = null;
+const NEW_TYPES = ['yes_no', 'rating', 'scale', 'number', 'phone'];
+const GROUP_TYPES = ['yes_no', 'rating', 'scale'];
+function needsExtensions(schema) {
+  if (schema.rezim === 'jedna_otazka' || schema.vzhled) return true;
+  return (schema.otazky ?? []).some(q => NEW_TYPES.includes(q?.typ)
+    || ((q?.typ === 'single_choice' || q?.typ === 'multi_choice') && (q.moznosti ?? []).some(m => m && (m.ikona || m.obrazek))));
+}
+
 const localKey = () => `zanda:form:${slug ?? `nahled-${previewId}`}:v1`;
 const sessionKey = () => `zanda:form:${slug}:${state.versionId}:klic`;
 const recoveryKey = () => `zanda:form:${slug}:obnova`;
@@ -247,6 +263,7 @@ function collectAnswers({ files = true } = {}) {
 function answerText(q) {
   const v = state.values[q.id];
   if (isEmpty(v)) return '';
+  if (rozsireni && NEW_TYPES.includes(q.typ)) return rozsireni.textOdpovedi(state.schema, q, v);
   if (q.typ === 'single_choice') return q.moznosti?.find(m => m.id === v)?.label ?? String(v);
   if (q.typ === 'multi_choice') return v.map(id => q.moznosti?.find(m => m.id === id)?.label ?? id).join(', ');
   if (q.typ === 'file') return doneFiles(q).map(f => f.name).join(', ');
@@ -342,6 +359,8 @@ function checkQuestion(q) {
     const ok = list.some(f => f.status === 'done' || f.status === 'uploading');
     return q.povinna && !ok ? t('Přidejte prosím soubor.', 'Přidej prosím soubor.', 'Please add a file.') : null;
   }
+  // Nové typy: stejné hlášky jako serverová kontrola (spolecne.js).
+  if (rozsireni && NEW_TYPES.includes(q.typ)) return rozsireni.zkontrolujHodnotu(state.schema, q, state.values[q.id]);
   const v = state.values[q.id];
   if (isEmpty(v)) return q.povinna ? requiredMessage(q) : null;
   const text = typeof v === 'string' ? v.trim() : '';
@@ -494,7 +513,8 @@ function renderQuestion(q, isLastStep) {
   const hintId = `${q.id}-hint`;
   const choice = isChoice(q);
   // Výběr i soubory jsou skupina — popisek je span (aria-labelledby), ne <label for>.
-  const label = choice || q.typ === 'file'
+  // (Ano / ne, hvězdičky a škála jsou taky skupina tlačítek.)
+  const label = choice || q.typ === 'file' || GROUP_TYPES.includes(q.typ)
     ? el('span', { class: 'field-label', id: labelId }, q.label)
     : el('label', { for: q.id, id: labelId }, q.label);
   if (!q.povinna) label.append(el('span', { class: 'optional' }, L('volitelné', 'optional')));
@@ -507,8 +527,14 @@ function renderQuestion(q, isLastStep) {
     return box;
   }
 
+  if (rozsireni && NEW_TYPES.includes(q.typ)) {
+    box.append(rozsireni.ovladac(q, controlApi(q, labelId, describedBy, isLastStep)));
+    return box;
+  }
+
   if (choice) {
-    box.append(renderChoice(q, labelId, describedBy));
+    // Možnosti s obrázkem / emoji = dlaždice (spolecne.js); jinak čipy jako dřív.
+    box.append(rozsireni?.maObrazky(q) ? rozsireni.ovladacVyberu(q, controlApi(q, labelId, describedBy, isLastStep)) : renderChoice(q, labelId, describedBy));
     return box;
   }
 
@@ -575,6 +601,19 @@ function renderQuestion(q, isLastStep) {
   }
   box.append(input);
   return box;
+}
+
+/** Rozhraní ovladačů ze spolecne.js pro režim kroků (hodnota přes setValue). */
+function controlApi(q, labelId, describedBy, isLastStep) {
+  return {
+    schema: state.schema,
+    rezim: 'kroky',
+    labelId,
+    describedBy,
+    enterHint: isLastStep ? 'send' : 'next',
+    ziskej: () => state.values[q.id],
+    nastav: value => setValue(q, value),
+  };
 }
 
 function syncSuggestionChips(box, value) {
@@ -1206,6 +1245,58 @@ function setSending(on) {
   updateNextButton();
 }
 
+/** Tělo odeslání (sdílí režim kroků i jedna otázka; pořadí klíčů jako dřív). */
+function submitBody(key, web) {
+  const body = {
+    versionId: state.versionId,
+    idempotencyKey: key,
+    odpovedi: collectAnswers(),
+    web,
+    otevreno: openedAt,
+  };
+  // Jen formuláře s nahráváním posílají token — ostatní tělo beze změny.
+  if (hasFileQuestions()) body.souborovyToken = uploadToken();
+  // Jen stránka otevřená z pozvánky posílá její token — jinak tělo beze změny.
+  if (state.inviteToken) body.pozvankaToken = state.inviteToken;
+  return body;
+}
+
+/**
+ * Odeslání pro režim jedna otázka: stejný požadavek, klíč pokusu a obnova
+ * po změně verze jako submit(), jen výsledek vrací místo vykreslení kroků.
+ * → { stav: 'ok', potvrzeni } | { stav: 'nahled' } | { stav: 'chyby', chyby, text } | { stav: 'chyba', text }
+ */
+async function sendAnswers(web) {
+  if (isPreview) return { stav: 'nahled' };
+  const failed = () => t(
+    'Odpovědi se nepodařilo odeslat. Nic se neztratilo — zkuste to prosím znovu.',
+    'Odpovědi se nepodařilo odeslat. Nic se neztratilo — zkus to prosím znovu.',
+    "Your answers couldn't be sent. Nothing is lost — please try again.",
+  );
+  const key = idempotencyKey();
+  setSending(true);
+  const res = await postJson(`${formPath}/odeslat`, submitBody(key, web));
+  setSending(false);
+  if (res.ok && res.data?.ok) return { stav: 'ok', potvrzeni: res.data.potvrzeni };
+  if (res.data?.pozvanka === 'neplatna') {
+    return { stav: 'chyba', text: res.data.chyba || t('Pozvánka už neplatí. Napište nám a pošleme novou.', 'Pozvánka už neplatí. Napiš nám a pošleme novou.', "This invitation is no longer valid. Let us know and we'll send you a new one.") };
+  }
+  state.retry = true;
+  if (res.network || res.status >= 500 || !res.data) return { stav: 'chyba', text: failed() };
+  if (res.status === 422 && res.data.chyby && typeof res.data.chyby === 'object') {
+    const chyby = {};
+    for (const q of questions()) {
+      if (isVisible(q) && typeof res.data.chyby[q.id] === 'string') chyby[q.id] = res.data.chyby[q.id];
+    }
+    if (Object.keys(chyby).length) {
+      return { stav: 'chyby', chyby, text: res.data.chyba || t('Zkontrolujte prosím označené odpovědi.', 'Zkontroluj prosím označené odpovědi.', 'Please check the highlighted answers.') };
+    }
+    return { stav: 'chyba', text: res.data.chyby._celkem || res.data.chyba || L('Odpovědi se nepodařilo odeslat.', "Your answers couldn't be sent.") };
+  }
+  if (res.status === 409) storage.set('sessionStorage', recoveryKey(), JSON.stringify(state.values));
+  return { stav: 'chyba', text: serverText(res, failed()) };
+}
+
 async function submit() {
   if (state.sending || state.done) return;
   if (anyUploading()) {
@@ -1232,18 +1323,7 @@ async function submit() {
   const key = idempotencyKey();
   setStatus('');
   setSending(true);
-  const body = {
-    versionId: state.versionId,
-    idempotencyKey: key,
-    odpovedi: collectAnswers(),
-    web: $('#hp-web').value,
-    otevreno: openedAt,
-  };
-  // Jen formuláře s nahráváním posílají token — ostatní tělo beze změny.
-  if (hasFileQuestions()) body.souborovyToken = uploadToken();
-  // Jen stránka otevřená z pozvánky posílá její token — jinak tělo beze změny.
-  if (state.inviteToken) body.pozvankaToken = state.inviteToken;
-  const res = await postJson(`${formPath}/odeslat`, body);
+  const res = await postJson(`${formPath}/odeslat`, submitBody(key, $('#hp-web').value));
   setSending(false);
 
   if (res.ok && res.data?.ok) {
@@ -1353,6 +1433,23 @@ function showSuccess(stav) {
   $('#form-area').hidden = true;
   $('#success').hidden = false;
 
+  cleanupAfterSuccess();
+
+  // Kroky v asidu: vše hotové, dál neklikací.
+  $('#steps').querySelectorAll('.step').forEach(b => {
+    b.classList.remove('active');
+    b.classList.add('done');
+    b.setAttribute('aria-current', 'false');
+    b.disabled = true;
+  });
+  $('#helper-copy').textContent = t('Odpovědi jsou uložené. Stránku můžete zavřít.', 'Odpovědi jsou uložené. Stránku můžeš zavřít.', 'Your answers are saved. You can close this page.');
+  bot?.react('hotovo');
+  scrollToTop();
+  h.focus({ preventScroll: true });
+}
+
+/** Úklid po uložení odpovědí (sdílí oba režimy). */
+function cleanupAfterSuccess() {
   // Úklid: rozepsané odpovědi i klíč pokusu už nejsou potřeba.
   storage.remove('localStorage', localKey());
   storage.remove('sessionStorage', sessionKey());
@@ -1368,18 +1465,6 @@ function showSuccess(stav) {
   state.memoryKey = null;
   $('#remember').checked = false;
   state.draftToken = null;
-
-  // Kroky v asidu: vše hotové, dál neklikací.
-  $('#steps').querySelectorAll('.step').forEach(b => {
-    b.classList.remove('active');
-    b.classList.add('done');
-    b.setAttribute('aria-current', 'false');
-    b.disabled = true;
-  });
-  $('#helper-copy').textContent = t('Odpovědi jsou uložené. Stránku můžete zavřít.', 'Odpovědi jsou uložené. Stránku můžeš zavřít.', 'Your answers are saved. You can close this page.');
-  bot?.react('hotovo');
-  scrollToTop();
-  h.focus({ preventScroll: true });
 }
 
 // ── Rozepsané odpovědi na serveru ────────────────────────────────────────────
@@ -1536,6 +1621,14 @@ async function loadInvitation() {
 
 function showInviteBanner(info) {
   if (!info || info.error) return;
+  const text = inviteBannerText(info);
+  if (!text) return;
+  const box = el('p', { class: 'invite-banner', id: 'invite' }, text);
+  $('#form-area').prepend(box);
+}
+
+/** Text pruhu pozvánky / opravy odpovědí (nebo ''). */
+function inviteBannerText(info) {
   let text = '';
   if (info.oprava) {
     const d = new Date(info.opravaZ);
@@ -1548,9 +1641,7 @@ function showInviteBanner(info) {
   } else if (info.jmeno) {
     text = L(`Pozvánka pro: ${info.jmeno}`, `Invitation for: ${info.jmeno}`);
   }
-  if (!text) return;
-  const box = el('p', { class: 'invite-banner', id: 'invite' }, text);
-  $('#form-area').prepend(box);
+  return text;
 }
 
 // ── Statistika kroků (23. 9. 2026) ───────────────────────────────────────────
@@ -1606,7 +1697,8 @@ function onClear() {
   $('#saved').hidden = true;
   $('#saved').replaceChildren();
   applyDefaults();
-  goTo(0);
+  if (joCtl) joCtl.reset();
+  else goTo(0);
   setStatus(t('Rozepsané odpovědi jsou smazané.', 'Rozepsané odpovědi jsou smazané.', 'Your draft answers are deleted.'));
 }
 
@@ -1810,6 +1902,24 @@ async function startForm(schema, versionId) {
   applyLanguage();
   if (isPreview) $('#preview').hidden = false;
 
+  // Nové typy / vzhled / jedna otázka: stáhnout rozšíření (jinak nic).
+  let joModule = null;
+  if (needsExtensions(schema)) {
+    const loaded = await loadExtensions(schema);
+    if (!loaded) {
+      showNotice({
+        title: L('Formulář se nepodařilo načíst', "The form couldn't be loaded"),
+        text: L(
+          'Zkontrolujte prosím připojení k internetu a zkuste to znovu. Pokud potíže trvají, napište nám.',
+          'Please check your internet connection and try again. If the problem persists, let us know.',
+        ),
+        retry: true,
+      });
+      return;
+    }
+    joModule = loaded.jo;
+  }
+
   // Pořadí zdrojů: rozepsané na serveru > obnova po změně verze > zařízení > výchozí.
   let restoredNote = '';
   const saved = storage.get('localStorage', localKey());
@@ -1837,6 +1947,11 @@ async function startForm(schema, versionId) {
   restoreFiles();
   applyDefaults();
 
+  if (joModule) {
+    await startOneQuestion(joModule, invite, draft, restoredNote);
+    return;
+  }
+
   renderPage();
   $('#skeleton').hidden = true;
   $('#loading-text').textContent = '';
@@ -1847,10 +1962,79 @@ async function startForm(schema, versionId) {
   showInviteBanner(invite);
   trackStep('zobrazeni', state.step);
 
+  showStartStatus(invite, draft, restoredNote);
+}
+
+function showStartStatus(invite, draft, restoredNote) {
   if (invite?.error) setStatus(invite.error, 'status-error');
   else if (draft && typeof draft === 'object' && draft.error) setStatus(draft.error, 'status-error');
   else if (typeof draft === 'string') setStatus(draft);
   else if (restoredNote) setStatus(restoredNote);
+}
+
+// ── Režim jedna otázka na obrazovku (23. 9. 2026 večer) ──────────────────────
+/** Stáhne spolecne.js (+ jedna-otazka.js), styly a použije vzhled. Při chybě null. */
+async function loadExtensions(schema) {
+  try {
+    const one = schema.rezim === 'jedna_otazka';
+    const [mod, joMod] = await Promise.all([
+      import('/formular-app/spolecne.js'),
+      one ? import('/formular-app/jedna-otazka.js') : null,
+    ]);
+    rozsireni = mod;
+    // Styly: když se nenačtou, stránka funguje dál (jen bez nových stylů).
+    await rozsireni.nactiStyly('/formular-app/spolecne.css');
+    rozsireni.pouzijVzhled(document.documentElement, schema);
+    return { jo: joMod };
+  } catch {
+    rozsireni = null;
+    return null;
+  }
+}
+
+async function startOneQuestion(joModule, invite, draft, restoredNote) {
+  renderPage(); // titulek dokumentu, klient v hlavičce, patička
+  $('#skeleton').hidden = true;
+  $('#loading-text').textContent = '';
+  $('#main').setAttribute('aria-busy', 'false');
+  setupBot();
+  joCtl = await joModule.spustit({
+    schema: state.schema,
+    get values() { return state.values; },
+    isPreview,
+    t,
+    L,
+    isEn,
+    isVisible,
+    checkQuestion,
+    answerText,
+    // Bez refreshVisibility — ta patří k DOM režimu kroků.
+    setValue(q, value) {
+      state.values[q.id] = value;
+      delete state.errors[q.id];
+      saveLocal();
+    },
+    renderFileField,
+    anyUploading,
+    odeslat: sendAnswers,
+    trackStep,
+    get bot() { return bot; },
+    setHelper(text) { $('#helper-copy').textContent = text; },
+    setStatus,
+    emailLine,
+    dokonceno() {
+      state.done = true;
+      state.retry = false;
+      cleanupAfterSuccess();
+      $('#helper-copy').textContent = t('Odpovědi jsou uložené. Stránku můžete zavřít.', 'Odpovědi jsou uložené. Stránku můžeš zavřít.', 'Your answers are saved. You can close this page.');
+    },
+    get retry() { return state.retry; },
+    inviteText: invite && !invite.error ? inviteBannerText(invite) : '',
+    // Existující prvky z index.html se jen přesunou (obsluha událostí zůstává).
+    draftNode: $('#draft'),
+    statusNode: $('#status'),
+  });
+  showStartStatus(invite, draft, restoredNote);
 }
 
 // ── Události ─────────────────────────────────────────────────────────────────

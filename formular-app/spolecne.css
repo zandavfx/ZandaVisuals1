@@ -1,0 +1,105 @@
+/* Sdílené styly veřejného formuláře (23. 9. 2026 večer).
+   Načítá je spolecne.js / form.js JEN u formulářů s novými typy otázek,
+   vlastním vzhledem nebo režimem jedna otázka. Všechno je pod
+   html[data-tema] nebo pod novými třídami .zv-*, takže formulář bez nich
+   (Book Therapy) vypadá přesně jako dřív. */
+
+/* ── Témata ──────────────────────────────────────────────────────────────── */
+html[data-tema]{--surface:#ffffffb3;--surface-solid:#fff;--soft:#f3e9ec;--soft-line:#e4d5dd;--field-line:#d9d1d5;--chip-line:#d8cbd2;--chip-on:#aa7d94;--chip-text:#655660;--focus:#99637e;--btn-bg:var(--pink);--btn-fg:#252125;--btn-hover:#dfa5c1;--bar:var(--pink);--hi:#e8b5ce8c;--err:#a02d2d;--err-line:#af3939;--track:#e5dfe1;--placeholder:#8a7d85}
+html[data-tema=inkoust]{--paper:#252125;--ink:#faf8f4;--line:#3e363c;--muted:#b9aeb5;--surface:#2d282c;--surface-solid:#2d282c;--soft:#3a2f36;--soft-line:#51424b;--field-line:#51474e;--chip-line:#5d4f57;--chip-on:#e8b5ce;--chip-text:#ddd2d8;--focus:#e8b5ce;--err:#f2a7a7;--err-line:#e48d8d;--track:#3e363c;--hi:#e8b5ce66;--placeholder:#9d9198;color-scheme:dark}
+html[data-tema=ruzova]{--paper:#f8ecf1;--line:#e8d2dc;--muted:#76606c;--surface:#fffafc;--surface-solid:#fffafc;--soft:#f2dce6;--soft-line:#e4c6d4;--field-line:#dcc2cf;--chip-line:#d6bccb;--track:#edd8e2;--btn-bg:#252125;--btn-fg:#faf8f4;--btn-hover:#3b3439;--bar:#c77ea3}
+
+/* Režim kroků s vlastním vzhledem: jen přepnutí barev na proměnné. */
+html[data-tema] body{background:var(--paper);color:var(--ink)}
+html[data-tema] header,html[data-tema] footer,html[data-tema] .actions,html[data-tema] .answer{border-color:var(--line)}
+html[data-tema=inkoust] header img{filter:invert(1) brightness(1.05)}
+html[data-tema] h1 span{background:linear-gradient(transparent 61%,var(--hi) 61%,var(--hi) 91%,transparent 91%)}
+html[data-tema] textarea,html[data-tema] input[type=email],html[data-tema] input[type=text],html[data-tema] input[type=url],html[data-tema] input[type=date],html[data-tema] input[type=tel]{background:var(--surface);border-color:var(--field-line);color:var(--ink)}
+html[data-tema] textarea:focus,html[data-tema] input:focus{border-color:var(--focus);box-shadow:0 0 0 3px color-mix(in srgb,var(--focus) 22%,transparent)}
+html[data-tema] textarea::placeholder,html[data-tema] input::placeholder{color:var(--placeholder)}
+html[data-tema] .error textarea,html[data-tema] .error input{border-color:var(--err-line)}
+html[data-tema] .error-message,html[data-tema] #status.status-error,html[data-tema] .file-error{color:var(--err)}
+html[data-tema] .chip{border-color:var(--chip-line);color:var(--chip-text)}
+html[data-tema] .chip:hover,html[data-tema] .chip[aria-pressed=true],html[data-tema] .chip[aria-checked=true]{background:var(--soft);border-color:var(--chip-on);color:var(--ink)}
+html[data-tema] .primary{background:var(--btn-bg);color:var(--btn-fg)}
+html[data-tema] .primary:hover{background:var(--btn-hover)}
+html[data-tema] .progress{background:var(--track)}
+html[data-tema] .progress div{background:var(--ink)}
+html[data-tema] .step b{border-color:var(--line)}
+html[data-tema] .step.active b{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+html[data-tema] .step.done b{background:var(--soft);border-color:var(--soft)}
+html[data-tema] .review-card,html[data-tema] .success,html[data-tema] .preview-message,html[data-tema] .invite-banner{background:var(--soft);border-color:var(--soft-line)}
+html[data-tema] #helper{background:var(--surface-solid);border-color:var(--line);color:var(--ink)}
+html[data-tema] .helper-top button{color:var(--ink)}
+html[data-tema] .file-drop{background:var(--surface);border-color:var(--chip-line)}
+html[data-tema] .file-drop:hover,html[data-tema] .file-drop.drag{background:var(--soft);border-color:var(--chip-on)}
+html[data-tema] .file-item{background:var(--surface-solid);border-color:var(--line)}
+html[data-tema] .file-bar{background:var(--track)}
+html[data-tema] .file-bar div{background:var(--ink)}
+html[data-tema] .saved{background:var(--surface);border-color:var(--line);color:var(--ink)}
+html[data-tema] .saved input{background:var(--surface-solid);color:var(--ink);border-color:var(--field-line)}
+html[data-tema] .draft input{accent-color:var(--ink)}
+html[data-tema] .draft .save-later{border-color:var(--chip-line);color:var(--ink)}
+html[data-tema] .draft .save-later:hover{background:var(--soft);border-color:var(--chip-on)}
+html[data-tema] button:focus-visible,html[data-tema] a:focus-visible,html[data-tema] summary:focus-visible,html[data-tema] .chip:focus-visible,html[data-tema] h1:focus-visible,html[data-tema] h2:focus-visible{outline-color:var(--focus)}
+html[data-tema] .secondary,html[data-tema] .step{color:var(--muted)}
+html[data-tema] .step.active{color:var(--ink)}
+
+/* ── Nové ovládací prvky (oba režimy) ────────────────────────────────────── */
+.zv-ano-ne,.zv-hvezdy,.zv-skala,.zv-seznam,.zv-dlazdice{margin:12px 0 0}
+.field>.field-label+.zv-skala-obal,.field>.field-label+.zv-cislo-obal{margin-top:12px}
+.field>label+input.zv-cislo-pole,.field>label+input.zv-telefon,.field>label+.zv-cislo-obal{margin-top:12px}
+input[type=tel],input.zv-cislo-pole{width:100%;border:1px solid var(--field-line,#d9d1d5);border-radius:8px;background:var(--surface,#ffffffb3);color:var(--ink);padding:14px 16px;outline:0;transition:border-color .16s,box-shadow .16s}
+input[type=tel]:focus,input.zv-cislo-pole:focus{border-color:var(--focus,#9b6a81);box-shadow:0 0 0 3px #e8b5ce33}
+.zv-cislo-pole{max-width:260px}
+.zv-rozsah{display:block;margin-top:6px;font-size:12px;color:var(--muted)}
+
+/* Možnost (ano / ne, seznam, dlaždice) */
+.zv-ano-ne{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;max-width:360px}
+.zv-seznam{display:grid;gap:8px;max-width:520px}
+.zv-moznost{position:relative;display:flex;flex-direction:column;align-items:stretch;min-height:44px;padding:10px 14px;border:1px solid var(--chip-line,#d8cbd2);border-radius:8px;background:var(--surface,#ffffffb3);color:var(--ink);font-size:14px;text-align:left;transition:border-color .16s,background-color .16s,transform .16s}
+.zv-moznost:hover{border-color:var(--chip-on,#aa7d94)}
+.zv-moznost[aria-checked=true]{background:var(--soft,#f3e9ec);border-color:var(--chip-on,#aa7d94)}
+.zv-moznost:focus-visible,.zv-hvezda:focus-visible,.zv-cislo:focus-visible{outline:3px solid var(--focus,#99637e);outline-offset:2px}
+.zv-radek{display:flex;align-items:center;gap:10px;min-width:0;width:100%}
+.zv-text{flex:1;min-width:0;overflow-wrap:anywhere}
+.zv-klavesa{flex:none;display:grid;place-items:center;width:24px;height:24px;border:1px solid var(--chip-line,#d8cbd2);border-radius:5px;font-size:11px;font-weight:700;color:var(--muted);background:var(--surface-solid,#fff)}
+.zv-moznost[aria-checked=true] .zv-klavesa{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.zv-fajfka{flex:none;width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;opacity:0;transition:opacity .16s}
+.zv-moznost[aria-checked=true] .zv-fajfka{opacity:1}
+.zv-ano-ne .zv-moznost{justify-content:center}
+
+/* Dlaždice s obrázkem / emoji */
+.zv-dlazdice{display:grid;grid-template-columns:repeat(var(--sloupcu,3),minmax(0,1fr));gap:10px}
+.zv-dlazdice-polozka{padding:8px;gap:8px}
+.zv-media{display:grid;place-items:center;aspect-ratio:4/3;border-radius:6px;background:var(--soft,#f3e9ec);overflow:hidden}
+.zv-media img{width:100%;height:100%;object-fit:cover;display:block}
+.zv-emoji{font-size:40px;line-height:1}
+.zv-dlazdice-polozka .zv-radek{padding:2px 4px 2px}
+
+/* Hvězdičky */
+.zv-hvezdy{display:flex;flex-wrap:wrap;gap:4px}
+.zv-hvezda{display:grid;place-items:center;width:44px;height:44px;padding:0;border:0;border-radius:8px;background:none;color:var(--ink)}
+.zv-hvezda svg{width:32px;height:32px;fill:transparent;stroke:currentColor;stroke-width:1.6;stroke-linejoin:round;transition:fill .12s,transform .16s}
+.zv-hvezda.plna svg,.zv-hvezda.nahled svg{fill:var(--pink)}
+.zv-hvezda:hover svg{transform:scale(1.08)}
+.error .zv-hvezda{color:var(--err-line,#af3939)}
+
+/* Škála (NPS) */
+.zv-skala{display:grid;grid-template-columns:repeat(var(--n,11),minmax(0,1fr));gap:6px;max-width:640px}
+.zv-cislo{min-height:44px;padding:0;border:1px solid var(--chip-line,#d8cbd2);border-radius:8px;background:var(--surface,#ffffffb3);color:var(--ink);font-size:14px;font-weight:700;font-variant-numeric:tabular-nums;transition:border-color .16s,background-color .16s}
+.zv-cislo:hover{border-color:var(--chip-on,#aa7d94)}
+.zv-cislo[aria-checked=true]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.zv-skala-obal{max-width:640px}
+.zv-hvezdy-obal{max-width:max-content}
+.zv-popisky{display:flex;justify-content:space-between;gap:16px;margin-top:8px;font-size:12px;color:var(--muted)}
+.zv-popisky span:last-child{text-align:right}
+
+.error .zv-moznost,.error .zv-cislo{border-color:var(--err-line,#af3939)}
+
+@media(max-width:560px){
+.zv-skala{grid-template-columns:repeat(var(--nm,6),minmax(0,1fr))}
+.zv-dlazdice{grid-template-columns:repeat(2,minmax(0,1fr))}
+.zv-emoji{font-size:34px}
+}
+@media(prefers-reduced-motion:reduce){.zv-hvezda svg,.zv-moznost,.zv-cislo{transition:none}.zv-hvezda:hover svg{transform:none}}

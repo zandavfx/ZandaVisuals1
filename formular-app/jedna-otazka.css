@@ -1,0 +1,178 @@
+/* Režim „jedna otázka na obrazovku" (23. 9. 2026 večer).
+   Načítá ho jen jedna-otazka.js. Barvy výhradně z proměnných témat
+   (spolecne.css: papír / inkoust / růžová + akcent). Zaoblení 8 px,
+   žádné barevné proužky u zaoblených prvků. */
+
+.jo-rezim{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;background:var(--paper);color:var(--ink)}
+.jo-rezim>header{width:100%;max-width:none;margin:0;padding:22px 32px 6px;border-bottom:0}
+.jo-rezim>header img{width:132px;height:auto}
+.jo-rezim .preview{position:relative;z-index:9}
+
+/* Tenký ukazatel postupu úplně nahoře */
+.jo-postup{position:fixed;top:0;left:0;right:0;height:3px;background:var(--track);z-index:8}
+.jo-postup div{height:100%;width:0;background:var(--bar);transition:width .22s cubic-bezier(.2,.7,.2,1)}
+
+.jo{flex:1;display:flex;flex-direction:column;min-width:0;width:100%}
+.jo-scena{position:relative;flex:1;display:flex;flex-direction:column;justify-content:center;width:100%;max-width:760px;margin:0 auto;padding:40px 32px 56px;min-width:0}
+.jo-obrazovka{width:100%;min-width:0}
+
+/* Štítek sekce (název kroku) */
+.jo-sekce{display:flex;align-items:center;gap:10px;margin:0 0 18px;font-size:11px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--muted)}
+.jo-sekce-cislo{display:grid;place-items:center;min-width:26px;height:22px;padding:0 6px;border-radius:6px;background:var(--soft);color:var(--ink);letter-spacing:.5px;font-variant-numeric:tabular-nums}
+.jo-sekce-uvod{margin:-6px 0 22px;font-size:15px;color:var(--muted);max-width:560px}
+
+/* Otázka */
+.jo .field{margin:0}
+.jo .jo-label{margin:0;font-size:clamp(23px,1.6vw + 15px,34px);line-height:1.22;letter-spacing:-.8px;font-weight:700;overflow-wrap:anywhere}
+.jo .jo-label label{display:inline;font:inherit;line-height:inherit}
+.jo .jo-label .optional{font-size:13px;letter-spacing:0;vertical-align:middle;margin-left:8px}
+.jo-cislo{display:inline-flex;align-items:center;gap:4px;margin-right:12px;vertical-align:.22em;font-size:13px;font-weight:700;letter-spacing:.4px;color:var(--muted);font-variant-numeric:tabular-nums}
+.jo-cislo-sipka{width:14px;height:14px;fill:none;stroke:var(--chip-on);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.jo-napoveda{margin:12px 0 0;font-size:16px;line-height:1.55;color:var(--muted);max-width:600px}
+.jo-pole>[data-control],.jo-pole>.jo-text,.jo-pole>.zv-skala-obal,.jo-pole>.zv-cislo-obal,.jo-pole>.file-field{margin-top:28px}
+.jo-pole .zv-ano-ne,.jo-pole .zv-seznam,.jo-pole .zv-dlazdice,.jo-pole .zv-hvezdy,.jo-pole .zv-skala{margin-top:28px}
+.jo-pole .zv-skala-obal .zv-skala,.jo-pole .zv-skala-obal .zv-hvezdy{margin-top:0}
+
+/* Text */
+.jo .jo-vstup,.jo .zv-cislo-pole,.jo input[type=tel]{font-size:20px;padding:16px 18px;border-radius:8px;background:var(--surface);border:1px solid var(--field-line);color:var(--ink);width:100%}
+.jo textarea.jo-vstup{min-height:120px;resize:none;line-height:1.5}
+.jo .jo-vstup::placeholder,.jo input::placeholder{font-size:18px;color:var(--placeholder)}
+.jo .zv-cislo-pole{max-width:320px}
+.jo input[type=tel]{max-width:420px}
+.jo input[type=date].jo-vstup{max-width:320px;min-height:60px}
+.jo .jo-chips{margin:12px 0 0}
+.jo .jo-chips .chip{font-size:13px;padding:9px 12px;min-height:40px}
+
+/* Výběr: větší možnosti s písmeny */
+.jo .zv-seznam{max-width:560px;gap:10px}
+.jo .zv-moznost{font-size:17px;min-height:52px;padding:12px 16px}
+.jo .zv-klavesa{width:28px;height:28px;font-size:12px}
+.jo .zv-ano-ne{max-width:420px;gap:10px}
+.jo .zv-ano-ne .zv-moznost{min-height:60px;justify-content:center}
+.jo .zv-ano-ne .zv-radek,.jo .zv-ano-ne .zv-moznost{flex-direction:row;align-items:center;gap:10px}
+.jo .zv-dlazdice{gap:12px;max-width:720px}
+.jo .zv-dlazdice-polozka{padding:10px;font-size:16px}
+.jo .zv-emoji{font-size:48px}
+.jo .zv-moznost[aria-checked=true]{transform:translateY(-1px)}
+.jo .zv-hvezda{width:52px;height:52px}
+.jo .zv-hvezda svg{width:38px;height:38px}
+.jo .zv-cislo{min-height:52px;font-size:16px}
+.jo .zv-popisky{font-size:13px}
+
+/* Chyba a klávesy */
+.jo .jo-chyba{display:flex;align-items:center;gap:8px;margin:14px 0 0;font-size:14px;color:var(--err)}
+.jo .jo-chyba::before{content:"";flex:none;width:6px;height:6px;border-radius:50%;background:currentColor}
+.jo .error .jo-vstup,.jo .error .zv-cislo-pole,.jo .error input[type=tel]{border-color:var(--err-line)}
+.jo-klavesy{margin:16px 0 0;font-size:12px;color:var(--muted)}
+@media(hover:none){.jo-klavesy,.jo-enter{display:none}}
+
+/* Úvod */
+.jo-nadtitulek{margin:0 0 18px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase}
+.jo .jo-nadpis{margin:0;font-size:clamp(40px,4.4vw + 16px,72px);line-height:1.02;letter-spacing:-.045em;overflow-wrap:anywhere}
+.jo .jo-nadpis span{background:linear-gradient(transparent 61%,var(--hi) 61%,var(--hi) 91%,transparent 91%)}
+.jo-uvod-text{margin:26px 0 0;font-size:clamp(17px,.5vw + 15px,20px);line-height:1.55;max-width:600px}
+.jo-doplnek{margin:12px 0 0;font-size:14px;color:var(--muted);max-width:520px}
+.jo-poznamka{display:flex;gap:14px;align-items:center;margin:24px 0 0;max-width:520px}
+.jo-poznamka p{margin:0;font-size:14px;color:var(--muted)}
+.jo-poznamka strong{color:var(--ink)}
+.jo-pozvanka{margin:24px 0 0;max-width:560px}
+.jo-start{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:34px}
+.jo .jo-zacit{font-size:17px;padding:16px 26px;gap:12px;align-items:center}
+.jo-enter{font-size:13px;color:var(--muted)}
+.jo-meta{margin:18px 0 0;font-size:13px;color:var(--muted)}
+.jo-codal{margin-top:22px;max-width:520px;color:var(--muted);font-size:14px}
+.jo-codal summary{color:var(--ink)}
+
+/* Přehled odpovědí */
+.jo-souhrn .review-card{margin:22px 0 8px}
+.jo-prehled{list-style:none;margin:22px 0 0;padding:0;border-top:1px solid var(--line)}
+.jo-prehled li{display:flex;gap:14px;align-items:flex-start;padding:16px 0;border-bottom:1px solid var(--line)}
+.jo-prehled-cislo{flex:none;min-width:26px;padding-top:2px;font-size:12px;font-weight:700;color:var(--muted);font-variant-numeric:tabular-nums}
+.jo-prehled-text{flex:1;min-width:0}
+.jo-prehled-text strong{display:block;font-size:14px}
+.jo-prehled-text p{margin:4px 0 0;font-size:15px;color:var(--muted);white-space:pre-wrap;overflow-wrap:anywhere}
+.jo-upravit{flex:none;min-height:40px;padding:8px 10px;border:1px solid var(--chip-line);border-radius:8px;background:none;color:var(--ink);font-size:13px}
+.jo-upravit:hover{background:var(--soft);border-color:var(--chip-on)}
+
+/* Potvrzení */
+.jo-hotovo .jo-jiskra{display:block;margin-bottom:22px}
+.jo-hotovo-text{margin:16px 0 0;font-size:18px;max-width:600px}
+.jo-hotovo .email-line{margin:14px 0 0;font-size:14px;color:var(--muted)}
+.jo-hotovo h3{margin:30px 0 10px;font-size:15px}
+.jo-dalsi-kroky{list-style:none;margin:0;padding:0;display:grid;gap:10px;max-width:600px}
+.jo-dalsi-kroky li{display:flex;gap:12px;font-size:15px}
+.jo-nahled{margin-top:26px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px}
+.jo-nahled p{margin:0;font-size:14px}
+
+/* Dolní lišta: Zpět / OK (Zandabot vlevo dole) */
+.jo-dole{position:sticky;bottom:0;z-index:4;background:var(--paper);padding:10px 32px 18px 128px;border-top:1px solid var(--line)}
+.jo-stav{max-width:760px;margin:0 auto}
+.jo-stav #status{margin:0 0 10px;font-size:13px}
+.jo-stav #status:empty{display:none}
+.jo-lista{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 12px}
+.jo-lista-vpravo{display:flex;align-items:center;gap:8px;margin-left:auto}
+.jo .jo-ok{min-height:48px;min-width:96px;padding:13px 22px;gap:8px;align-items:center;justify-content:center;font-size:15px}
+.jo .jo-zpet{min-height:44px;padding:10px 14px;border-radius:8px}
+.jo .jo-zpet:hover{background:var(--soft);color:var(--ink)}
+.jo-ulozit{min-height:40px;border:0;background:none;padding:8px 0;color:var(--muted);font-size:13px;text-decoration:underline;text-underline-offset:3px}
+.jo-ulozit:hover{color:var(--ink)}
+.jo[data-obrazovka=uvod] .jo-lista,.jo[data-obrazovka=hotovo] .jo-lista,.jo[data-obrazovka=hotovo] .jo-dole{display:none}
+.jo[data-obrazovka=uvod] .jo-dole{border-top-color:transparent}
+.jo-ikona{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+
+/* Panel rozepsaných odpovědí */
+.jo-panel{position:fixed;left:24px;bottom:96px;z-index:7;width:min(440px,calc(100vw - 32px));max-height:calc(100dvh - 140px);overflow:auto;background:var(--surface-solid);color:var(--ink);border:1px solid var(--line);border-radius:8px;box-shadow:0 16px 44px #25212522;padding:16px 18px}
+.jo-panel-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.jo-panel-top strong{font-size:14px}
+.jo-panel-zavrit{width:40px;height:40px;border:0;border-radius:8px;background:none;color:var(--ink);font-size:24px;line-height:1}
+.jo-panel .draft{margin-top:4px}
+.jo-panel .draft button{min-height:40px}
+.jo-panel .draft label{min-height:40px}
+.jo .file-pick,.jo .file-remove{min-height:40px;padding:0 4px}
+.jo .file-drop{padding:22px 18px}
+.jo .file-lead{font-size:16px}
+
+/* Zandabot a nápověda v tomhle režimu vlevo dole */
+.jo-rezim #bot{left:22px;right:auto;bottom:12px;width:80px;height:80px;z-index:6}
+.jo-rezim #helper{left:24px;right:auto;bottom:104px}
+
+/* Zarovnání na střed */
+[data-zarovnani=stred] .jo-obrazovka{text-align:center}
+[data-zarovnani=stred] .jo-sekce,[data-zarovnani=stred] .jo-start,[data-zarovnani=stred] .jo-poznamka{justify-content:center}
+[data-zarovnani=stred] .jo-sekce-uvod,[data-zarovnani=stred] .jo-napoveda,[data-zarovnani=stred] .jo-uvod-text,[data-zarovnani=stred] .jo-doplnek,[data-zarovnani=stred] .jo-poznamka,[data-zarovnani=stred] .jo-pozvanka,[data-zarovnani=stred] .jo-codal,[data-zarovnani=stred] .jo-hotovo-text,[data-zarovnani=stred] .jo-dalsi-kroky{margin-left:auto;margin-right:auto}
+[data-zarovnani=stred] .jo-pole .zv-seznam,[data-zarovnani=stred] .jo-pole .zv-ano-ne,[data-zarovnani=stred] .jo-pole .zv-dlazdice,[data-zarovnani=stred] .jo-pole .zv-skala-obal,[data-zarovnani=stred] .jo-pole>.zv-skala,[data-zarovnani=stred] .jo-text,[data-zarovnani=stred] .jo .zv-cislo-pole,[data-zarovnani=stred] .jo input[type=tel],[data-zarovnani=stred] .jo input[type=date].jo-vstup,[data-zarovnani=stred] .jo-pole .file-field{margin-left:auto;margin-right:auto;max-width:560px}
+[data-zarovnani=stred] .jo-pole .zv-hvezdy{justify-content:center;max-width:none}
+[data-zarovnani=stred] .jo-hotovo .jo-jiskra{margin-left:auto;margin-right:auto}
+[data-zarovnani=stred] .jo-chips,[data-zarovnani=stred] .jo-chyba{justify-content:center}
+[data-zarovnani=stred] .zv-moznost{text-align:left}
+[data-zarovnani=stred] .jo-prehled{text-align:left}
+[data-zarovnani=stred] .jo-dalsi-kroky li{text-align:left}
+
+/* Mobil */
+@media(max-width:760px){
+.jo-rezim>header{padding:18px 16px 0}
+.jo-rezim>header img{width:112px}
+.jo-scena{justify-content:flex-start;padding:28px 16px 32px}
+.jo .jo-label{letter-spacing:-.4px}
+.jo-pole>[data-control],.jo-pole>.jo-text,.jo-pole>.zv-skala-obal,.jo-pole>.zv-cislo-obal,.jo-pole>.file-field,.jo-pole .zv-ano-ne,.jo-pole .zv-seznam,.jo-pole .zv-dlazdice,.jo-pole .zv-hvezdy,.jo-pole .zv-skala{margin-top:22px}
+.jo .jo-vstup,.jo .zv-cislo-pole,.jo input[type=tel]{font-size:18px;padding:14px 16px}
+.jo .jo-vstup::placeholder,.jo input::placeholder{font-size:16px}
+.jo .zv-moznost{font-size:16px}
+.jo .zv-hvezda{width:44px;height:44px}
+.jo .zv-hvezda svg{width:32px;height:32px}
+.jo .zv-cislo{min-height:44px}
+.jo-dole{padding:8px 16px 12px 76px}
+.jo .jo-ok{min-width:0;padding:12px 16px;font-size:14px}
+.jo .jo-zpet{min-width:44px;padding:10px 12px}
+.jo-zpet-text{display:none}
+.jo-ulozit{font-size:12px;max-width:9.5em;text-align:left;line-height:1.3}
+.jo-rezim #bot{left:10px;bottom:8px;width:56px;height:56px}
+.jo-rezim #helper{left:12px;bottom:80px;max-width:calc(100vw - 24px)}
+.jo-panel{left:16px;bottom:84px}
+.jo-start{gap:12px}
+}
+@media(max-width:360px){.jo-lista-vpravo{gap:4px}.jo .jo-zpet{padding:10px 6px}}
+@media(prefers-reduced-motion:reduce){.jo-postup div{transition:none}.jo .zv-moznost[aria-checked=true]{transform:none}}
+
+/* Nadpis dostává fokus jen kvůli čtečce (tabindex=-1) — bez rámečku. */
+.jo [data-nadpis]:focus{outline:none}
