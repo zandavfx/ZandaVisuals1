@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 1,
+  "slug": "book_therapy",
+  "title": "Book Therapy",
+  "mode": "preview",
+  "steps": [
+    "Téma a účel",
+    "Vzhled a atmosféra",
+    "Natáčení a podklady",
+    "Kontrola a dokončení"
+  ],
+  "fields": [
+    {
+      "id": "q1",
+      "number": 1,
+      "label": "Je něco aktuálního, na čem byste chtěla první video postavit?",
+      "help": "Například nová kniha, setkání s autorem, plánovaná akce, spolupráce nebo příběh z knihkupectví. Přidejte případný termín a odkaz. Můžete také zvolit: Téma nechám navrhnout Žanka.",
+      "type": "textarea",
+      "required": true,
+      "step": 0
+    },
+    {
+      "id": "q2",
+      "number": 2,
+      "label": "Koho má video především oslovit?",
+      "help": "Například lidi, kteří Book Therapy ještě neznají; současné zákazníky; milovníky knih, designu a umění; nebo lidi hledající dárek. Vyberte nejdůležitější skupinu, případně doplňte vlastní.",
+      "type": "textarea",
+      "required": true,
+      "step": 0
+    },
+    {
+      "id": "q3",
+      "number": 3,
+      "label": "Co by si měl divák odnést nebo udělat?",
+      "help": "Například poznat váš způsob výběru knih, přijít do knihkupectví, prohlédnout si konkrétní knihu na e-shopu, přihlásit se na akci nebo začít sledovat váš profil. Vyberte jeden hlavní cíl. Pokud už máte cílovou stránku, přidejte odkaz.",
+      "type": "textarea",
+      "required": true,
+      "step": 0
+    },
+    {
+      "id": "q4",
+      "number": 4,
+      "label": "Kde chcete video použít?",
+      "help": "Instagram, Facebook, web, placená reklama nebo jiné místo? Máte požadovaný jazyk, délku či formát, nebo necháte doporučení na mně?",
+      "type": "textarea",
+      "required": false,
+      "step": 0
+    },
+    {
+      "id": "q5",
+      "number": 5,
+      "label": "Pošlete prosím 2–3 videa, která jsou vám vizuálně blízká.",
+      "help": "Mohou být vaše i odjinud. Ke každému stačí věta, co se vám líbí: například klidné tempo, detailní záběry knih, přirozený projev, decentní titulky nebo hudba. Pokud reference nemáte, popište požadovaný dojem třemi slovy.",
+      "type": "textarea",
+      "required": true,
+      "step": 1
+    },
+    {
+      "id": "q6",
+      "number": 6,
+      "label": "Co by ve videu naopak působilo nepatřičně?",
+      "help": "Například rychlé přechody, výrazné animované titulky, křiklavé barvy, příliš prodejní tón nebo určitý druh hudby. Klidně přidejte odkaz na konkrétní příklad.",
+      "type": "textarea",
+      "required": false,
+      "step": 1
+    },
+    {
+      "id": "q7",
+      "number": 7,
+      "label": "Má video zastupovat pouze Book Therapy, nebo také partnerskou značku?",
+      "help": "Pokud máte pravidla pro logo, fonty, barvy, titulky nebo hudbu, přidejte odkaz na podklady. U partnera doplňte, co musí být ve videu dodrženo.",
+      "type": "textarea",
+      "required": false,
+      "step": 1
+    },
+    {
+      "id": "q8",
+      "number": 8,
+      "label": "Jaké tři věci musí první video splnit, abyste si řekla „ano, takhle má Book Therapy působit“?",
+      "help": "Například: knihy vyniknou i v detailech; mluvení působí přirozeně; titulky jsou dobře čitelné a neruší obraz. Zajímají mě vaše vlastní priority.",
+      "type": "textarea",
+      "required": true,
+      "step": 1
+    },
+    {
+      "id": "q9",
+      "number": 9,
+      "label": "Jaké natáčení je pro vás reálně možné?",
+      "help": "Můžete natočit záběry podle připraveného scénáře, plánujete akci s mluveným programem, nebo chcete poradit s výběrem? Kdo může být před kamerou a kdo bude natáčet? U akce přidejte datum, místo a možnost zaznamenat čistý zvuk řečníků.",
+      "type": "textarea",
+      "required": true,
+      "step": 2
+    },
+    {
+      "id": "q10",
+      "number": 10,
+      "label": "Co máte k dispozici pro natáčení a zpracování?",
+      "help": "Stačí napsat například telefon či fotoaparát, mikrofon, dostupné prostory a případné starší záběry nebo fotografie. Máte-li materiály po ruce, přidejte odkaz na sdílenou složku a případná omezení jejich použití. Nic zatím nemusíte nově natáčet.",
+      "type": "textarea",
+      "required": false,
+      "step": 2
+    },
+    {
+      "id": "q11",
+      "number": 11,
+      "label": "Co musí ve videu zaznít a co naopak vynechat?",
+      "help": "Pokud už téma znáte, doplňte důležitá jména, fakta, názvy knih, termíny či odkazy. Pokud námět teprve vybereme, tuto otázku můžete přeskočit.",
+      "type": "textarea",
+      "required": false,
+      "step": 2
+    },
+    {
+      "id": "q12",
+      "number": 12,
+      "label": "Kdy byste chtěla video zveřejnit a kdy zvládnete dodat natočené podklady?",
+      "help": "Pokud nemáte pevný termín, stačí to napsat. Schválení scénáře a střihu budeme řešit s vámi; případnou další osobu doplňte.",
+      "type": "textarea",
+      "required": true,
+      "step": 2
+    },
+    {
+      "id": "billing",
+      "label": "Fakturační údaje",
+      "help": "Název firmy, IČO, fakturační adresa a případně DIČ. Můžete vše vložit do jednoho pole.",
+      "type": "textarea",
+      "required": false,
+      "step": 3
+    },
+    {
+      "id": "email",
+      "label": "E-mail pro fakturu a potvrzení",
+      "help": "Adresa, na kterou vám po napojení přijde potvrzení a další postup.",
+      "type": "email",
+      "required": true,
+      "step": 3
+    }
+  ]
+}
