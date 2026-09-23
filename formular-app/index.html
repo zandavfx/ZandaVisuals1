@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Formulář · ZandaVisuals</title>
+<link rel="icon" href="/formular-app/assets/favicon.ico">
+<link rel="stylesheet" href="/formular-app/assets/fonts.css">
+<link rel="stylesheet" href="/formular-app/styles.css">
+</head>
+<body>
+<div class="preview" id="preview" hidden>Náhled formuláře <span>— odpovědi se neodesílají</span></div>
+<header><a href="https://zandavisuals.com" aria-label="ZandaVisuals — hlavní web"><img src="/formular-app/assets/logo.svg" alt="ZandaVisuals" width="174"></a><span class="client" id="client" hidden>PŘIPRAVENO PRO <strong id="client-name"></strong></span></header>
+<main id="main" aria-busy="true">
+<aside id="aside">
+<div class="skeleton" id="aside-skeleton" aria-hidden="true"><span class="sk-short"></span><span class="sk-title"></span><span class="sk-title"></span><span></span><span class="sk-short"></span></div>
+<div class="eyebrow" id="eyebrow" hidden></div>
+<h1 id="title" hidden></h1>
+<p class="intro" id="intro" hidden></p>
+<p class="muted" id="muted" hidden></p>
+<nav aria-label="Kroky formuláře" id="steps"></nav>
+<div class="side-note" id="side-note" hidden><img src="/formular-app/assets/jiskra.svg" width="36" alt=""><p id="note"></p></div>
+<details id="next-info" hidden><summary id="next-summary"></summary><div id="next-body"></div></details>
+</aside>
+<section class="workspace" id="workspace">
+<div class="skeleton" id="skeleton" aria-hidden="true"><span class="sk-short"></span><span class="sk-title sk-gap"></span><span class="sk-short"></span><span class="sk-box sk-gap"></span><span class="sk-short"></span><span class="sk-box"></span></div>
+<p class="sr-only" id="loading-text" role="status">Načítám formulář…</p>
+<div id="notice" hidden></div>
+<div id="form-area" hidden>
+<div class="progress-label"><span id="step-label"></span><span id="completion"></span></div>
+<div class="progress"><div id="bar"></div></div>
+<div id="heading"></div>
+<form id="form" novalidate>
+<div id="fields"></div>
+<section id="review" hidden></section>
+<div class="hp" aria-hidden="true"><label for="hp-web">Nevyplňujte</label><input type="text" id="hp-web" name="web" tabindex="-1" autocomplete="off" value=""></div>
+<p id="status" role="status" aria-live="polite"></p>
+<div class="actions"><button type="button" id="back" class="secondary">← Zpět</button><button type="submit" id="next" class="primary"></button></div>
+</form>
+<div class="draft" id="draft">
+<button type="button" id="save-later" class="save-later">Uložit a dokončit později</button>
+<div class="saved" id="saved" hidden></div>
+<label><input type="checkbox" id="remember"> Pamatovat si rozepsané odpovědi na tomto zařízení</label>
+<button id="clear" type="button">Smazat rozepsané odpovědi</button>
+</div>
+</div>
+<div id="success" hidden></div>
+</section>
+</main>
+<footer><span id="foot-left">ZandaVisuals</span><span id="foot-right"></span></footer>
+<div id="helper" hidden><div class="helper-top"><strong>Zandabot</strong><button id="close-helper" type="button" aria-label="Zavřít nápovědu">×</button></div><p id="helper-copy"></p><small>Nápověda k formuláři</small></div><div id="bot" aria-label="Otevřít nápovědu Zandabota" hidden></div>
+<script type="module" src="/formular-app/form.js"></script>
+</body>
+</html>
