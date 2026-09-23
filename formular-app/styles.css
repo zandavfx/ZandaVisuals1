@@ -61,3 +61,28 @@ main.solo aside{display:none}
 
 @media(max-width:760px){.success{padding:24px 20px}.notice p{font-size:16px}.saved .saved-row{flex-direction:column;align-items:stretch}.draft .saved-row button{align-self:start}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important}}
+
+/* Nahrávání souborů (23. 9. 2026) — stejné tokeny jako zbytek formuláře */
+.field>.field-label+.file-field{margin-top:12px}
+.file-drop{border:1px dashed #d8cbd2;border-radius:8px;background:#ffffffb3;padding:18px 16px;cursor:pointer;transition:border-color .16s,background-color .16s}
+.file-drop:hover,.file-drop.drag{border-color:#aa7d94;background:#f3e9ec}
+.file-lead{margin:0;font-size:14px}
+.file-pick{border:0;background:none;padding:0;font-weight:700;color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+.file-pick:focus-visible,.file-remove:focus-visible{outline:3px solid #99637e;outline-offset:2px}
+.file-limits{display:block;margin-top:4px;font-size:12px;color:var(--muted)}
+.error .file-drop{border-color:#af3939}
+.file-list{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:8px}
+.file-list:empty{display:none}
+.file-item{border:1px solid var(--line);border-radius:8px;padding:10px 12px;background:#fff}
+.file-row{display:flex;align-items:center;gap:10px;font-size:13px;min-width:0}
+.file-name{flex:1;min-width:0;overflow-wrap:anywhere}
+.file-size{color:var(--muted);font-size:12px;white-space:nowrap}
+.file-remove{border:0;background:none;padding:2px 0;font-size:12px;color:var(--muted);text-decoration:underline}
+.file-remove:hover{color:var(--ink)}
+.file-bar{height:3px;background:#e5dfe1;margin-top:8px;border-radius:2px;overflow:hidden}
+.file-bar div{height:100%;width:0;background:var(--ink);transition:width .2s}
+.file-item.error{border-color:#e3b9b9}
+.file-error{margin:6px 0 0;font-size:12px;color:#a02d2d}
+
+/* Pozvánka a oprava odpovědí (23. 9. 2026) — klidný pruh nad krokem, stejné tokeny */
+.invite-banner{margin:0 0 22px;border:1px solid #e4d5dd;background:#f3e9ec;border-radius:8px;padding:12px 16px;font-size:13px;line-height:1.55;color:var(--ink);overflow-wrap:anywhere}
