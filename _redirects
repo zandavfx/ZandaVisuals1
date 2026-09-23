@@ -1,5 +1,5 @@
 # Veřejné formuláře ZandaVisuals OS (23. 9. 2026): jedna stránka pro všechny
 # formuláře, data načítá z app.zandavisuals.com/api/verejne/formulare/<slug>.
 # Soubory stránky jsou v /formular-app/, ať je tohle pravidlo nechytí.
-/formular/:slug/  /formular-app/index.html  200
-/formular/:slug   /formular-app/index.html  200
+/formular/:slug/  /formular-app/  200
+/formular/:slug   /formular-app/  200
