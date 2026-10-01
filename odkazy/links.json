@@ -1,0 +1,13 @@
+{
+  "nazev": "Žanek · ZandaVisuals",
+  "podtitul": "Tvůj styl. Náš systém. Včas.",
+  "adresa": "https://zandavisuals.com/odkazy/",
+  "popis": "Střih videa pro firmy. Napiš mi do DM, pošli web nebo e-mail.",
+  "odkazy": [
+    { "slug": "dm", "text": "Napiš mi do DM", "pozn": "Pošli profil svojí firmy", "url": "https://ig.me/m/zanda.visuals", "ikona": "zprava", "hlavni": true },
+    { "slug": "web", "text": "Web a portfolio", "pozn": "zandavisuals.com", "url": "https://zandavisuals.com/", "ikona": "web" },
+    { "slug": "email", "text": "E-mail", "pozn": "kontakt@zandavisuals.cz", "url": "mailto:kontakt@zandavisuals.cz", "ikona": "email" },
+    { "slug": "youtube", "text": "YouTube", "pozn": "@Zandavisuals", "url": "https://www.youtube.com/@Zandavisuals", "ikona": "video" },
+    { "slug": "linkedin", "text": "LinkedIn", "pozn": "in/zandavisuals", "url": "https://www.linkedin.com/in/zandavisuals/", "ikona": "profil" }
+  ]
+}

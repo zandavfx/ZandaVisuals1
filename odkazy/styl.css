@@ -1,0 +1,68 @@
+/* Link-in-bio ZandaVisuals (1. 10. 2026). Brand: papír #FAF8F4, inkoust #252125, růžová #E8B5CE
+   jen pro hlavní akci, DM Sans, malé zaoblení .5rem, mikroanimace 120–200 ms bez odskoku. */
+@font-face { font-family: 'DM Sans'; font-weight: 100 1000; font-display: swap; src: url(fonty/DM-Sans-2.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'DM Sans'; font-weight: 100 1000; font-display: swap; src: url(fonty/DM-Sans-1.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+:root {
+  --papir: #FAF8F4; --inkoust: #252125; --ruzova: #E8B5CE; --ruzova-hover: #E2A6C3;
+  --plocha: #FFFFFF; --plocha-hover: #F3EFE9; --cara: rgba(37, 33, 37, .10); --tlum: rgba(37, 33, 37, .62);
+  --focus: #252125; color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --papir: #171517; --inkoust: #F4F1EC; --plocha: #211E21; --plocha-hover: #2A262A;
+    --cara: rgba(244, 241, 236, .12); --tlum: rgba(244, 241, 236, .64); --focus: #E8B5CE;
+  }
+  .avatar { box-shadow: 0 0 0 1px var(--cara); }
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; min-height: 100vh; min-height: 100dvh; background: var(--papir); color: var(--inkoust);
+  font: 16px/1.45 'DM Sans', system-ui, -apple-system, sans-serif; -webkit-font-smoothing: antialiased;
+}
+.stranka {
+  max-width: 30rem; margin: 0 auto; min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column;
+  padding: max(40px, env(safe-area-inset-top)) 16px max(24px, env(safe-area-inset-bottom));
+}
+.hlava { text-align: center; margin-bottom: 28px; }
+.avatar { display: inline-block; width: 88px; height: 88px; border-radius: 50%; margin-bottom: 14px; }
+.avatar svg { display: block; width: 100%; height: 100%; }
+h1 { font-size: 24px; line-height: 1.2; margin: 0 0 6px; font-weight: 700; letter-spacing: -.015em; }
+.hlava p { margin: 0; color: var(--tlum); font-size: 15px; }
+
+.odkazy { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.odkaz {
+  display: flex; align-items: center; gap: 14px; min-height: 60px; padding: 10px 16px;
+  background: var(--plocha); color: inherit; text-decoration: none; border: 1px solid var(--cara); border-radius: .5rem;
+  transition: background-color 160ms ease, border-color 160ms ease, transform 120ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.odkaz:hover { background: var(--plocha-hover); }
+.odkaz:active { transform: scale(.985); }
+.odkaz:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.odkaz .ikona { flex: none; }
+.odkaz .text { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.odkaz strong { font-weight: 600; font-size: 16px; }
+.odkaz small { color: var(--tlum); font-size: 13px; overflow-wrap: anywhere; }
+.odkaz .sipka { flex: none; opacity: .45; transition: opacity 160ms ease, transform 160ms ease; }
+.odkaz:hover .sipka { opacity: .8; transform: translate(1px, -1px); }
+
+.odkaz.hlavni { background: var(--ruzova); border-color: transparent; color: #252125; min-height: 68px; }
+.odkaz.hlavni:hover { background: var(--ruzova-hover); }
+.odkaz.hlavni strong { font-size: 17px; font-weight: 700; }
+.odkaz.hlavni small { color: rgba(37, 33, 37, .72); }
+.odkaz.hlavni .sipka { opacity: .7; }
+.odkaz.hlavni:focus-visible { outline-color: var(--inkoust); }
+
+.pata { margin-top: auto; padding-top: 32px; text-align: center; font-size: 13px; }
+.pata a { color: var(--tlum); text-decoration: none; }
+.pata a:hover { color: var(--inkoust); }
+
+@media (prefers-reduced-motion: reduce) {
+  .odkaz, .odkaz .sipka { transition: none; }
+  .odkaz:active { transform: none; }
+}
