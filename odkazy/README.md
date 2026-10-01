@@ -31,7 +31,7 @@ Přejmenovaný nebo smazaný slug zůstane ve statistikách se štítkem „už 
 - `functions/odkazy/stats.js` — statistiky.
 - `wrangler.toml` (kořen repozitáře) — napojení D1. Produkce používá `zandavisuals-odkazy`, náhledy větví `zandavisuals-odkazy-nahled` (obě EU). Bez build příkazu, web se dál servíruje z kořene.
 - `odkazy/schema.sql` — tabulka `kliky`. Nová databáze: `npx wrangler d1 execute zandavisuals-odkazy --remote --file odkazy/schema.sql`.
-- `_headers` — přísná CSP jen pro `/odkazy`, ostatní web beze změny.
+- `_headers` — bezpečnostní hlavičky pro `/odkazy` (zákaz vložení do cizí stránky). Skripty CSP neomezuje, stejně jako u formulářů: Cloudflare na doméně vkládá Web Analytics, ochranu e-mailu a kontrolu robotů.
 
 **Vyzkoušet na Macu:** `npx wrangler pages dev . --port 8797` v kořeni repozitáře (lokální D1, heslo v `.dev.vars`, který není v Gitu).
 

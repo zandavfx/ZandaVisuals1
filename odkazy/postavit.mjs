@@ -89,7 +89,7 @@ ${polozky}
   </nav>
   <footer class="pata"><a href="/">zandavisuals.com</a></footer>
 </main>
-<script src="/odkazy/pocitani.js" defer></script>
+<script data-cfasync="false" src="/odkazy/pocitani.js" defer></script>
 </body>
 </html>
 `;
