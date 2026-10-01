@@ -1,0 +1,15 @@
+# Bezpečnostní hlavičky veřejných formulářů ZandaVisuals OS (předaudit SOC 2 /
+# ISO 27001, 1. 10. 2026). Jen pro formuláře — zbytek webu beze změny.
+# Skripty CSP neomezuje (stránka formuláře načítá data z app.zandavisuals.com);
+# zakazuje jen vložení do cizí stránky (clickjacking) a pluginy.
+/formular/*
+  Strict-Transport-Security: max-age=31536000
+  X-Frame-Options: DENY
+  Content-Security-Policy: frame-ancestors 'none'; object-src 'none'; base-uri 'self'
+  X-Content-Type-Options: nosniff
+
+/formular-app/*
+  Strict-Transport-Security: max-age=31536000
+  X-Frame-Options: DENY
+  Content-Security-Policy: frame-ancestors 'none'; object-src 'none'; base-uri 'self'
+  X-Content-Type-Options: nosniff
