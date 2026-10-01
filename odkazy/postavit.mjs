@@ -36,6 +36,7 @@ const IKONY = {
   web: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/>',
   email: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6.5 8.5-6.5"/>',
   video: '<rect x="2.5" y="5" width="19" height="14" rx="3.5"/><path d="m10 9.2 5 2.8-5 2.8z" fill="currentColor"/>',
+  kalendar: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4"/><path d="M17 3v4"/><path d="M3 10h18"/><path d="M8 14h2"/><path d="M14 14h2"/><path d="M8 17.5h2"/>',
   profil: '<rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="12" cy="10" r="3"/><path d="M6.5 18.5c1.2-2.4 3.1-3.5 5.5-3.5s4.3 1.1 5.5 3.5"/>',
 };
 const ikona = (k) => `<svg class="ikona" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${IKONY[k] ?? IKONY.web}</svg>`;
@@ -47,7 +48,7 @@ const polozky = data.odkazy.map((o) => {
   // klik se započítá zvlášť přes sendBeacon. Ostatní jdou přes /go/<slug> (funguje i bez JS).
   const mail = o.url.startsWith('mailto:');
   const href = mail ? o.url : `/go/${o.slug}`;
-  return `      <li><a class="odkaz${o.hlavni ? ' hlavni' : ''}" href="${h(href)}"${mail ? ` data-pocitat="/go/${h(o.slug)}"` : ''}>${ikona(o.ikona)}<span class="text"><strong>${h(o.text)}</strong>${o.pozn ? `<small>${h(o.pozn)}</small>` : ''}</span><svg class="sipka" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a></li>`;
+  return `      <li><a class="odkaz${o.hlavni ? ' hlavni' : ''}" href="${h(href)}"${mail ? ` data-pocitat="/go/${h(o.slug)}"` : ''}>${ikona(o.ikona)}<span class="text"><strong>${h(o.text)}</strong>${o.pozn ? `<small>${h(o.pozn)}</small>` : ''}</span></a></li>`;
 }).join('\n');
 
 const stranka = `<!doctype html>

@@ -48,14 +48,11 @@ h1 { font-size: 24px; line-height: 1.2; margin: 0 0 6px; font-weight: 700; lette
 .odkaz .text { flex: 1; min-width: 0; display: flex; flex-direction: column; }
 .odkaz strong { font-weight: 600; font-size: 16px; }
 .odkaz small { color: var(--tlum); font-size: 13px; overflow-wrap: anywhere; }
-.odkaz .sipka { flex: none; opacity: .45; transition: opacity 160ms ease, transform 160ms ease; }
-.odkaz:hover .sipka { opacity: .8; transform: translate(1px, -1px); }
 
 .odkaz.hlavni { background: var(--ruzova); border-color: transparent; color: #252125; min-height: 68px; }
 .odkaz.hlavni:hover { background: var(--ruzova-hover); }
 .odkaz.hlavni strong { font-size: 17px; font-weight: 700; }
 .odkaz.hlavni small { color: rgba(37, 33, 37, .72); }
-.odkaz.hlavni .sipka { opacity: .7; }
 .odkaz.hlavni:focus-visible { outline-color: var(--inkoust); }
 
 .pata { margin-top: auto; padding-top: 32px; text-align: center; font-size: 13px; }
@@ -63,6 +60,6 @@ h1 { font-size: 24px; line-height: 1.2; margin: 0 0 6px; font-weight: 700; lette
 .pata a:hover { color: var(--inkoust); }
 
 @media (prefers-reduced-motion: reduce) {
-  .odkaz, .odkaz .sipka { transition: none; }
+  .odkaz { transition: none; }
   .odkaz:active { transform: none; }
 }
