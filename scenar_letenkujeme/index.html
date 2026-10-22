@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Letenkujeme × Keňa</title>
+<link rel="icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--modra:#38B6FF;--tmava:#2176A5;--seda:#EDEDEF;--text:#14171A;--mekky:#5B6470;--oranz:#E07A2E;--zelena:#22B573;--linka:#DADDE2;
+ --stin:0 1px 2px rgba(16,24,40,.05),0 10px 28px rgba(16,24,40,.08);
+ --stin-hover:0 2px 4px rgba(16,24,40,.06),0 20px 44px rgba(16,24,40,.14);
+ --pruzina:cubic-bezier(.2,.8,.2,1)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--seda);color:var(--text);font-family:'Open Sans',system-ui,sans-serif;font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:var(--tmava)}
+.obal{max-width:1080px;margin:0 auto;padding:0 20px}
+header.hero{background:linear-gradient(160deg,#38B6FF 0%,#2176A5 100%);color:#fff;padding:28px 0 84px;position:relative;overflow:hidden}
+.hero .lista{display:flex;align-items:center;justify-content:space-between;gap:12px;font-weight:700;font-size:15px}
+.hero .znak{width:58px;height:58px;border-radius:18px;background:#fff;display:grid;place-items:center;box-shadow:0 10px 24px rgba(0,0,0,.18)}
+.hero .znak img{width:44px;height:44px}
+.hero h1{font-size:clamp(40px,7vw,76px);line-height:1.03;font-weight:800;letter-spacing:-1px;margin-top:64px;max-width:820px}
+.hero p.lead{font-size:clamp(18px,2.2vw,22px);max-width:640px;margin-top:22px;opacity:.95}
+.hero .terminy{display:flex;flex-wrap:wrap;gap:10px;margin-top:38px}
+.pill{display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--text);border-radius:999px;padding:9px 18px;font-weight:700;font-size:15px;box-shadow:0 8px 20px rgba(0,0,0,.12)}
+.pill b{color:var(--modra)}
+nav.obsah{position:sticky;top:0;z-index:5;background:rgba(237,237,239,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--linka)}
+nav.obsah .obal{display:flex;gap:4px;overflow-x:auto;padding-top:10px;padding-bottom:10px;scrollbar-width:none}
+nav.obsah a{flex:none;text-decoration:none;color:var(--text);font-weight:600;font-size:14px;padding:7px 14px;border-radius:999px;transition:background .2s}
+nav.obsah a:hover{background:#fff}
+section{padding:96px 0 8px}
+.cislo{font-family:'IBM Plex Mono',monospace;color:var(--modra);font-weight:600;font-size:14px;letter-spacing:2px}
+h2{font-size:clamp(30px,4.4vw,46px);line-height:1.1;font-weight:800;letter-spacing:-.5px;margin:8px 0 16px;max-width:820px}
+h2 em{font-style:normal;color:var(--modra)}
+h3{font-size:21px;font-weight:800;margin:30px 0 10px}
+p.uvod{font-size:19px;color:var(--mekky);max-width:700px}
+.karta{background:#fff;border-radius:24px;padding:30px;box-shadow:var(--stin);transition:transform .35s var(--pruzina),box-shadow .35s}
+.karta:hover{transform:translateY(-3px);box-shadow:var(--stin-hover)}
+.mrizka{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:28px}
+.ano li,.ne li{list-style:none;padding:7px 0 7px 32px;position:relative}
+.ano li::before{content:"✓";position:absolute;left:4px;color:var(--modra);font-weight:800}
+.ne li::before{content:"✗";position:absolute;left:4px;color:var(--oranz);font-weight:800}
+.citat{font-size:22px;font-weight:700;line-height:1.35}
+.citat small{display:block;font-size:14px;font-weight:600;color:var(--mekky);margin-top:10px}
+.barvy{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;margin-top:24px}
+.barva{border-radius:20px;overflow:hidden;background:#fff;box-shadow:var(--stin);transition:transform .35s var(--pruzina),box-shadow .35s}
+.barva:hover{transform:translateY(-3px);box-shadow:var(--stin-hover)}
+.barva .vz{height:110px;box-shadow:inset 0 -1px 0 rgba(0,0,0,.06)}
+.barva div.t{padding:12px 16px;font-size:14px}
+.barva b{display:block;font-size:15px}
+.barva code{font-family:'IBM Plex Mono',monospace;color:var(--mekky)}
+.ukazka-titulku{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;margin-top:24px}
+.telefon{aspect-ratio:9/16;border-radius:28px;overflow:hidden;position:relative;background:#222 center/cover;color:#fff;box-shadow:var(--stin);transition:transform .35s var(--pruzina),box-shadow .35s}
+.telefon:hover{transform:translateY(-4px);box-shadow:var(--stin-hover)}
+.telefon::before{content:'';position:absolute;inset:0;background:linear-gradient(rgba(0,0,0,.05),rgba(0,0,0,.35))}
+.telefon .tit{position:absolute;left:0;right:0;bottom:30%;text-align:center;font-weight:800;font-size:25px;line-height:1.15;padding:0 18px;text-shadow:0 2px 12px rgba(0,0,0,.45)}
+.telefon .tit span{color:var(--modra)}
+.telefon .stitek{position:absolute;left:16px;top:16px;background:#fff;color:var(--text);border-radius:999px;padding:6px 14px;font-weight:700;font-size:13px}
+.telefon .cena{position:absolute;left:50%;top:22%;transform:translateX(-50%);background:var(--modra);border-radius:999px;padding:6px 20px 8px;font-weight:800;font-size:26px;white-space:nowrap}
+.telefon .popis{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(transparent,rgba(0,0,0,.7));padding:40px 16px 14px;font-size:13px;font-weight:600}
+/* mapa */
+.mapa-karta{padding:0;overflow:hidden;margin-top:24px}
+.mapa-wrap{background:#B9DDF7;border-bottom:1px solid #EEF0F2}
+.mapa{display:block;width:100%;height:auto}
+.mapa text{font-family:-apple-system,'SF Pro Text','Open Sans',sans-serif}
+.mapa .park{font-size:12.5px;font-weight:600;fill:#5E9358;paint-order:stroke;stroke:#DCEFD2;stroke-width:3px}
+.mapa .maly{font-size:12px;fill:#8A8F96;paint-order:stroke;stroke:#F7F5F0;stroke-width:3px}
+.mapa .voda-t{fill:#5F95BE;stroke:none;font-style:italic}
+.mapa .zeme{font-size:12px;font-weight:600;letter-spacing:3px;fill:#A3A7AD}
+.mapa .stit{font-size:15px;font-weight:700;fill:#1d1d1f;paint-order:stroke;stroke:#fff;stroke-width:4px;stroke-linejoin:round}
+.mapa .pin{opacity:0;transform:scale(.4);transform-box:fill-box;transform-origin:center;transition:opacity .35s,transform .45s cubic-bezier(.2,1.5,.4,1)}
+.mapa .pin.on{opacity:1;transform:none}
+.mapa-text{padding:24px 30px 28px;display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap}
+.mapa-text p{font-size:15px;color:var(--mekky);max-width:620px}
+.mapa-text h3{margin:0 0 6px}
+.znovu{border:0;background:var(--seda);font:inherit;font-weight:700;font-size:15px;border-radius:999px;padding:10px 20px;cursor:pointer;transition:background .2s,transform .2s}
+.znovu:hover{background:#E2E4E8}.znovu:active{transform:scale(.97)}
+/* carousel */
+.galerie{display:flex;flex-wrap:wrap;justify-content:center;row-gap:18px;margin-top:28px}
+.galerie button{flex:0 0 20%;border:0;padding:0;background:none;cursor:zoom-in;border-radius:0;overflow:hidden;box-shadow:var(--stin);transition:transform .35s var(--pruzina),box-shadow .35s}
+.galerie button:hover{transform:translateY(-6px);box-shadow:var(--stin-hover);z-index:2;position:relative}
+.galerie button:nth-child(1),.galerie button:nth-child(6){border-radius:16px 0 0 16px}.galerie button:nth-child(5),.galerie button:nth-child(9){border-radius:0 16px 16px 0}
+.galerie img{width:100%;display:block;aspect-ratio:4/5;object-fit:cover}
+.hooky{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:26px}
+.hooky span{font-size:14px;font-weight:700;color:var(--mekky);margin-right:4px}
+.hook{border:0;font:inherit;font-weight:700;font-size:15px;border-radius:999px;padding:10px 18px;background:#fff;box-shadow:var(--stin);cursor:pointer;transition:background .2s,color .2s,transform .2s}
+.hook:hover{transform:translateY(-1px)}.hook.on{background:var(--modra);color:#fff}
+.tlacitka{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;cursor:pointer;font:inherit;font-weight:700;font-size:15px;border-radius:999px;padding:13px 24px;text-decoration:none;background:var(--modra);color:#fff;box-shadow:0 8px 20px rgba(56,182,255,.35);transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(56,182,255,.45)}
+.btn:active{transform:scale(.98)}
+.btn.sv{background:#fff;color:var(--text);box-shadow:var(--stin)}
+.caption{white-space:pre-line;font-size:16px;background:#F7F8FA;border-radius:16px;padding:20px;margin-top:14px}
+table{width:100%;border-collapse:collapse;font-size:16px}
+.tab{overflow-x:auto;background:#fff;border-radius:24px;margin-top:28px;box-shadow:var(--stin)}
+th{text-align:left;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:var(--mekky);padding:18px 20px;border-bottom:1px solid var(--linka);background:#FAFAFB}
+td{padding:18px 20px;border-bottom:1px solid #EEF0F2;vertical-align:top}
+tr:last-child td{border-bottom:0}
+tbody tr{transition:background .2s}
+tbody tr:hover{background:#F8FBFE}
+td.cas{font-family:'IBM Plex Mono',monospace;color:var(--mekky);white-space:nowrap;font-size:14px}
+td.hlas{font-weight:600;min-width:260px}
+.slot{display:inline;background:#FFF3E8;color:#9A4A0B;border-radius:6px;padding:1px 6px;font-weight:700}
+.prik{display:block;color:var(--mekky);font-weight:400;font-style:italic;font-size:14px;margin-top:4px}
+.obr{font-weight:700;color:var(--tmava)}
+.dny{display:grid;gap:16px;margin-top:28px}
+.den{background:#fff;border-radius:24px;padding:26px 28px;display:grid;grid-template-columns:110px 1fr;gap:18px;box-shadow:var(--stin);transition:transform .35s var(--pruzina),box-shadow .35s}
+.den:hover{transform:translateY(-3px);box-shadow:var(--stin-hover)}
+.den .kdy{font-weight:800;font-size:15px}
+.den .kdy span{display:block;font-family:'IBM Plex Mono',monospace;color:var(--modra);font-size:28px;line-height:1}
+.den h4{font-size:19px;font-weight:800;margin-bottom:6px}
+.den li{list-style:none;padding:3px 0 3px 26px;position:relative;font-size:16px}
+.den li::before{position:absolute;left:0;font-weight:800}
+.den li.mus::before{content:"●";color:var(--modra);font-size:12px;top:7px}
+.den li.bon::before{content:"+";color:var(--zelena)}
+.den li.nah::before{content:"↺";color:var(--oranz)}
+.legenda{display:flex;flex-wrap:wrap;gap:18px;font-size:14px;color:var(--mekky);margin-top:16px}
+.legenda b.m{color:var(--modra)}.legenda b.b{color:var(--zelena)}.legenda b.n{color:var(--oranz)}
+.fakta{border:2px solid var(--modra);background:#fff;border-radius:24px;padding:28px;margin-top:24px;box-shadow:var(--stin)}
+.fakta .radek{display:flex;justify-content:space-between;gap:16px;padding:8px 0;border-bottom:1px dashed var(--linka);font-family:'IBM Plex Mono',monospace;font-size:15px}
+.fakta .radek:last-of-type{border:0}
+.fakta .radek b{white-space:nowrap}
+.tahak{background:var(--text);color:#fff;border-radius:28px;padding:34px;margin-top:28px;box-shadow:0 20px 44px rgba(16,24,40,.25)}
+.tahak h3{color:#fff;margin-top:0}
+.tahak ol{padding-left:22px}
+.tahak li{padding:5px 0}
+.tahak .nast{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:16px 0 24px}
+.tahak .nast div{background:rgba(255,255,255,.08);border-radius:16px;padding:14px 16px;font-size:15px;transition:background .2s}
+.tahak .nast div:hover{background:rgba(255,255,255,.13)}
+.tahak .nast b{display:block;color:var(--modra);font-size:13px;letter-spacing:1px;text-transform:uppercase}
+.kroky{display:grid;gap:12px;margin-top:28px}
+.krok{display:grid;grid-template-columns:150px 1fr;gap:16px;background:#fff;border-radius:20px;padding:20px 24px;align-items:baseline;box-shadow:var(--stin);transition:transform .35s var(--pruzina),box-shadow .35s}
+.krok:hover{transform:translateY(-2px);box-shadow:var(--stin-hover)}
+.krok .d{font-weight:800;color:var(--tmava)}
+footer{padding:96px 0 60px;color:var(--mekky);font-size:14px}
+.lightbox{position:fixed;inset:0;background:rgba(10,12,15,.9);display:flex;align-items:center;justify-content:center;z-index:20;padding:20px;opacity:0;pointer-events:none;transition:opacity .25s}
+.lightbox.on{opacity:1;pointer-events:auto}
+.lightbox img{max-height:92vh;max-width:92vw;border-radius:16px;transform:scale(.96);transition:transform .3s var(--pruzina)}
+.lightbox.on img{transform:none}
+.ukaz{opacity:0;transform:translateY(20px);transition:opacity .7s var(--pruzina),transform .7s var(--pruzina)}
+.ukaz.vid{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+ .ukaz{opacity:1;transform:none}
+ .mapa .pin{opacity:1;transform:none}
+ *{transition-duration:0s!important;animation:none!important}
+}
+
+@media(max-width:640px){
+ body{font-size:16px}
+ section{padding-top:72px}
+ .karta,.fakta,.tahak{padding:22px}
+ .den{grid-template-columns:1fr;gap:6px}
+ .krok{grid-template-columns:1fr;gap:2px}
+ td,th{padding:12px}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+ <div class="obal">
+  <div class="lista"><span>Letenkujeme.cz × ZandaVisuals</span><span class="znak"><img src="logo.png" alt="Letenkujeme"></span></div>
+  <h1>Keňa: scénář, natáčení a&nbsp;styl vašich videí</h1>
+  <p class="lead">Všechno na jednom místě: jak bude Letenkujeme ve videích vypadat a znít, scénář prvního Reelu, co natočit každý den cesty a carousel, který můžete zveřejnit ještě před odletem.</p>
+  <div class="terminy">
+   <span class="pill">✈️ Odlet <b>3. 11.</b></span>
+   <span class="pill">🏠 Návrat <b>10. 11.</b></span>
+   <span class="pill">📦 Záběry k nám <b>do 12. 11.</b></span>
+   <span class="pill">🎬 Hotové video <b>do 2 týdnů</b></span>
+  </div>
+ </div>
+</header>
+
+<nav class="obsah"><div class="obal">
+ <a href="#hlas">Hlas</a><a href="#styl">Vizuální styl</a><a href="#carousel">Carousel zdarma</a><a href="#scenar">Scénář</a><a href="#plan">Plán po dnech</a><a href="#voiceover">Voiceover</a><a href="#dal">Co dál</a>
+</div></nav>
+
+<main class="obal">
+
+<!-- 01 HLAS -->
+<section id="hlas">
+ <div class="cislo">01 · HLAS</div>
+ <h2>Jako kamarád, který se právě <em>vrátil z&nbsp;Afriky</em>.</h2>
+ <p class="uvod">Podle toho, co jsi napsal ve formuláři. Nadšený cestovatel, zkušený parťák a praktický průvodce v jednom. Žádná cestovka, žádný dokonalý influencer.</p>
+ <div class="mrizka">
+  <div class="karta ukaz">
+   <h3 style="margin-top:0">Takhle ano</h3>
+   <ul class="ano">
+    <li>Tykáme. Mluvíme jako s kamarádem.</li>
+    <li>Konkrétní čísla, která jde ověřit.</li>
+    <li>Nadšení, když je opravdové („Tohle musíš zažít!“).</li>
+    <li>Poctivě i to, co se doplácí.</li>
+    <li>Hlavní roli má destinace, ne my.</li>
+   </ul>
+  </div>
+  <div class="karta ukaz">
+   <h3 style="margin-top:0">Takhle ne</h3>
+   <ul class="ne">
+    <li>„Zadarmo“, když to zadarmo není.</li>
+    <li>„Nejlevnější safari na světě“ bez ověření.</li>
+    <li>Slibovat zvířata nebo výhled na Kilimandžáro.</li>
+    <li>Reklama na Čedok nebo na nás samotné.</li>
+    <li>Clickbait a tlačení prodeje.</li>
+   </ul>
+  </div>
+ </div>
+</section>
+
+<!-- 02 STYL -->
+<section id="styl">
+ <div class="cislo">02 · VIZUÁLNÍ STYL VIDEÍ</div>
+ <h2>Vaše modrá a vaše písmo. <em>Destinace</em> v hlavní roli.</h2>
+ <p class="uvod">Zároveň manuál pro všechna další videa, aby každé bylo na první pohled vaše. Dynamika jako u Letenek od Kuby, jen bez osobnosti v centru.</p>
+ <div class="barvy">
+  <div class="barva ukaz"><div class="vz" style="background:#38B6FF"></div><div class="t"><b>Letenkujeme modrá</b><code>#38B6FF</code> · titulky, mapa</div></div>
+  <div class="barva ukaz"><div class="vz" style="background:#2176A5"></div><div class="t"><b>Tmavá modrá</b><code>#2176A5</code> · letadlo z loga</div></div>
+  <div class="barva ukaz"><div class="vz" style="background:#E07A2E"></div><div class="t"><b>Savanová oranžová</b><code>#E07A2E</code> · doplatky</div></div>
+  <div class="barva ukaz"><div class="vz" style="background:#22B573"></div><div class="t"><b>Zelená výzva</b><code>#22B573</code> · jen výzva na konci</div></div>
+  <div class="barva ukaz"><div class="vz" style="background:#E3E4E8"></div><div class="t"><b>Světle šedá</b><code>#EDEDEF</code> · grafické slidy</div></div>
+ </div>
+ <div class="ukazka-titulku">
+  <div class="telefon ukaz" style="background-image:url('carousel/fotky/auto.jpg')"><div class="cena">44 990 Kč</div><div class="tit">Safari v <span>Keni</span></div><div class="popis">Úvod: velký bílý text, jedno slovo modře. Cena v pilulce jako na vašich postech.</div></div>
+  <div class="telefon ukaz" style="background-image:url('carousel/fotky/akacie.jpg')"><div class="stitek">📍 Tsavo East</div><div class="tit">A první <span>slon</span> stál dvacet metrů od auta</div><div class="popis">Titulky: Open Sans ExtraBold, 2–5 slov naráz, důležité slovo modře. Místo vlevo nahoře.</div></div>
+  <div class="telefon ukaz" style="background-image:url('carousel/fotky/plaz.jpg')"><div class="tit" style="bottom:42%">Ale safari je jen <span>půlka</span>.</div><div class="popis">Přechody mezi částmi: krátká věta přes celý obraz, pak zase záběry.</div></div>
+ </div>
+
+ <div class="karta mapa-karta ukaz">
+  <div class="mapa-wrap">
+  <svg class="mapa" id="mapa" viewBox="0 0 800 560" role="img" aria-label="Mapa trasy: Mombasa, Tsavo East, Amboseli, Taita Hills, pobřeží">
+   <defs>
+    <filter id="st" x="-60%" y="-60%" width="220%" height="220%"><feDropShadow dx="0" dy="1.5" stdDeviation="2.2" flood-color="#0b2540" flood-opacity=".22"/></filter>
+    <linearGradient id="voda" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#C5E4FA"/><stop offset="1" stop-color="#A8D4F4"/></linearGradient>
+   </defs>
+   <rect width="800" height="560" fill="url(#voda)"/>
+   <path id="m-pevnina" fill="#F7F5F0"/>
+   <path id="m-tanzanie" fill="#EFECE6"/>
+   <path id="m-hranice" fill="none" stroke="#C9C3D3" stroke-width="1.2" stroke-dasharray="4 5"/>
+   <path id="m-park1" fill="#DCEFD2"/><path id="m-park2" fill="#DCEFD2"/><path id="m-park3" fill="#DCEFD2"/><path id="m-park4" fill="#DCEFD2"/>
+   <text class="park" x="455" y="140">Tsavo East</text>
+   <text class="park" x="255" y="150">Tsavo West</text>
+   <path d="M86,196 Q106,160 126,196 Z" fill="#E2DDD3"/><path d="M99,181 Q106,168 113,181 Q106,178 99,181 Z" fill="#fff"/>
+   <text class="maly" x="106" y="214" text-anchor="middle">Kilimandžáro</text>
+   <text class="zeme" x="585" y="46">KEŇA</text>
+   <text class="zeme" x="60" y="400">TANZANIE</text>
+   <text class="maly voda-t" x="705" y="478" text-anchor="middle">Indický oceán</text>
+   <g id="m-silnice"></g>
+   <path id="m-trasa-zbyva" fill="none" stroke="#38B6FF" stroke-opacity=".28" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+   <path id="m-trasa-okraj" fill="none" stroke="#fff" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+   <path id="m-trasa" fill="none" stroke="#38B6FF" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/>
+   <g id="m-piny"></g>
+   <g id="m-letadlo" filter="url(#st)" style="transition:opacity .4s"><circle r="15" fill="#fff"/><path d="M22,0 C22,-2.2 20,-3.2 17,-3.2 L6,-3.2 L-6,-19 L-11,-19 L-4,-3.2 L-14,-3.2 L-19,-9 L-23,-9 L-20,0 L-23,9 L-19,9 L-14,3.2 L-4,3.2 L-11,19 L-6,19 L6,3.2 L17,3.2 C20,3.2 22,2.2 22,0 Z" fill="#2176A5" transform="scale(.42)"/></g>
+  </svg>
+  </div>
+  <div class="mapa-text">
+   <div><h3>Mapa trasy ve stylu Apple Map</h3><p>Ve videu se kamera nakloní nad mapu a letadélko projede trasu po silnicích. Zastávka se rozsvítí ve chvíli, kdy o ní mluvíš. Tohle je náčrt, ve videu bude skutečná mapa.</p></div>
+   <button class="znovu" id="znovu" type="button">↻ Přehrát znovu</button>
+  </div>
+ </div>
+
+ <div class="mrizka">
+  <div class="karta ukaz"><h3 style="margin-top:0">Písmo</h3><p><b>Open Sans</b> z vašeho webu. ExtraBold na titulky, SemiBold na štítky. Na účtenku a čísla strojové písmo IBM Plex Mono.</p></div>
+  <div class="karta ukaz"><h3 style="margin-top:0">Grafika</h3><p>Mapa, jednoduché ikony, pilulky s cenou, účtenka. Každý prvek něco vysvětluje a nikdy nepřekrývá zvíře ani tvář.</p></div>
+  <div class="karta ukaz"><h3 style="margin-top:0">Hudba a zvuk</h3><p>Dobrodružná, lehce filmová, tempo se mění se scénou. Efekty jen na mapu a účtenku. Na safari necháme chvíli i skutečný zvuk savany.</p></div>
+ </div>
+</section>
+
+<!-- 03 CAROUSEL -->
+<section id="carousel">
+ <div class="cislo">03 · CAROUSEL ZDARMA</div>
+ <h2>Carousel v hodnotě <em>1 500 Kč</em> zdarma</h2>
+ <p class="uvod">Jedna dlouhá trasa přes všech 9 slidů: při posouvání na sebe fotky i trasa plynule navazují. Divák se dozví, co všechno v ceně uvidí, kolik by to stálo před slevou a kolik zaplatí reálně. Připravili jsme dvě úvodní věty, vyber si tu, která ti víc sedí.</p>
+ <div class="hooky">
+  <span>Úvodní věta:</span>
+  <button type="button" class="hook on" data-hook="hadanka">Kolik myslíš, že stálo tohle safari?</button>
+  <button type="button" class="hook" data-hook="myty">3 věci, co si myslíš o safari.</button>
+ </div>
+ <div class="galerie ukaz" id="galerie"></div>
+ <div class="tlacitka">
+  <a class="btn" id="zip" href="carousel-trasa/hadanka/Letenkujeme-Kena-hadanka.zip" download>↓ Stáhnout všech 9 slidů</a>
+  <button class="btn sv" data-kopiruj="cap-carousel">Zkopírovat popisek</button>
+ </div>
+ <div class="karta ukaz" style="margin-top:22px">
+  <h3 style="margin-top:0">Popisek pod příspěvek</h3>
+  <template id="cap-myty">🦁 3 věci, co si myslíš o safari. A proč nejsou pravda.
+
+1️⃣ „Je to jen pro bohaté.“ Tenhle zájezd stál 44 990 Kč i s letenkami.
+2️⃣ „Musíš to zařídit sám.“ Auto 4×4, česky mluvící průvodce i transfery jsou v ceně.
+3️⃣ „Je to jen o zvířatech.“ Po 3 nocích v safari lodžích máš 4 noci u Indického oceánu.
+
+💸 Před slevou 72 499 Kč, my jsme zaplatili 44 990 Kč. Vstupy do parků, dýško a eTA doplácíš na místě (cca 7 100 Kč), takže reálně kolem 52 tisíc.
+
+👇 Kterému mýtu jsi věřil ty? Napiš do komentářů.
+
+Nejde o placenou spolupráci. Kurz ČNB 21. 10. 2026.
+
+#kena #safari #cestovani #letenkujeme #dovolena</template><template id="cap-hadanka">🤔 Kolik myslíš, že stálo tohle safari? Tipni si, než dojedeš na konec.
+
+✈️ 6 500 km letu do Mombasy, safari v autě 4×4 v Tsavo East, Amboseli a Taita Hills, 3 noci v safari lodžích a 4 noci u Indického oceánu.
+
+💸 Před slevou stál zájezd 72 499 Kč, my jsme zaplatili 44 990 Kč. Vstupy do parků, dýško a eTA doplácíš na místě (cca 7 100 Kč), takže reálně kolem 52 tisíc.
+
+👇 Napiš do komentářů, kolik jsi tipoval, a pošli to tomu, s kým bys jel(a).
+
+Nejde o placenou spolupráci. Kurz ČNB 21. 10. 2026.
+
+#kena #safari #cestovani #letenkujeme #dovolena</template>
+  <div class="caption" id="cap-carousel">🤔 Kolik myslíš, že stálo tohle safari? Tipni si, než dojedeš na konec.
+
+✈️ 6 500 km letu do Mombasy, safari v autě 4×4 v Tsavo East, Amboseli a Taita Hills, 3 noci v safari lodžích a 4 noci u Indického oceánu.
+
+💸 Před slevou stál zájezd 72 499 Kč, my jsme zaplatili 44 990 Kč. Vstupy do parků, dýško a eTA doplácíš na místě (cca 7 100 Kč), takže reálně kolem 52 tisíc.
+
+👇 Napiš do komentářů, kolik jsi tipoval, a pošli to tomu, s kým bys jel(a).
+
+Nejde o placenou spolupráci. Kurz ČNB 21. 10. 2026.
+
+#kena #safari #cestovani #letenkujeme #dovolena</div>
+  <p style="font-size:14px;color:var(--mekky);margin-top:12px">Zveřejnit ideálně <b>do 2. 11.</b>, carousel mluví o cestě v budoucím čase. Fotky jsou ilustrační z Unsplash (volné i pro komerční použití). Po návratu vyměníme fotky za vaše. Cenu před slevou ještě ověříme pro váš termín 3. 11.</p>
+ </div>
+</section>
+
+<!-- 04 SCÉNÁŘ -->
+<section id="scenar">
+ <div class="cislo">04 · SCÉNÁŘ PRVNÍHO REELU</div>
+ <h2>Safari v Keni za 44 990 Kč. <em>Co v tom fakt bylo?</em></h2>
+ <p class="uvod">Cena na začátku zastaví palec a vyvrací největší obavu vašich lidí („není to jen pro bohaté?“). Pak trasa na mapě se záběry a na konci poctivě doplatky. Asi 45 vteřin, hlas nahraješ doma po návratu.</p>
+ <div class="tab ukaz"><table>
+  <thead><tr><th>Čas</th><th>Tvůj hlas (mimo obraz)</th><th>Text na obrazovce</th><th>Záběr</th></tr></thead>
+  <tbody>
+   <tr><td class="cas">0–4 s</td><td class="hlas">„Safari v Keni si každej představuje za statisíce. My jsme za něj dali 44 990 korun. Tak ti ukážu, co v tom fakt bylo.“</td><td><b>Safari v Keni za 44 990 Kč</b><br><small>cena, za kterou jsme zájezd koupili</small></td><td><span class="obr">A1</span> jízda safari autem přes rameno</td></tr>
+   <tr><td class="cas">4–8 s</td><td class="hlas">„Letíme z Prahy do Mombasy a letenky jsou v ceně.“</td><td>Mapa PRG → MBA · <b>letenky ✓</b></td><td>mapa + okénko letadla</td></tr>
+   <tr><td class="cas">8–14 s</td><td class="hlas">„První zastávka Tsavo East. <span class="slot">po návratu: co jste viděli jako první</span><span class="prik">Ukázka: „A první slon stál asi dvacet metrů od auta.“</span></td><td>📍 Tsavo East</td><td>střecha auta, zvíře nebo krajina</td></tr>
+   <tr><td class="cas">14–20 s</td><td class="hlas">„Pak Amboseli. <span class="slot">po návratu: jedna věta</span><span class="prik">Kilimandžáro jen když bylo opravdu vidět.</span></td><td>📍 Amboseli</td><td>krajina, reakce zezadu</td></tr>
+   <tr><td class="cas">20–25 s</td><td class="hlas">„A Taita Hills. Všechny tři noci spíš přímo v safari lodžích.“</td><td><b>3 noci v lodžích ✓</b></td><td>příjezd do lodže, večer z terasy</td></tr>
+   <tr><td class="cas">25–29 s</td><td class="hlas">„Ale safari je jen půlka. Druhá půlka jsou čtyři noci u moře.“</td><td>Mapa → pobřeží · <b>4 noci u moře ✓</b></td><td>první pohled na oceán</td></tr>
+   <tr><td class="cas">29–37 s</td><td class="hlas">„A teď poctivě. V ceně nejsou vstupy do parků a spropitný, asi 295 dolarů, a vstupní povolení do Keni za 32 dolarů. Takže reálně kolem 52 tisíc.“</td><td>Účtenka: <b style="color:var(--oranz)">+ ~6 400 Kč · + ~700 Kč</b> · <b>≈ 52 000 Kč</b></td><td>animovaná účtenka</td></tr>
+   <tr><td class="cas">37–42 s</td><td class="hlas"><span class="slot">po návratu: stálo to za to? jedna upřímná věta</span><span class="prik">Ukázka: „Za safari i moře? Tohle bych dal znova.“</span></td><td>—</td><td><span class="obr">A2</span> nejsilnější záběr cesty, zpomaleně</td></tr>
+   <tr><td class="cas">42–47 s</td><td class="hlas">„Celou cestu i s tipy najdeš v článku na Letenkujeme.cz. A další cesty, co nestojí majlant, uvidíš u nás.“</td><td><b>Letenkujeme.cz</b> · celý článek v biu</td><td><span class="obr">A3</span> západ slunce, logo</td></tr>
+  </tbody>
+ </table></div>
+ <div class="mrizka">
+  <div class="karta ukaz"><h3 style="margin-top:0">Proč jsou ve scénáři prázdná místa</h3><p>Zážitky za tebe vymýšlet nebudeme. Oranžová místa doplníš po návratu jednou vlastní větou o tom, co se opravdu stalo. Zbytek stojí na faktech, která platí už teď.</p></div>
+  <div class="karta ukaz"><h3 style="margin-top:0">Text na začátek (vyber)</h3><ol style="padding-left:20px"><li><b>Safari v Keni za 44 990 Kč</b> (doporučujeme)</li><li>Kolik fakt stojí safari v Keni?</li><li>Safari + moře. Celá účtenka.</li></ol></div>
+ </div>
+ <div class="karta ukaz" style="margin-top:20px">
+  <h3 style="margin-top:0">Popisek k Reelu</h3>
+  <button class="btn sv" data-kopiruj="cap-reel">Zkopírovat popisek</button>
+  <div class="caption" id="cap-reel">🦁 Safari v Keni za 44 990 Kč? Přesně tolik jsme za zájezd zaplatili. ✈️
+
+🌍 Tři noci v safari lodžích v Tsavo East, Amboseli a Taita Hills, pak čtyři noci u Indického oceánu. Letenky, transfery, jízdy v autech 4×4 i česky mluvící průvodce v ceně.
+
+💸 A poctivě: vstupy do parků a spropitné (cca 295 USD) a keňskou eTA (cca 32 USD) doplácíš zvlášť. Reálně tedy kolem 52 tisíc na osobu.
+
+🐘 Která zvířata potkáš, ti nikdo nezaručí. To je na safari to krásné.
+
+👉 Celou cestu, tipy a co bychom udělali jinak najdeš v článku na Letenkujeme.cz (odkaz v biu).
+
+Zájezd jsme si koupili sami, nejde o placenou spolupráci. Cena platila v době nákupu.
+
+#kena #safari #cestovani #letenkujeme #dovolena</div>
+ </div>
+</section>
+
+<!-- 05 PLÁN -->
+<section id="plan">
+ <div class="cislo">05 · PLÁN ZÁBĚRŮ PO DNECH</div>
+ <h2>Co natočit <em>každý den</em>. A co dělat, když to nevyjde.</h2>
+ <p class="uvod">Podle programu Čedoku, pořadí se může změnit. Stačí 10–15 minut natáčení denně, zbytek času si užijte. Scénář nestojí na žádném jednom záběru.</p>
+ <div class="legenda"><span><b class="m">●</b> nutné pro video</span><span><b class="b">+</b> bonus, když je chvíle</span><span><b class="n">↺</b> náhrada, když to nevyjde</span></div>
+ <div class="dny">
+  <div class="den ukaz"><div class="kdy"><span>01</span>Út 3. 11.</div><div><h4>Odlet a přílet do Mombasy</h4><ul>
+   <li class="mus">Okénko letadla při přistání, 10 s bez pohybu</li>
+   <li class="mus">Prvních pár kroků ven z letiště (telefon u hrudi)</li>
+   <li class="nah">Nejde okénko? Transfer z okna auta, první palmy</li></ul></div></div>
+  <div class="den ukaz"><div class="kdy"><span>02</span>Tsavo East</div><div><h4>První safari a první lodž</h4><ul>
+   <li class="mus">Jízda autem přes rameno řidiče, prašná cesta, 15 s</li>
+   <li class="mus">Každé zvíře třikrát: široce, blíž, detail</li>
+   <li class="mus">Vaše reakce zezadu: hlavy, ukazování, dalekohled</li>
+   <li class="mus">Příjezd do lodže, pokoj, výhled z terasy</li>
+   <li class="nah">Žádné zvíře? Stopy, prach za autem, průvodce ukazuje do dálky</li></ul></div></div>
+  <div class="den ukaz"><div class="kdy"><span>03</span>Amboseli</div><div><h4>Krajina a možná Kilimandžáro</h4><ul>
+   <li class="mus">Ranní výjezd: první světlo přes okno auta</li>
+   <li class="mus">Široký záběr krajiny, stojící, 10 s</li>
+   <li class="bon">Kilimandžáro, pokud je vidět: široce + 3× zoom</li>
+   <li class="nah">Mraky? Nevadí, Kilimandžáro ve videu prostě nebude</li></ul></div></div>
+  <div class="den ukaz"><div class="kdy"><span>04</span>Taita Hills</div><div><h4>Třetí lodž a večer v buši</h4><ul>
+   <li class="mus">Večer z terasy za šera: telefon opřít, 15 s</li>
+   <li class="mus">Detaily lodže: jídlo, světla, ruce s nápojem</li>
+   <li class="nah">Prší? Kapky na okně, pokoj, rozhovor u stolu zezadu</li></ul></div></div>
+  <div class="den ukaz"><div class="kdy"><span>05</span>Cesta k moři</div><div><h4>První pohled na oceán</h4><ul>
+   <li class="mus">Nohy do písku, pohled na oceán, 10 s</li>
+   <li class="mus">Příjezd do hotelu, výhled z balkonu</li>
+   <li class="nah">Pozdě večer? Natočte to ráno</li></ul></div></div>
+  <div class="den ukaz"><div class="kdy"><span>06–08</span>U moře</div><div><h4>Odpočinek a materiál navíc</h4><ul>
+   <li class="mus">Pláž, bazén, jídlo: každé místo široce + detail</li>
+   <li class="mus">Nejsilnější moment cesty znovu ve 4K 60 (kvůli zpomalení)</li>
+   <li class="mus">Západ slunce, telefon opřený, 20 s</li>
+   <li class="bon">Nahrát první soubory na úložiště (pošleme odkaz)</li></ul></div></div>
+ </div>
+</section>
+
+
+<!-- 07 VOICEOVER -->
+<section id="voiceover">
+ <div class="cislo">06 · VOICEOVER PO NÁVRATU</div>
+ <h2>Nahraješ doma za <em>15 minut</em>.</h2>
+ <div class="mrizka">
+  <div class="karta ukaz"><h3 style="margin-top:0">1. Doplň věty</h3><p>Pošleš nám 2–3 věty do oranžových míst. Doladíme je spolu a pošleme ti finální text.</p></div>
+  <div class="karta ukaz"><h3 style="margin-top:0">2. Malá místnost</h3><p>Ložnice nebo místnost se závěsy. Mikrofon na dlaň od pusy, telefony na tichý režim.</p></div>
+  <div class="karta ukaz"><h3 style="margin-top:0">3. Třikrát celé</h3><p>Každou větu třikrát: normálně, víc nadšeně, klidněji. Jako bys to vyprávěl kamarádovi.</p></div>
+ </div>
+</section>
+
+<!-- 08 CO DÁL -->
+<section id="dal">
+ <div class="cislo">07 · CO DÁL</div>
+ <h2>Co je potřeba a <em>do kdy</em>.</h2>
+ <div class="kroky">
+  <div class="krok ukaz"><div class="d">Teď</div><div>Projdi scénář a napiš na WhatsApp, co změnit.</div></div>
+  <div class="krok ukaz"><div class="d">Do 2. 11.</div><div>Volitelně zveřejnit carousel.</div></div>
+  <div class="krok ukaz"><div class="d">3.–10. 11.</div><div>Natáčet podle plánu. U moře můžete nahrávat průběžně.</div></div>
+  <div class="krok ukaz"><div class="d">Do 12. 11.</div><div>Originály na úložiště (ne přes WhatsApp) a 2–3 věty do scénáře.</div></div>
+  <div class="krok ukaz"><div class="d">Pak</div><div>Nahraješ hlas, my střih. Hotové video do 2 týdnů, pak jedno kolo úprav. Zveřejnit spolu s článkem.</div></div>
+ </div>
+</section>
+
+</main>
+
+<footer><div class="obal">Připravilo ZandaVisuals pro Letenkujeme.cz · říjen 2026</div></footer>
+
+<div class="lightbox" id="lb"><img alt=""></div>
+<script>
+(()=>{
+ const tichy=matchMedia('(prefers-reduced-motion: reduce)').matches;
+ const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vid');io.unobserve(e.target)}}),{rootMargin:'0px 0px -6% 0px'});
+ document.querySelectorAll('.ukaz').forEach((el,i)=>{el.style.transitionDelay=(tichy?0:(i%4)*60)+'ms';io.observe(el)});
+ const mapa=document.getElementById('mapa'), NS='http://www.w3.org/2000/svg';
+ const hladka=(b,uz=false)=>{const p=uz?[b[b.length-1],...b,b[0],b[1]]:[b[0],...b,b[b.length-1]];let d=`M${b[0][0]},${b[0][1]}`;
+  for(let i=1;i<p.length-2;i++){const[a,c,e,f]=[p[i-1],p[i],p[i+1],p[i+2]];d+=` C${c[0]+(e[0]-a[0])/6},${c[1]+(e[1]-a[1])/6} ${e[0]-(f[0]-c[0])/6},${e[1]-(f[1]-c[1])/6} ${e[0]},${e[1]}`}return d};
+ const pob=[[800,0],[788,0],[778,80],[760,205],[700,292],[656,378],[634,438],[590,502],[548,512],[530,560],[800,560]];
+ const hr=[[548,512],[420,430],[300,352],[205,292],[180,230],[168,168],[120,160],[60,120],[0,84]];
+ const $=id=>document.getElementById(id);
+ $('m-pevnina').setAttribute('d',hladka([[0,0],...pob.slice(1,10),[0,560]])+'Z');
+ $('m-tanzanie').setAttribute('d',hladka(hr)+' L0,560 L530,560 Z');
+ $('m-hranice').setAttribute('d',hladka(hr));
+ $('m-park1').setAttribute('d',hladka([[360,48],[470,40],[560,70],[548,160],[530,230],[470,290],[420,300],[380,250],[352,170]],true));
+ $('m-park2').setAttribute('d',hladka([[238,112],[320,118],[365,170],[392,230],[330,282],[262,272],[222,212]],true));
+ $('m-park3').setAttribute('d',hladka([[52,92],[78,70],[118,76],[132,100],[110,122],[70,122]],true));
+ $('m-park4').setAttribute('d',hladka([[296,268],[322,258],[344,272],[334,294],[306,296]],true));
+ const zast=[{n:'Mombasa',p:[635,380],dx:-14,dy:30,a:'end'},{n:'Tsavo East',p:[395,245],dx:20,dy:-12,a:'start'},{n:'Amboseli',p:[85,95],dx:0,dy:-24,a:'middle'},{n:'Taita Hills',p:[311,276],dx:-14,dy:32,a:'end'},{n:'U moře',p:[664,368],dx:22,dy:-10,a:'start'}];
+ const body=[[635,380],[618,374],[600,356],[576,348],[548,333],[528,314],[503,306],[478,291],[458,272],[430,262],[410,251],[395,245],
+  [372,252],[348,244],[322,226],[300,216],[279,199],[262,181],[240,168],[214,159],[190,142],[164,130],[138,118],[112,106],[85,95],
+  [94,116],[110,134],[130,150],[150,166],[174,190],[196,211],[216,233],[240,249],[262,262],[286,272],[311,276],
+  [336,290],[362,302],[392,314],[422,326],[452,337],[482,348],[512,362],[542,374],[572,384],[604,390],[632,386],[650,377],[664,368]];
+ const d=hladka(body);['m-trasa-zbyva','m-trasa-okraj','m-trasa'].forEach(id=>$(id).setAttribute('d',d));
+ [[[640,382],[700,300],[757,211]],[[395,245],[330,330],[250,420],[160,520]],[[85,95],[150,40],[230,0]]].forEach(r=>{
+  const s=document.createElementNS(NS,'path');s.setAttribute('d',hladka(r));s.setAttribute('fill','none');s.setAttribute('stroke','#fff');s.setAttribute('stroke-width','3.5');s.setAttribute('stroke-linecap','round');$('m-silnice').appendChild(s)});
+ const tr=$('m-trasa'),ok=$('m-trasa-okraj'),L=tr.getTotalLength(),letadlo=$('m-letadlo');
+ const delky=zast.map(z=>{let best=0,bd=1e9;for(let l=0;l<=L;l+=2){const q=tr.getPointAtLength(l),dd=(q.x-z.p[0])**2+(q.y-z.p[1])**2;if(dd<bd){bd=dd;best=l}}return best});
+ delky[delky.length-1]=L;
+ const piny=zast.map((z,i)=>{const g=document.createElementNS(NS,'g');g.setAttribute('class','pin');
+  g.innerHTML=`<g filter="url(#st)"><circle cx="${z.p[0]}" cy="${z.p[1]}" r="12" fill="#fff"/><circle cx="${z.p[0]}" cy="${z.p[1]}" r="8.5" fill="#38B6FF"/></g><text x="${z.p[0]}" y="${z.p[1]+4}" text-anchor="middle" font-size="10" font-weight="800" fill="#fff">${i+1}</text><text class="stit" x="${z.p[0]+z.dx}" y="${z.p[1]+z.dy}" text-anchor="${z.a}">${z.n}</text>`;
+  $('m-piny').appendChild(g);return g});
+ const nastav=l=>{[tr,ok].forEach(x=>{x.style.strokeDasharray=L;x.style.strokeDashoffset=L-l});
+  const a=tr.getPointAtLength(l),b=tr.getPointAtLength(Math.min(L,l+1.5)),c=l>=L-1?tr.getPointAtLength(L-1.5):a;
+  const uh=Math.atan2((l>=L-1?a.y-c.y:b.y-a.y),(l>=L-1?a.x-c.x:b.x-a.x))*180/Math.PI;
+  letadlo.setAttribute('transform',`translate(${a.x},${a.y})`);letadlo.querySelector('path').setAttribute('transform',`rotate(${uh}) scale(.42)`);
+  piny.forEach((g,i)=>g.classList.toggle('on',l>=delky[i]-1));letadlo.style.opacity=l>=L-1?0:1};
+ let raf=0;const prehraj=()=>{cancelAnimationFrame(raf);if(tichy){nastav(L);return}const T=6500,t0=performance.now();
+  const krok=now=>{const x=Math.min(1,(now-t0)/T),e=x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;nastav(L*e);if(x<1)raf=requestAnimationFrame(krok)};raf=requestAnimationFrame(krok)};
+ nastav(0);
+ const mio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){prehraj();mio.disconnect()}}),{threshold:.45});
+ mio.observe(mapa);
+ document.getElementById('znovu').addEventListener('click',prehraj);
+ document.querySelectorAll('[data-kopiruj]').forEach(b=>b.addEventListener('click',async()=>{
+  const t=document.getElementById(b.dataset.kopiruj).innerText;
+  try{await navigator.clipboard.writeText(t);const o=b.textContent;b.textContent='Zkopírováno ✓';setTimeout(()=>b.textContent=o,1600)}catch(e){}
+ }));
+ const gal=document.getElementById('galerie');
+ const nastavHook=h=>{gal.innerHTML=[1,2,3,4,5,6,7,8,9].map(i=>`<button type="button"><img src="carousel-trasa/${h}/Letenkujeme-Kena-${h}-0${i}.jpg" alt="Slide ${i}"></button>`).join('');
+  document.getElementById('zip').href=`carousel-trasa/${h}/Letenkujeme-Kena-${h}.zip`;
+  document.getElementById('cap-carousel').textContent=document.getElementById('cap-'+h).innerHTML.replace(/&amp;/g,'&');
+  document.querySelectorAll('.hook').forEach(b=>b.classList.toggle('on',b.dataset.hook===h));
+  gal.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{lb.querySelector('img').src=b.querySelector('img').src;lb.classList.add('on')}))};
+ document.querySelectorAll('.hook').forEach(b=>b.addEventListener('click',()=>nastavHook(b.dataset.hook)));
+ const lb=document.getElementById('lb');
+ nastavHook('hadanka');
+ lb.addEventListener('click',()=>lb.classList.remove('on'));
+ addEventListener('keydown',e=>{if(e.key==='Escape')lb.classList.remove('on')});
+})();
+</script>
+</body>
+</html>
