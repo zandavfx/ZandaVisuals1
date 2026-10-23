@@ -10,6 +10,7 @@
 // potvrzení serverem; při chybě zůstávají všechny odpovědi ve formuláři.
 
 import { createZandaBot } from '/formular-app/assets/zanda-bot.js';
+import { jazykyFormulare, NAZVY, prelozit, textVJazyce, vybratJazyk, ZKRATKY } from '/formular-app/jazyky.js';
 
 // ── Pomocníci ────────────────────────────────────────────────────────────────
 const $ = sel => document.querySelector(sel);
@@ -111,6 +112,8 @@ const state = {
   uploadToken: null,
   /** Token osobní pozvánky / žádosti o opravu (jen v paměti a v sessionStorage). */
   inviteToken: null,
+  /** MIE-045: jméno z pozvánky pro proměnné {{klient}} / {{jmeno}} (jen v paměti). */
+  inviteName: '',
 };
 
 let bot = null;
@@ -124,38 +127,66 @@ let clearTimer = 0;
 let rozsireni = null;
 /** Řízení režimu jedna otázka (jen když ho formulář má). */
 let joCtl = null;
-const NEW_TYPES = ['yes_no', 'rating', 'scale', 'number', 'phone'];
-const GROUP_TYPES = ['yes_no', 'rating', 'scale'];
+/** MID-033: modul bloku Video (video-krok.js) — stáhne se jen u formuláře s videem v sekci. */
+let videoModul = null;
+const maVideo = schema => (schema.kroky ?? []).some(k => k?.video?.token);
+/** Prvek s videem sekce, nebo null (bez videa / modul se nenačetl — formulář jede dál). */
+function videoSekce(krok) {
+  if (!krok?.video || !videoModul) return null;
+  return videoModul.videoKroku(krok.video, { api: API, merit: !isPreview, L });
+}
+const NEW_TYPES = ['yes_no', 'rating', 'scale', 'number', 'phone', 'termin'];
+const GROUP_TYPES = ['yes_no', 'rating', 'scale', 'termin'];
 function needsExtensions(schema) {
   if (schema.rezim === 'jedna_otazka' || schema.vzhled) return true;
-  return (schema.otazky ?? []).some(q => NEW_TYPES.includes(q?.typ)
+  // MIE-045/046 (Mochi vlna 4): termín hovoru a proměnné v textu otázek.
+  return (schema.otazky ?? []).some(q => NEW_TYPES.includes(q?.typ) || q?.promenne === true
     || ((q?.typ === 'single_choice' || q?.typ === 'multi_choice') && (q.moznosti ?? []).some(m => m && (m.ikona || m.obrazek))));
 }
+/** MIE-045: text otázky / nápovědy s proměnnými (bez příznaku `promenne` přesně jako dřív). */
+function textOtazky(q, pole) {
+  return q?.promenne === true && rozsireni ? rozsireni.textOtazky(q, pole, promenneHodnoty()) : q[pole];
+}
+function promenneHodnoty() {
+  return rozsireni ? rozsireni.hodnotyPromennych(state.schema, state.values, state.inviteName) : {};
+}
+/** MIE-046: veřejná trasa volných termínů (jen formulář s otázkou Termín hovoru). */
+const terminyUrl = () => (formPath ? `${formPath}/terminy` : null);
 
 const localKey = () => `zanda:form:${slug ?? `nahled-${previewId}`}:v1`;
 const sessionKey = () => `zanda:form:${slug}:${state.versionId}:klic`;
 const recoveryKey = () => `zanda:form:${slug}:obnova`;
 const langKey = () => `zanda:form:${slug}:jazyk`;
+/** Jazyk, který si člověk sám vybral přepínačem (23. 10. 2026). */
+const volbaJazykaKey = () => `zanda:form:${slug ?? `nahled-${previewId}`}:volba-jazyka`;
+/** Odpovědi rozepsané před přepnutím jazyka (stránka se načte znovu). */
+const prepnutiKey = () => `zanda:form:${slug ?? `nahled-${previewId}`}:prepnuti-jazyka`;
 const filesKey = () => `zanda:form:${slug}:soubory`;
 const inviteKey = () => `zanda:form:${slug}:pozvanka`;
 const statsKey = () => `zanda:form:${slug}:${state.versionId}:kroky`;
 
-// ── Jazyk (23. 9. 2026) ──────────────────────────────────────────────────────
-// Hlášky jsou česky, u schématu s `jazyk: "en"` anglicky. Dokud schéma
-// nemáme (nenalezen, chyba sítě), rozhoduje ?lang=en v adrese nebo jazyk
-// formuláře, který se na tomhle zařízení naposledy načetl.
+// ── Jazyk (23. 9. 2026, němčina a přepínač 23. 10. 2026) ─────────────────────
+// Hlášky jsou česky, u schématu s `jazyk: "en"` anglicky, s `"de"` německy
+// (slovník v jazyky.js, vždy Sie). Formulář s překlady (`preklady`) se ukáže
+// v jazyce z ?lang=, z volby přepínačem nebo podle prohlížeče — state.schema
+// je pak už přeložené (jazyk = zobrazený jazyk). Dokud schéma nemáme
+// (nenalezen, chyba sítě), rozhoduje ?lang= v adrese nebo jazyk formuláře,
+// který se na tomhle zařízení naposledy načetl.
+const langParam = new URLSearchParams(location.search).get('lang');
 let pageLang = (() => {
-  const q = new URLSearchParams(location.search).get('lang');
-  if (q === 'en' || q === 'cs') return q;
-  return slug && storage.get('localStorage', langKey()) === 'en' ? 'en' : 'cs';
+  if (langParam === 'en' || langParam === 'cs' || langParam === 'de') return langParam;
+  const ulozeny = slug ? storage.get('localStorage', langKey()) : null;
+  return ulozeny === 'en' || ulozeny === 'de' ? ulozeny : 'cs';
 })();
 
-const isEn = () => (state.schema ? state.schema.jazyk === 'en' : pageLang === 'en');
+const jazyk = () => (state.schema ? state.schema.jazyk || 'cs' : pageLang);
+const isEn = () => jazyk() === 'en';
 const vy = () => state.schema?.osloveni !== 'ty';
-/** Česky podle oslovení (vy / ty), anglicky jedno znění (když je zadané). */
-const t = (formal, informal, english) => (isEn() && english !== undefined ? english : vy() ? formal : informal);
-/** Hláška bez oslovení: česky / anglicky. */
-const L = (cs, en) => (isEn() ? en : cs);
+/** Česky podle oslovení (vy / ty), anglicky / německy jedno znění (když je zadané). */
+const t = (formal, informal, english, german) =>
+  (jazyk() !== 'cs' && english !== undefined ? textVJazyce(jazyk(), '', english, german) : vy() ? formal : informal);
+/** Hláška bez oslovení: česky / anglicky / německy (bez třetího argumentu ze slovníku). */
+const L = (cs, en, de) => textVJazyce(jazyk(), cs, en, de);
 const recommendText = () => L('Nechám si doporučit.', "I'd like a recommendation.");
 
 const steps = () => state.schema.kroky;
@@ -346,7 +377,7 @@ function requiredMessage(q) {
   if (q.typ === 'single_choice') return t('Vyberte jednu možnost.', 'Vyber jednu možnost.', 'Please select one option.');
   if (q.typ === 'multi_choice') return t('Vyberte aspoň jednu možnost.', 'Vyber aspoň jednu možnost.', 'Please select at least one option.');
   if (q.typ === 'date') return t('Vyberte prosím datum.', 'Vyber prosím datum.', 'Please pick a date.');
-  if (q.doporuceni) return t('Napište odpověď, nebo „nechám si doporučit“.', 'Napiš odpověď, nebo „nechám si doporučit“.', `Please write an answer, or choose “${recommendText()}”`);
+  if (q.doporuceni) return t('Napište odpověď, nebo „nechám si doporučit“.', 'Napiš odpověď, nebo „nechám si doporučit“.', `Please write an answer, or choose “${recommendText()}”`, `Bitte schreiben Sie eine Antwort oder wählen Sie „${recommendText()}“`);
   return t('Tuhle otázku prosím vyplňte.', 'Tuhle otázku prosím vyplň.', 'Please answer this question.');
 }
 
@@ -515,11 +546,11 @@ function renderQuestion(q, isLastStep) {
   // Výběr i soubory jsou skupina — popisek je span (aria-labelledby), ne <label for>.
   // (Ano / ne, hvězdičky a škála jsou taky skupina tlačítek.)
   const label = choice || q.typ === 'file' || GROUP_TYPES.includes(q.typ)
-    ? el('span', { class: 'field-label', id: labelId }, q.label)
-    : el('label', { for: q.id, id: labelId }, q.label);
+    ? el('span', { class: 'field-label', id: labelId }, textOtazky(q, 'label'))
+    : el('label', { for: q.id, id: labelId }, textOtazky(q, 'label'));
   if (!q.povinna) label.append(el('span', { class: 'optional' }, L('volitelné', 'optional')));
   box.append(label);
-  if (q.napoveda) box.append(el('p', { class: 'hint', id: hintId }, q.napoveda));
+  if (q.napoveda) box.append(el('p', { class: 'hint', id: hintId }, textOtazky(q, 'napoveda')));
   const describedBy = q.napoveda ? hintId : undefined;
 
   if (q.typ === 'file') {
@@ -578,9 +609,13 @@ function renderQuestion(q, isLastStep) {
   input.maxLength = { long_text: 5000, short_text: 500, email: 254, url: 2000 }[q.typ] ?? 5000;
   const current = state.values[q.id];
   input.value = typeof current === 'string' ? current : '';
+  // FOR-045 (noc 1 n8): limit délky už neořízne vložený text potichu —
+  // od 80 % limitu se ukáže počítadlo, na limitu vysvětlení.
+  const counter = (q.typ === 'long_text' || q.typ === 'short_text') ? textCounter(input) : null;
   input.addEventListener('input', () => {
     setValue(q, input.value);
     syncSuggestionChips(box, input.value);
+    counter?.update();
   });
 
   const chipTexts = [...(q.navrhy ?? [])];
@@ -593,6 +628,7 @@ function renderQuestion(q, isLastStep) {
         input.value = text;
         setValue(q, text);
         syncSuggestionChips(box, text);
+        counter?.update();
         input.focus();
       });
       row.append(b);
@@ -600,7 +636,25 @@ function renderQuestion(q, isLastStep) {
     box.append(row);
   }
   box.append(input);
+  if (counter) box.append(counter.node);
   return box;
+}
+
+/** Počítadlo znaků u textového pole (FOR-045): skryté do 80 % limitu. */
+function textCounter(input) {
+  const max = input.maxLength;
+  const node = el('p', { class: 'hint', 'aria-live': 'polite' });
+  const fmt = n => n.toLocaleString(L('cs-CZ', 'en-US'));
+  const update = () => {
+    const n = input.value.length;
+    node.hidden = !(max > 0 && n >= max * 0.8);
+    if (node.hidden) return;
+    node.textContent = n >= max
+      ? L(`Limit je ${fmt(max)} znaků — delší text se sem nevejde.`, `The limit is ${fmt(max)} characters — longer text won't fit.`, `Das Limit liegt bei ${fmt(max)} Zeichen – längerer Text passt hier nicht hinein.`)
+      : L(`${fmt(n)} / ${fmt(max)} znaků`, `${fmt(n)} / ${fmt(max)} characters`, `${fmt(n)} / ${fmt(max)} Zeichen`);
+  };
+  update();
+  return { node, update };
 }
 
 /** Rozhraní ovladačů ze spolecne.js pro režim kroků (hodnota přes setValue). */
@@ -613,6 +667,9 @@ function controlApi(q, labelId, describedBy, isLastStep) {
     enterHint: isLastStep ? 'send' : 'next',
     ziskej: () => state.values[q.id],
     nastav: value => setValue(q, value),
+    // MIE-046: termín hovoru (jen ovladač Termín hovoru je čte).
+    terminyUrl: terminyUrl(),
+    nahled: isPreview,
   };
 }
 
@@ -801,7 +858,7 @@ function typeAllowed(q, file) {
 function fileProblem(q, file) {
   const maxMb = q.soubor?.maxMb ?? 0;
   if (!(file.size > 0)) return L('Soubor je prázdný.', 'The file is empty.');
-  if (file.size > Math.min(500, maxMb) * 1024 * 1024) return L(`Soubor je moc velký (nejvýš ${maxMb} MB).`, `The file is too large (max ${maxMb} MB).`);
+  if (file.size > Math.min(500, maxMb) * 1024 * 1024) return L(`Soubor je moc velký (nejvýš ${maxMb} MB).`, `The file is too large (max ${maxMb} MB).`, `Die Datei ist zu groß (höchstens ${maxMb} MB).`);
   if (!typeAllowed(q, file)) return L('Tenhle typ souboru sem nejde nahrát.', "This file type can't be uploaded here.");
   return null;
 }
@@ -822,9 +879,11 @@ function typesLabel(q) {
 function limitsText(q) {
   const max = q.soubor?.maxSouboru ?? 1;
   const mb = q.soubor?.maxMb ?? 0;
-  const count = isEn()
-    ? (max === 1 ? `1 file up to ${mb} MB` : `Up to ${max} files, each up to ${mb} MB`)
-    : (max === 1 ? `1 soubor do ${mb} MB` : `Nejvýš ${max} ${max < 5 ? 'soubory' : 'souborů'}, každý do ${mb} MB`);
+  const count = L(
+    max === 1 ? `1 soubor do ${mb} MB` : `Nejvýš ${max} ${max < 5 ? 'soubory' : 'souborů'}, každý do ${mb} MB`,
+    max === 1 ? `1 file up to ${mb} MB` : `Up to ${max} files, each up to ${mb} MB`,
+    max === 1 ? `1 Datei bis ${mb} MB` : `Bis zu ${max} Dateien, je bis ${mb} MB`,
+  );
   const types = typesLabel(q);
   return types ? `${count} · ${types}` : count;
 }
@@ -948,9 +1007,11 @@ function addFiles(q, files) {
   const messages = [];
   for (const file of files) {
     if (free <= 0) {
-      messages.push(isEn()
-        ? `You can upload at most ${max} ${max === 1 ? 'file' : 'files'} here.`
-        : `Sem jde nahrát nejvýš ${max} ${max === 1 ? 'soubor' : max < 5 ? 'soubory' : 'souborů'}.`);
+      messages.push(L(
+        `Sem jde nahrát nejvýš ${max} ${max === 1 ? 'soubor' : max < 5 ? 'soubory' : 'souborů'}.`,
+        `You can upload at most ${max} ${max === 1 ? 'file' : 'files'} here.`,
+        `Hier können Sie höchstens ${max} ${max === 1 ? 'Datei' : 'Dateien'} hochladen.`,
+      ));
       break;
     }
     const problem = fileProblem(q, file);
@@ -1010,6 +1071,7 @@ async function uploadFile(q, item, file) {
     typ: file.type || '',
     velikost: file.size,
     uploadToken: uploadToken(),
+    ...(maPreklady() ? { jazyk: jazyk() } : {}),
   });
   if (item.status !== 'uploading') return; // mezitím odebrán
   if (!(start.ok && start.data?.ok && typeof start.data.putUrl === 'string')) {
@@ -1033,7 +1095,7 @@ async function uploadFile(q, item, file) {
   item.progress = 1;
   item.xhr = null;
   persistFiles();
-  announce(q, L(`Soubor ${item.name} je nahraný.`, `${item.name} is uploaded.`));
+  announce(q, L(`Soubor ${item.name} je nahraný.`, `${item.name} is uploaded.`, `${item.name} ist hochgeladen.`));
   refreshFiles(q);
 }
 
@@ -1048,7 +1110,7 @@ function removeFile(q, item, { quiet = false } = {}) {
   persistFiles();
   refreshFiles(q);
   if (quiet) return;
-  announce(q, L(`Soubor ${item.name} je odebraný.`, `${item.name} was removed.`));
+  announce(q, L(`Soubor ${item.name} je odebraný.`, `${item.name} was removed.`, `${item.name} wurde entfernt.`));
   fieldBox(q.id)?.querySelector('.file-pick')?.focus();
 }
 
@@ -1073,7 +1135,7 @@ function renderReview() {
   const earlier = questions().filter(q => stepIndexOf(q) < state.step && isVisible(q));
   for (const q of earlier) {
     const row = el('div', { class: 'answer' });
-    row.append(el('strong', {}, q.label), el('p', {}, answerText(q) || t('Necháme k doplnění.', 'Doplníme spolu.', "We'll complete this together.")));
+    row.append(el('strong', {}, textOtazky(q, 'label')), el('p', {}, answerText(q) || t('Necháme k doplnění.', 'Doplníme spolu.', "We'll complete this together.")));
     const edit = el('button', { type: 'button' }, L('Upravit odpověď', 'Edit answer'));
     edit.addEventListener('click', () => {
       goTo(stepIndexOf(q), { focusHeading: false });
@@ -1140,6 +1202,8 @@ function render() {
   const h2 = el('h2', { tabindex: '-1', id: 'step-heading' }, krok.nazev);
   const heading = [h2];
   if (krok.uvod) heading.push(el('p', { class: 'lead' }, krok.uvod));
+  const video = videoSekce(krok);
+  if (video) heading.push(video);
   $('#heading').replaceChildren(...heading);
 
   for (const q of questionsOfStep(state.step)) {
@@ -1211,11 +1275,11 @@ function advanceTo(i) {
  * odpovědí, které server u `jazyk: "en"` posílá anglicky sám).
  */
 function serverText(res, fallback) {
-  if (!isEn()) return res.data?.chyba || fallback;
-  if (res.status === 409) return 'The form has changed in the meantime. Reload the page — your answers will stay.';
-  if (res.status === 429) return 'Too many attempts in a short time. Please try again in a few minutes.';
-  if (res.status === 413) return 'Your answers are too long.';
-  if (res.status === 404) return "This form isn't accepting answers right now.";
+  if (jazyk() === 'cs') return res.data?.chyba || fallback;
+  if (res.status === 409) return L('', 'The form has changed in the meantime. Reload the page — your answers will stay.', 'Das Formular wurde inzwischen geändert. Laden Sie die Seite neu – Ihre Antworten bleiben erhalten.');
+  if (res.status === 429) return L('', 'Too many attempts in a short time. Please try again in a few minutes.', 'Zu viele Versuche in kurzer Zeit. Bitte versuchen Sie es in ein paar Minuten erneut.');
+  if (res.status === 413) return L('', 'Your answers are too long.', 'Ihre Antworten sind zu lang.');
+  if (res.status === 404) return L('', "This form isn't accepting answers right now.", 'Dieses Formular nimmt gerade keine Antworten an.');
   return fallback;
 }
 
@@ -1258,7 +1322,32 @@ function submitBody(key, web) {
   if (hasFileQuestions()) body.souborovyToken = uploadToken();
   // Jen stránka otevřená z pozvánky posílá její token — jinak tělo beze změny.
   if (state.inviteToken) body.pozvankaToken = state.inviteToken;
+  // MIE-035 (Mochi vlna 2): skrytá pole z adresy (?zdroj=ig&kampan=…) — jen
+  // formulář, který je definuje, a jen vyplněné; jinak tělo beze změny.
+  const skryta = skrytaPoleZAdresy(state.schema);
+  if (skryta) body.skryta = skryta;
+  // Přepínač jazyka (23. 10. 2026): jen formulář s překlady — jinak tělo beze změny.
+  if (maPreklady()) body.jazyk = jazyk();
   return body;
+}
+
+/** Hodnoty skrytých polí z adresy stránky (null = formulář žádná nemá / nic v adrese). */
+function skrytaPoleZAdresy(schema) {
+  const nazvy = Array.isArray(schema?.skrytaPole) ? schema.skrytaPole : [];
+  if (!nazvy.length) return null;
+  let parametry;
+  try {
+    parametry = new URLSearchParams(location.search);
+  } catch {
+    return null;
+  }
+  const out = {};
+  for (const k of nazvy.slice(0, 10)) {
+    if (typeof k !== 'string' || !/^[a-z][a-z0-9_]{0,29}$/.test(k)) continue;
+    const v = (parametry.get(k) || '').trim().slice(0, 200);
+    if (v) out[k] = v;
+  }
+  return Object.keys(out).length ? out : null;
 }
 
 /**
@@ -1276,8 +1365,13 @@ async function sendAnswers(web) {
   const key = idempotencyKey();
   setSending(true);
   const res = await postJson(`${formPath}/odeslat`, submitBody(key, web));
+  if (res.ok && res.data?.ok) {
+    // MIE-046: rezervace termínu až po uložení odpovědí (jen formulář s termínem).
+    const termin = await rezervovatTermin(res.data.id);
+    setSending(false);
+    return termin ? { stav: 'ok', potvrzeni: res.data.potvrzeni, termin } : { stav: 'ok', potvrzeni: res.data.potvrzeni };
+  }
   setSending(false);
-  if (res.ok && res.data?.ok) return { stav: 'ok', potvrzeni: res.data.potvrzeni };
   if (res.data?.pozvanka === 'neplatna') {
     return { stav: 'chyba', text: res.data.chyba || t('Pozvánka už neplatí. Napište nám a pošleme novou.', 'Pozvánka už neplatí. Napiš nám a pošleme novou.', "This invitation is no longer valid. Let us know and we'll send you a new one.") };
   }
@@ -1324,13 +1418,16 @@ async function submit() {
   setStatus('');
   setSending(true);
   const res = await postJson(`${formPath}/odeslat`, submitBody(key, $('#hp-web').value));
-  setSending(false);
 
   if (res.ok && res.data?.ok) {
+    // MIE-046: rezervace termínu až po uložení odpovědí (jen formulář s termínem).
+    const termin = await rezervovatTermin(res.data.id);
+    setSending(false);
     trackStep('dokonceni', state.step);
-    showSuccess(res.data.potvrzeni);
+    showSuccess(res.data.potvrzeni, termin);
     return;
   }
+  setSending(false);
 
   // Neplatná pozvánka: hláška ze serveru (v jazyce formuláře), odpovědi
   // zůstávají a token se potichu nezahazuje.
@@ -1401,7 +1498,7 @@ function emailLine(stav) {
   switch (stav) {
     case 'odeslano':
       return email
-        ? t(`Potvrzení jsme vám poslali na e-mail ${email}.`, `Potvrzení jsme ti poslali na e-mail ${email}.`, `We've sent a confirmation to ${email}.`)
+        ? t(`Potvrzení jsme vám poslali na e-mail ${email}.`, `Potvrzení jsme ti poslali na e-mail ${email}.`, `We've sent a confirmation to ${email}.`, `Wir haben Ihnen eine Bestätigung an ${email} geschickt.`)
         : t('Potvrzení jsme vám poslali e-mailem.', 'Potvrzení jsme ti poslali e-mailem.', "We've sent you a confirmation by email.");
     case 'ceka':
       return t('Potvrzení vám pošleme e-mailem během několika minut.', 'Potvrzení ti pošleme e-mailem během několika minut.', "We'll email you a confirmation within a few minutes.");
@@ -1412,7 +1509,7 @@ function emailLine(stav) {
   }
 }
 
-function showSuccess(stav) {
+function showSuccess(stav, termin = '') {
   state.done = true;
   state.retry = false;
   const p = state.schema.potvrzeni ?? {};
@@ -1423,12 +1520,17 @@ function showSuccess(stav) {
   if (p.text) box.append(el('p', {}, p.text));
   const line = emailLine(stav);
   if (line) box.append(el('p', { class: 'email-line' }, line));
+  // MIE-046: výsledek rezervace termínu (jen formulář s termínem hovoru).
+  if (termin) box.append(el('p', { class: 'email-line' }, termin));
   if (Array.isArray(p.dalsiKroky) && p.dalsiKroky.length) {
     box.append(el('h3', {}, L('Co bude následovat', 'What happens next')));
     const ol = el('ol');
     for (const k of p.dalsiKroky) ol.append(el('li', {}, k));
     box.append(ol);
   }
+  // FOR-029: volitelné tlačítko na závěr (jen http/https). Bez něj beze změny.
+  const tl = tlacitkoZaveru(p);
+  if (tl) box.append(el('a', { class: 'primary zaver-tlacitko', href: tl.href, target: '_blank', rel: 'noopener noreferrer' }, tl.text));
   $('#success').replaceChildren(box);
   $('#form-area').hidden = true;
   $('#success').hidden = false;
@@ -1446,6 +1548,55 @@ function showSuccess(stav) {
   bot?.react('hotovo');
   scrollToTop();
   h.focus({ preventScroll: true });
+}
+
+/**
+ * FOR-029: tlačítko na závěrečné obrazovce `{ text, odkaz }` → `{ text, href }`,
+ * nebo null (chybí, prázdné, jiný protokol než http/https). Stejné pravidlo
+ * jako server (lib/formulare/schema.ts platnyOdkazTlacitka) i spolecne.js.
+ */
+function tlacitkoZaveru(p) {
+  const t = p?.tlacitko;
+  if (!t || typeof t !== 'object') return null;
+  const text = typeof t.text === 'string' ? t.text.trim().slice(0, 60) : '';
+  const odkaz = typeof t.odkaz === 'string' ? t.odkaz.trim() : '';
+  if (!text || !odkaz || odkaz.length > 500 || /\s/.test(odkaz)) return null;
+  try {
+    const u = new URL(odkaz);
+    if ((u.protocol !== 'https:' && u.protocol !== 'http:') || u.username || u.password || !u.hostname) return null;
+    return { text, href: u.href };
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * MIE-046 (Mochi vlna 4): po uložení odpovědí zarezervuje vybraný termín
+ * existující cestou rezervací (server ověří, že termín patří téhle odpovědi).
+ * Formulář bez termínu / bez vybraného času / náhled → '' (nic se neposílá).
+ * Vrací větu pro závěrečnou obrazovku; chyba rezervace odpovědi nemaže.
+ */
+async function rezervovatTermin(submissionId) {
+  if (isPreview || !rozsireni || typeof submissionId !== 'string') return '';
+  const q = questions().find(x => x.typ === 'termin' && isVisible(x));
+  const v = q ? state.values[q.id] : null;
+  if (typeof v !== 'string' || !v) return '';
+  const res = await postJson(terminyUrl(), { submissionId, start: v, pasmo: rozsireni.pasmoProhlizece() });
+  if (res.ok && res.data?.ok) {
+    const kdy = rozsireni.textTerminu(state.schema, v);
+    return t(
+      `Termín máme zarezervovaný: ${kdy}. Pozvánku jsme vám poslali e-mailem.`,
+      `Termín máme zarezervovaný: ${kdy}. Pozvánku jsme ti poslali e-mailem.`,
+      `Your time is booked: ${kdy}. We've emailed you the invitation.`,
+      `Ihr Termin ist gebucht: ${kdy}. Die Einladung haben wir Ihnen per E-Mail geschickt.`,
+    );
+  }
+  const duvod = !res.network && typeof res.data?.chyba === 'string' ? `${res.data.chyba} ` : '';
+  return `${duvod}${t(
+    'Odpovědi máme uložené — termín se ale nepodařilo zarezervovat, ozveme se vám s jiným.',
+    'Odpovědi máme uložené — termín se ale nepodařilo zarezervovat, ozveme se ti s jiným.',
+    "Your answers are saved, but the time couldn't be booked — we'll get in touch with another one.",
+  )}`;
 }
 
 /** Úklid po uložení odpovědí (sdílí oba režimy). */
@@ -1512,6 +1663,7 @@ function showSavedPanel(token, platiDo) {
     `Rozepsané odpovědi jsou uložené${date ? ` do ${date}` : ''}. Pokračovat můžete z tohoto soukromého odkazu — nikomu ho neposílejte:`,
     `Rozepsané odpovědi jsou uložené${date ? ` do ${date}` : ''}. Pokračovat můžeš z tohoto soukromého odkazu — nikomu ho neposílej:`,
     `Your draft is saved${date ? ` until ${date}` : ''}. You can continue from this private link — don't share it with anyone:`,
+    `Ihr Entwurf ist gespeichert${date ? ` bis ${date}` : ''}. Sie können über diesen privaten Link weitermachen – bitte geben Sie ihn nicht weiter:`,
   ));
   const input = el('input', { type: 'text', readonly: true, id: 'saved-link', 'aria-labelledby': 'saved-text', spellcheck: 'false', autocomplete: 'off' });
   input.value = link;
@@ -1599,7 +1751,8 @@ async function loadInvitation() {
   if (!res.ok || !res.data.ok) {
     storage.remove('sessionStorage', inviteKey());
     return {
-      error: (!isEn() || res.status === 410 ? res.data.chyba : '') || t(
+      // Server hlásí v základním jazyce formuláře — jinak vlastní text v jazyce zobrazení.
+      error: (jazyk() === 'cs' || (res.status === 410 && jazyk() === (state.jazyky?.[0] ?? jazyk())) ? res.data.chyba : '') || t(
         'Pozvánka už neplatí. Napište nám a pošleme novou.',
         'Pozvánka už neplatí. Napiš nám a pošleme novou.',
         "This invitation is no longer valid. Let us know and we'll send you a new one.",
@@ -1607,6 +1760,7 @@ async function loadInvitation() {
     };
   }
   state.inviteToken = token;
+  state.inviteName = typeof res.data.jmeno === 'string' ? res.data.jmeno.trim().slice(0, 200) : '';
   storage.set('sessionStorage', inviteKey(), token);
   const pre = res.data.oprava ? sanitizeValues(res.data.predvyplneni) : {};
   // Čerstvě otevřený odkaz předvyplní původní odpovědi; po obnovení stránky
@@ -1637,9 +1791,10 @@ function inviteBannerText(info) {
       `Opravujete odpovědi${date ? ` z ${date}` : ''}. Původní odpovědi jsou předvyplněné — změňte, co je potřeba, a odešlete znovu. Původní odpověď zůstane uložená.`,
       `Opravuješ odpovědi${date ? ` z ${date}` : ''}. Původní odpovědi jsou předvyplněné — změň, co je potřeba, a odešli znovu. Původní odpověď zůstane uložená.`,
       `You're reviewing your answers${date ? ` from ${date}` : ''}. Your previous answers are filled in — change what's needed and send again. Your original answers stay saved.`,
+      `Sie bearbeiten Ihre Antworten${date ? ` vom ${date}` : ''}. Ihre bisherigen Antworten sind ausgefüllt – ändern Sie, was nötig ist, und senden Sie erneut. Ihre ursprüngliche Antwort bleibt gespeichert.`,
     );
   } else if (info.jmeno) {
-    text = L(`Pozvánka pro: ${info.jmeno}`, `Invitation for: ${info.jmeno}`);
+    text = L(`Pozvánka pro: ${info.jmeno}`, `Invitation for: ${info.jmeno}`, `Einladung für: ${info.jmeno}`);
   }
   return text;
 }
@@ -1737,7 +1892,7 @@ function showNotice({ title, text, retry = false, docTitle }) {
 function rememberLanguage(lang) {
   pageLang = lang;
   if (!slug) return;
-  if (lang === 'en') storage.set('localStorage', langKey(), 'en');
+  if (lang === 'en' || lang === 'de') storage.set('localStorage', langKey(), lang);
   else storage.remove('localStorage', langKey());
 }
 
@@ -1753,23 +1908,26 @@ let restoreStaticTexts = null;
  * český formulář, vrátí se původní texty.
  */
 function applyLanguage() {
-  const en = isEn();
-  document.documentElement.lang = en ? 'en' : 'cs';
-  if (!en) {
+  const j = jazyk();
+  document.documentElement.lang = j;
+  if (j === 'cs') {
     restoreStaticTexts?.();
     restoreStaticTexts = null;
     return;
   }
   if (restoreStaticTexts) return;
   const undo = [];
-  const text = (node, value) => {
+  // Anglické znění níž; němčina ze slovníku jazyky.js.
+  const text = (node, english) => {
     if (!node) return;
+    const value = L('', english);
     const prev = node.textContent;
     node.textContent = value;
     undo.push(() => { node.textContent = prev; });
   };
-  const attr = (node, name, value) => {
+  const attr = (node, name, english) => {
     if (!node) return;
+    const value = L('', english);
     const prev = node.getAttribute(name);
     node.setAttribute(name, value);
     undo.push(() => (prev === null ? node.removeAttribute(name) : node.setAttribute(name, prev)));
@@ -1788,7 +1946,7 @@ function applyLanguage() {
   text($('#helper small'), 'Form help');
   attr($('#bot'), 'aria-label', 'Open Zandabot help');
   // Stav načítání se mění průběžně, proto bez návratu.
-  if ($('#loading-text').textContent) $('#loading-text').textContent = 'Loading form…';
+  if ($('#loading-text').textContent) $('#loading-text').textContent = L('', 'Loading form…');
   restoreStaticTexts = () => undo.reverse().forEach(fn => fn());
 }
 
@@ -1821,6 +1979,39 @@ function setupBot() {
     setOpen(false);
     if (inside) svg?.focus();
   });
+}
+
+// ── Přepínač jazyka (23. 10. 2026) ───────────────────────────────────────────
+const maPreklady = () => (state.jazyky?.length ?? 0) > 1;
+
+/**
+ * Odkazy DE · CS · EN v hlavičce (jen formulář s překlady). Přepnutí načte
+ * stránku znovu s ?lang= — rozepsané odpovědi se předají přes sessionStorage
+ * (soubory má stránka v sessionStorage i tak), volba se zapamatuje.
+ */
+function vykreslitPrepinacJazyka() {
+  if (!maPreklady() || $('#jazyky')) return;
+  const nav = el('nav', { id: 'jazyky', class: 'jazyky', 'aria-label': L('Jazyk formuláře', 'Form language') });
+  for (const j of state.jazyky) {
+    const url = new URL(location.href);
+    url.searchParams.set('lang', j);
+    const aktivni = j === jazyk();
+    const a = el('a', { href: url.pathname + url.search + url.hash, lang: j, hreflang: j, title: NAZVY[j], 'aria-label': NAZVY[j], 'aria-current': aktivni ? 'true' : undefined }, ZKRATKY[j]);
+    a.addEventListener('click', e => {
+      if (aktivni) {
+        e.preventDefault();
+        return;
+      }
+      storage.set('localStorage', volbaJazykaKey(), j);
+      try {
+        storage.set('sessionStorage', prepnutiKey(), JSON.stringify(state.values));
+      } catch { /* bez úložiště jen přepneme */ }
+    });
+    nav.append(a);
+  }
+  const header = document.querySelector('header');
+  const client = $('#client');
+  header.insertBefore(nav, client);
 }
 
 // ── Načtení ──────────────────────────────────────────────────────────────────
@@ -1880,7 +2071,7 @@ async function load() {
     return;
   }
   if (r.kind === 'paused') {
-    if (r.jazyk === 'en') rememberLanguage('en');
+    if (r.jazyk === 'en' || r.jazyk === 'de') rememberLanguage(r.jazyk);
     showNotice({
       title: r.nazev || L('Formulář je pozastavený', 'This form is paused'),
       text: r.zprava || L('Formulář teď nepřijímá odpovědi. Zkuste to prosím později.', "This form isn't accepting answers right now. Please try again later."),
@@ -1895,11 +2086,21 @@ async function load() {
   await startForm(r.schema, r.versionId);
 }
 
-async function startForm(schema, versionId) {
+async function startForm(schemaZaklad, versionId) {
+  // Přepínač jazyka (23. 10. 2026): bez překladů je schema totéž co dřív.
+  const zvoleny = vybratJazyk(schemaZaklad, {
+    zAdresy: langParam,
+    ulozeny: storage.get('localStorage', volbaJazykaKey()),
+    prohlizec: typeof navigator === 'object' ? [...(navigator.languages ?? []), navigator.language] : [],
+  });
+  const schema = prelozit(schemaZaklad, zvoleny);
   state.schema = schema;
+  state.jazyky = jazykyFormulare(schemaZaklad);
   state.versionId = versionId;
-  rememberLanguage(schema.jazyk === 'en' ? 'en' : 'cs');
+  // Zapamatuje se základní jazyk (stavové stránky bez schématu).
+  rememberLanguage(schemaZaklad.jazyk === 'en' || schemaZaklad.jazyk === 'de' ? schemaZaklad.jazyk : 'cs');
   applyLanguage();
+  vykreslitPrepinacJazyka();
   if (isPreview) $('#preview').hidden = false;
 
   // Nové typy / vzhled / jedna otázka: stáhnout rozšíření (jinak nic).
@@ -1919,6 +2120,8 @@ async function startForm(schema, versionId) {
     }
     joModule = loaded.jo;
   }
+  // MID-033: video v sekci — modul jen když ho formulář má; chyba = formulář bez videa.
+  if (maVideo(schema)) videoModul = await import('/formular-app/video-krok.js').catch(() => null);
 
   // Pořadí zdrojů: rozepsané na serveru > obnova po změně verze > zařízení > výchozí.
   let restoredNote = '';
@@ -1931,6 +2134,16 @@ async function startForm(schema, versionId) {
         $('#remember').checked = true;
       }
     } catch { /* poškozený záznam ignorujeme */ }
+  }
+  // Odpovědi rozepsané před přepnutím jazyka (stejné id otázek v každém jazyce).
+  const poPrepnuti = storage.get('sessionStorage', prepnutiKey());
+  if (poPrepnuti) {
+    try {
+      const prevzate = sanitizeValues(JSON.parse(poPrepnuti));
+      state.values = { ...state.values, ...prevzate };
+      if (Object.keys(prevzate).length) restoredNote = L('Odpovědi jsme převzali do nového jazyka.', "We've kept your answers in the new language.");
+    } catch { /* poškozený záznam ignorujeme */ }
+    storage.remove('sessionStorage', prepnutiKey());
   }
   if (slug) {
     const recovery = storage.get('sessionStorage', recoveryKey());
@@ -2015,6 +2228,10 @@ async function startOneQuestion(joModule, invite, draft, restoredNote) {
       saveLocal();
     },
     renderFileField,
+    videoSekce,
+    // MIE-045/046 (Mochi vlna 4): proměnné v textu a adresa volných termínů.
+    textOtazky,
+    terminyUrl: terminyUrl(),
     anyUploading,
     odeslat: sendAnswers,
     trackStep,

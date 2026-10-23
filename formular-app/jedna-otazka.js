@@ -18,7 +18,9 @@
 //   checkQuestion(q), answerText(q), setValue(q, v), renderFileField(q, labelId, hintId),
 //   anyUploading(), odeslat(web) → { stav, … }, trackStep(akce, krokIndex),
 //   bot (getter), setHelper(text), setStatus(text, trida), emailLine(stav),
-//   dokonceno(), retry (getter), inviteText, draftNode, statusNode }
+//   dokonceno(), retry (getter), inviteText, draftNode, statusNode,
+//   textOtazky(q, pole) — MIE-045 proměnné v textu (bez příznaku beze změny),
+//   terminyUrl — MIE-046 adresa volných termínů }
 
 import * as S from './spolecne.js';
 
@@ -296,6 +298,9 @@ function vytvor(ctx) {
     out.push(s);
     const prvni = list[i - 1]?.krok !== o.krok;
     if (prvni && krok.uvod && o.typ === 'otazka') out.push(el('p', { class: 'jo-sekce-uvod' }, krok.uvod));
+    // MID-033: video sekce u její první otázky (bez videa nic).
+    const video = prvni && o.typ === 'otazka' ? ctx.videoSekce?.(krok) : null;
+    if (video) out.push(video);
     return out;
   }
 
@@ -306,13 +311,13 @@ function vytvor(ctx) {
       const n = Math.min(26, q.moznosti?.length ?? 0);
       const rozsah = n > 1 ? `A–${S.pismeno(n - 1)}` : 'A';
       return q.typ === 'multi_choice'
-        ? t(`Klávesy ${rozsah} · můžete vybrat víc možností · Enter = další`, `Klávesy ${rozsah} · můžeš vybrat víc možností · Enter = další`, `Keys ${rozsah} · choose as many as you like · Enter = next`)
-        : L(`Klávesy ${rozsah} · Enter = další`, `Keys ${rozsah} · Enter = next`);
+        ? t(`Klávesy ${rozsah} · můžete vybrat víc možností · Enter = další`, `Klávesy ${rozsah} · můžeš vybrat víc možností · Enter = další`, `Keys ${rozsah} · choose as many as you like · Enter = next`, `Tasten ${rozsah} · Mehrfachauswahl möglich · Enter = weiter`)
+        : L(`Klávesy ${rozsah} · Enter = další`, `Keys ${rozsah} · Enter = next`, `Tasten ${rozsah} · Enter = weiter`);
     }
-    if (q.typ === 'yes_no') return schema.jazyk === 'en' ? 'Keys Y / N · Enter = next' : 'Klávesy A / N · Enter = další';
+    if (q.typ === 'yes_no') return L('Klávesy A / N · Enter = další', 'Keys Y / N · Enter = next', 'Tasten J / N · Enter = weiter');
     if (q.typ === 'rating' || q.typ === 'scale') {
       const k = S.skalaOtazky(q);
-      return L(`Čísla ${k.od}–${k.do} · Enter = další`, `Numbers ${k.od}–${k.do} · Enter = next`);
+      return L(`Čísla ${k.od}–${k.do} · Enter = další`, `Numbers ${k.od}–${k.do} · Enter = next`, `Zahlen ${k.od}–${k.do} · Enter = weiter`);
     }
     if (q.typ === 'file') return '';
     return L('Enter ↵ = další', 'Enter ↵ = next');
@@ -334,21 +339,25 @@ function vytvor(ctx) {
 
     const h = el('h2', { class: 'jo-label', id: labelId, tabindex: '-1', 'data-nadpis': '' });
     const c = el('span', { class: 'jo-cislo' });
-    c.append(el('span', { class: 'sr-only' }, L(`Otázka ${cislo} z ${celkem}: `, `Question ${cislo} of ${celkem}: `)), el('span', { 'aria-hidden': 'true' }, pad(cislo)), ikona(SIPKA, 'jo-cislo-sipka'));
+    c.append(el('span', { class: 'sr-only' }, L(`Otázka ${cislo} z ${celkem}: `, `Question ${cislo} of ${celkem}: `, `Frage ${cislo} von ${celkem}: `)), el('span', { 'aria-hidden': 'true' }, pad(cislo)), ikona(SIPKA, 'jo-cislo-sipka'));
     const volitelne = q.povinna ? null : el('span', { class: 'optional' }, L('volitelné', 'optional'));
+    const label = ctx.textOtazky ? ctx.textOtazky(q, 'label') : q.label;
     if (skupina) {
-      h.append(c, document.createTextNode(q.label));
+      h.append(c, document.createTextNode(label));
       if (volitelne) h.append(volitelne);
     } else {
-      const lab = el('label', { for: inputId }, q.label);
+      const lab = el('label', { for: inputId }, label);
       if (volitelne) lab.append(volitelne);
       h.append(c, lab);
     }
     box.append(h);
-    if (q.napoveda) box.append(withBreaks(el('p', { class: 'jo-napoveda', id: hintId }), q.napoveda));
+    if (q.napoveda) box.append(withBreaks(el('p', { class: 'jo-napoveda', id: hintId }), ctx.textOtazky ? ctx.textOtazky(q, 'napoveda') : q.napoveda));
     const describedBy = q.napoveda ? hintId : undefined;
 
     const api = {
+      // MIE-046: Termín hovoru (jen jeho ovladač je čte).
+      terminyUrl: ctx.terminyUrl ?? null,
+      nahled: Boolean(ctx.isPreview),
       schema,
       rezim: 'jedna',
       labelId,
@@ -538,8 +547,9 @@ function vytvor(ctx) {
     drivejsi.forEach((x, n) => {
       const li = el('li');
       const text = el('div', { class: 'jo-prehled-text' });
-      text.append(el('strong', {}, x.q.label), el('p', {}, ctx.answerText(x.q) || t('Necháme k doplnění.', 'Doplníme spolu.', "We'll complete this together.")));
-      const edit = el('button', { type: 'button', class: 'jo-upravit', 'aria-label': `${L('Upravit odpověď', 'Edit answer')}: ${x.q.label}` }, L('Upravit', 'Edit'));
+      const nazev = ctx.textOtazky ? ctx.textOtazky(x.q, 'label') : x.q.label;
+      text.append(el('strong', {}, nazev), el('p', {}, ctx.answerText(x.q) || t('Necháme k doplnění.', 'Doplníme spolu.', "We'll complete this together.")));
+      const edit = el('button', { type: 'button', class: 'jo-upravit', 'aria-label': `${L('Upravit odpověď', 'Edit answer')}: ${nazev}` }, L('Upravit', 'Edit'));
       edit.addEventListener('click', () => {
         navratNaSouhrn = true;
         prejdi(x.klic, -1);
@@ -644,6 +654,8 @@ function vytvor(ctx) {
     if (r.stav === 'ok') {
       const line = ctx.emailLine(r.potvrzeni);
       if (line) sec.append(el('p', { class: 'email-line' }, line));
+      // MIE-046: výsledek rezervace termínu (jen formulář s termínem hovoru).
+      if (r.termin) sec.append(el('p', { class: 'email-line' }, r.termin));
     }
     if (Array.isArray(p.dalsiKroky) && p.dalsiKroky.length) {
       sec.append(el('h3', {}, L('Co bude následovat', 'What happens next')));
@@ -655,6 +667,9 @@ function vytvor(ctx) {
       });
       sec.append(ol);
     }
+    // FOR-029: volitelné tlačítko na závěr (jen http/https). Bez něj beze změny.
+    const tl = S.tlacitkoZaveru(p);
+    if (tl) sec.append(el('a', { class: 'primary zaver-tlacitko', href: tl.href, target: '_blank', rel: 'noopener noreferrer' }, tl.text));
     if (r.stav === 'nahled') {
       const note = el('div', { class: 'preview-message jo-nahled' });
       note.append(el('p', {}, L('Náhled je dokončený. Odpovědi se v náhledu neodesílají.', "Preview complete. Answers aren't sent in preview.")));

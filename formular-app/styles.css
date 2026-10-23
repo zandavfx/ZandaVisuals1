@@ -46,6 +46,11 @@ main.solo aside{display:none}
 .success h3{font-size:15px;margin:24px 0 8px}
 .success ol{margin:0;padding-left:20px;font-size:14px}
 .success li{margin-bottom:6px}
+/* FOR-029: volitelné tlačítko na závěr (odkaz ve stylu hlavního tlačítka, i v režimu jedna otázka) */
+.zaver-tlacitko{display:inline-flex;align-items:center;max-width:100%;margin-top:22px;text-decoration:none;overflow-wrap:anywhere;transition:background-color .15s}
+
+/* FOR-044 (9. 10. 2026): čipy na dotykových zařízeních aspoň 44 px skutečné výšky (ne neviditelná plocha — nekrade klepnutí sousedům); počítač beze změny */
+@media(pointer:coarse){.chip{min-height:44px}}
 
 /* Uložit a dokončit později */
 .draft .save-later{border:1px solid #d8cbd2;border-radius:8px;padding:9px 14px;text-decoration:none;color:var(--ink);font-size:12px;margin-bottom:4px}
@@ -86,3 +91,5 @@ main.solo aside{display:none}
 
 /* Pozvánka a oprava odpovědí (23. 9. 2026) — klidný pruh nad krokem, stejné tokeny */
 .invite-banner{margin:0 0 22px;border:1px solid #e4d5dd;background:#f3e9ec;border-radius:8px;padding:12px 16px;font-size:13px;line-height:1.55;color:var(--ink);overflow-wrap:anywhere}
+/* Přepínač jazyka (23. 10. 2026) — jen formulář s překlady */
+.jazyky{display:flex;gap:4px;margin:0 28px 0 auto;align-items:center}.jazyky:has(+ .client[hidden]){margin-right:0}.jazyky a{font-size:11px;font-weight:700;letter-spacing:1.2px;line-height:1;color:var(--muted);text-decoration:none;padding:8px 9px;border:1px solid transparent;border-radius:6px}.jazyky a:hover{color:var(--ink);border-color:var(--line)}.jazyky a[aria-current=true]{color:var(--ink);border-color:var(--ink)}@media(max-width:760px){.jazyky{margin-right:14px;gap:2px}.jazyky a{font-size:10px;padding:7px 6px}}
