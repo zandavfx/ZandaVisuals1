@@ -727,6 +727,14 @@ export function createZandaBot(host, options = {}) {
     onClick()
   }
   const onVis = () => { last = null }
+  // Fokus: z myši/dotyku bez rámečku, z klávesnice růžová záře (ne čtverec).
+  let fokusZMysi = false
+  const onFocusPointer = () => { fokusZMysi = true }
+  const onFocus = () => {
+    if (!fokusZMysi) svg.style.filter = 'drop-shadow(0 0 3px #e8b5ce) drop-shadow(0 0 1px #99637e)'
+    fokusZMysi = false
+  }
+  const onBlur = () => { svg.style.filter = ''; fokusZMysi = false }
   addEventListener('pointermove', onMove, { passive: true })
   document.addEventListener('visibilitychange', onVis)
   if (o.interactive) {
@@ -738,6 +746,12 @@ export function createZandaBot(host, options = {}) {
     svg.setAttribute('tabindex', '0')
     svg.setAttribute('role', 'button')
     addEventListener('pointerup', onUp)
+    // Bez modrého čtverce prohlížeče kolem bota (Žanek 23. 10. 2026): po kliknutí
+    // nic, z klávesnice (Tab) jen jemná růžová záře v jeho tvaru.
+    svg.style.outline = 'none'
+    svg.addEventListener('pointerdown', onFocusPointer)
+    svg.addEventListener('focus', onFocus)
+    svg.addEventListener('blur', onBlur)
   }
   function off() {
     removeEventListener('pointermove', onMove)
@@ -747,6 +761,9 @@ export function createZandaBot(host, options = {}) {
     svg.removeEventListener('pointerdown', onDown)
     svg.removeEventListener('click', onClick)
     svg.removeEventListener('keydown', onKey)
+    svg.removeEventListener('pointerdown', onFocusPointer)
+    svg.removeEventListener('focus', onFocus)
+    svg.removeEventListener('blur', onBlur)
     removeEventListener('pointerup', onUp)
   }
 
