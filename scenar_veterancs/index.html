@@ -1,0 +1,533 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.className="js"</script>
+<meta name="robots" content="noindex, nofollow">
+<title>Veteran CS: brand, carousel a první video</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23141414'/%3E%3Ccircle cx='16' cy='16' r='7' fill='%239A4A1E'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --asfalt:#141414;--grafit:#242424;--oranz:#9A4A1E;--oranz-d:#7A3814;--oranz-l:#D08A52;--krem:#F3EEE6;--papir:#FBF9F5;--ocel:#8A847C;
+  --ink:#1A1A1A;--muted:#5f5a54;--line:#E0D8CC;--card:#fff;
+  --shadow:0 1px 2px rgba(20,20,20,.05),0 10px 28px rgba(20,20,20,.07);
+  --head:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;--body:"Barlow",system-ui,-apple-system,sans-serif
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--krem);color:var(--ink);font:400 17px/1.6 var(--body)}
+img{max-width:100%;display:block}
+.wrap{max-width:1000px;margin:0 auto;padding:0 24px}
+
+/* hero */
+header.hero{position:relative;overflow:hidden;background:var(--asfalt);color:#fff}
+.hero-photo{position:absolute;inset:0 0 0 38%;background:url(img/lakovani-911.jpg) center/cover no-repeat;opacity:.55}
+.hero-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--asfalt) 0%,rgba(20,20,20,.75) 35%,rgba(20,20,20,.15) 100%)}
+.hero .wrap{position:relative;z-index:1;padding-top:30px;padding-bottom:56px}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.topbar .logo{width:190px;height:auto}
+.topbar .by{font-size:13px;color:#bdb6ac;letter-spacing:.04em;text-transform:uppercase}
+.hero h1{font:800 clamp(44px,8vw,86px)/.95 var(--head);text-transform:uppercase;letter-spacing:.005em;margin:48px 0 22px;max-width:640px}
+.hero h1 em{font-style:normal;color:var(--oranz-l)}
+.hero p{max-width:600px;margin:0 0 12px;font-size:18px;color:#e9e4dc}
+.hero .legend{color:#fff}
+.hero .meta{color:#a49d93;font-size:14px;margin-top:22px;letter-spacing:.04em;text-transform:uppercase}
+.stripe{height:6px;background:var(--oranz)}
+
+nav.toc{position:sticky;top:0;z-index:5;background:rgba(20,20,20,.94);backdrop-filter:blur(8px)}
+nav.toc .wrap{display:flex;gap:24px;overflow-x:auto;padding-top:13px;padding-bottom:13px;scrollbar-width:none}
+nav.toc .wrap::-webkit-scrollbar{display:none}
+nav.toc a{color:#bdb6ac;text-decoration:none;font:700 15px var(--head);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;transition:color .2s}
+nav.toc a:hover{color:var(--oranz-l)}
+
+main{padding:36px 0 64px}
+section.card{background:var(--card);border:1px solid var(--line);border-radius:6px;box-shadow:var(--shadow);padding:34px;margin:0 0 24px;scroll-margin-top:64px;border-top:4px solid var(--asfalt)}
+.js section.card{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
+.js section.card.in{opacity:1;transform:none}
+h2{font:800 34px/1.05 var(--head);text-transform:uppercase;letter-spacing:.005em;margin:0 0 18px;display:flex;align-items:center;gap:14px}
+h2 .n{flex:none;display:inline-grid;place-items:center;width:40px;height:40px;border-radius:4px;background:var(--oranz);color:#fff;font-size:22px}
+h3{font:700 22px/1.2 var(--head);text-transform:uppercase;letter-spacing:.03em;margin:32px 0 12px}
+p{margin:0 0 12px}
+b,strong{font-weight:600}
+.odhad{background:linear-gradient(transparent 60%,rgba(154,74,30,.24) 60%);border-bottom:1px dashed var(--oranz-d)}
+.hero .odhad{background:linear-gradient(transparent 58%,rgba(208,138,82,.5) 58%);border-bottom-color:var(--oranz-l)}
+.legend{display:inline-block;margin-top:6px;font-size:15px;color:var(--muted)}
+.quote{font-weight:600}
+
+table{width:100%;border-collapse:separate;border-spacing:0;font-size:16px;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+th{background:var(--asfalt);color:#fff;text-align:left;font:700 14px var(--head);letter-spacing:.06em;text-transform:uppercase;padding:12px 14px}
+td{padding:14px;border-top:1px solid var(--line);vertical-align:top}
+tbody tr{transition:background .2s}
+tbody tr:hover{background:#faf4ec}
+td.time{font:700 18px var(--head);white-space:nowrap;color:var(--oranz-d)}
+td.ost{font:800 17px/1.15 var(--head);letter-spacing:.02em;text-transform:uppercase}
+.reveal td{background:#f6ebdd}
+
+ol.steps{list-style:none;counter-reset:s;padding:0;margin:0}
+ol.steps li{counter-increment:s;position:relative;padding:11px 0 11px 50px;border-top:1px solid var(--line)}
+ol.steps li:first-child{border-top:0}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:10px;width:32px;height:32px;border-radius:4px;background:var(--asfalt);color:#fff;display:grid;place-items:center;font:700 17px var(--head)}
+.note{color:var(--muted);font-size:15px;margin-top:14px}
+.caption{position:relative;background:var(--papir);border:1px solid var(--line);border-left:4px solid var(--oranz);border-radius:4px;padding:20px 20px 66px;white-space:pre-line}
+.copy{position:absolute;right:14px;bottom:14px;font:700 15px var(--head);letter-spacing:.06em;text-transform:uppercase;background:var(--asfalt);color:#fff;border:0;border-radius:4px;padding:11px 18px;cursor:pointer;transition:transform .15s,background .2s}
+.copy:hover{transform:translateY(-1px);background:#000}
+.copy:active{transform:scale(.97)}
+.copy.ok{background:var(--oranz)}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:8px}
+.box{background:var(--papir);border:1px solid var(--line);border-radius:4px;padding:18px 20px;transition:transform .2s,box-shadow .2s}
+.box:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.box b{display:block;margin-bottom:6px;font:700 18px var(--head);letter-spacing:.04em;text-transform:uppercase}
+.box ul{margin:0;padding-left:20px}
+.box li{margin:4px 0}
+.sign{margin-top:20px;font:700 20px var(--head);letter-spacing:.03em;text-transform:uppercase}
+
+/* vizuální styl */
+.style-intro{margin-bottom:18px}
+.logo-row{display:grid;grid-template-columns:1.3fr 1fr;gap:16px;margin-bottom:16px}
+.logo-tile{border-radius:4px;display:grid;place-items:center;min-height:150px;padding:24px}
+.logo-tile.dark{background:var(--asfalt)}
+.logo-tile.orange{background:var(--oranz)}
+.logo-tile img{width:min(300px,90%)}
+
+.swatches{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:8px}
+.sw{border:1px solid var(--line);border-radius:4px;overflow:hidden;background:#fff}
+.sw i{display:block;height:84px}
+.sw div{padding:10px 12px;font-size:14px;line-height:1.35}
+.sw strong{display:block;font:700 16px var(--head);letter-spacing:.04em;text-transform:uppercase}
+.sw code{font-size:13px;color:var(--muted)}
+.type{display:grid;grid-template-columns:1.2fr 1fr;gap:16px}
+.type .box .big{font:800 52px/1 var(--head);text-transform:uppercase;margin:6px 0 8px}
+.type .box .big em{font-style:normal;color:var(--oranz)}
+.type .box .txt{font:400 19px/1.45 var(--body);margin:6px 0 8px}
+.plate{display:inline-flex;align-items:center;gap:10px;background:var(--oranz);color:#fff;font:800 17px/1 var(--head);letter-spacing:.08em;text-transform:uppercase;padding:9px 14px;border-radius:3px;position:relative}
+.plate::before,.plate::after{content:"";width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.65)}
+.demo-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:10px}
+.phone{position:relative;aspect-ratio:9/16;border-radius:10px;overflow:hidden;background:var(--grafit) center/cover no-repeat;color:#fff;container-type:inline-size}
+.phone::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,0) 55%,rgba(0,0,0,.7) 100%)}
+.phone>*{position:relative;z-index:1}
+.phone .top{position:absolute;top:7cqw;left:7cqw;right:7cqw}
+.phone .top .plate{font-size:6.6cqw;padding:2.6cqw 3.6cqw;gap:2.6cqw}
+.phone .top .plate::before,.phone .top .plate::after{width:1.8cqw;height:1.8cqw}
+.phone .bottom{position:absolute;left:7cqw;right:7cqw;bottom:8cqw;font:800 13cqw/.95 var(--head);text-transform:uppercase}
+.phone .bottom em{font-style:normal;color:var(--oranz-l)}
+.phone .sub{position:absolute;left:6cqw;right:6cqw;bottom:24cqw;text-align:center;font:800 9.4cqw/1.05 var(--head);text-transform:uppercase;-webkit-text-stroke:1.6cqw #000;paint-order:stroke fill}
+.phone .sub em{font-style:normal;color:var(--oranz-l)}
+.phone .ph{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:10cqw;color:#8d877e;font-size:6cqw;line-height:1.3}
+.phone.question{background:var(--oranz)}
+.phone.question::after{display:none}
+.phone.question .bottom{color:#fff;bottom:auto;top:38%;font-size:16cqw}
+.phone.question .top .plate{background:#141414;color:#fff}
+.phone.question .top .plate::before,.phone.question .top .plate::after{background:rgba(255,255,255,.6)}
+.demo-label{font-size:14px;color:var(--muted);margin-top:8px;line-height:1.35}
+.rules{display:grid;grid-template-columns:1fr 1fr;gap:12px 20px;margin:0;padding:0;list-style:none}
+.rules li{padding-left:26px;position:relative}
+.rules li::before{content:"";position:absolute;left:0;top:.6em;width:12px;height:4px;background:var(--oranz)}
+
+/* carousel návrhy */
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 18px}
+.tab{font:700 16px var(--head);letter-spacing:.05em;text-transform:uppercase;border:2px solid var(--asfalt);background:#fff;color:var(--asfalt);border-radius:4px;padding:10px 16px;cursor:pointer;transition:background .2s,color .2s}
+.tab[aria-selected="true"]{background:var(--asfalt);color:#fff}
+.tab:hover{border-color:var(--oranz)}
+.design{margin-bottom:26px}
+.js .design[hidden]{display:none}
+.design-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;margin-bottom:6px}
+.design-head h3{margin:0}
+.design-head span{color:var(--muted);font-size:15px}
+.design>p{margin-bottom:14px;max-width:720px}
+.strip{display:flex;gap:14px;overflow-x:auto;padding:4px 2px 14px;scroll-snap-type:x mandatory;scrollbar-width:thin}
+.slot-wrap{flex:none;width:280px;scroll-snap-align:start}
+.sl{position:relative;aspect-ratio:4/5;border-radius:4px;overflow:hidden;container-type:inline-size;box-shadow:0 2px 10px rgba(0,0,0,.12)}
+.sl-cap{font-size:13px;color:var(--muted);margin-top:7px;display:flex;gap:8px;align-items:center}
+.sl-cap .tag{font:700 12px var(--head);letter-spacing:.06em;text-transform:uppercase;color:var(--oranz-d);border:1px dashed var(--oranz-d);border-radius:3px;padding:1px 6px}
+.sl em{font-style:normal}
+.sl .num{position:absolute;top:6cqw;left:7cqw;font:700 4.6cqw var(--head);letter-spacing:.08em;z-index:3}
+.sl .lg{position:absolute;right:6cqw;bottom:5.5cqw;width:30cqw;z-index:3}
+.sl .ph{position:absolute;background-size:cover;background-position:center}
+.sl .h{font:800 10.5cqw/.98 var(--head);text-transform:uppercase;margin:0}
+.sl .s{font:500 5.4cqw/1.35 var(--body);margin:4cqw 0 0}
+.sl .lab{font:700 5.2cqw/1.2 var(--head);letter-spacing:.06em;text-transform:uppercase}
+.sl .val{font:800 20cqw/.9 var(--head);text-transform:uppercase;margin-top:3cqw}
+.sl .val.long{font-size:15cqw}
+.sl .swipe{position:absolute;right:7cqw;top:6cqw;font:700 4.4cqw var(--head);letter-spacing:.08em;text-transform:uppercase;z-index:3}
+
+/* 1 Dílna */
+.d1 .sl{background:var(--asfalt);color:#fff}
+.d1 .sl .ph{inset:0;opacity:.9}
+.d1 .sl .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,20,20,.25) 0%,rgba(20,20,20,.1) 35%,rgba(20,20,20,.92) 78%)}
+.d1 .sl .body{position:absolute;left:7cqw;right:7cqw;bottom:17cqw;z-index:2}
+.d1 .sl.noimg .body{bottom:auto;top:50%;transform:translateY(-50%)}
+.d1 .sl em{color:var(--oranz-l)}
+.d1 .sl .lab{color:var(--oranz-l)}
+.d1 .sl .num{color:#bdb6ac}
+.d1 .sl .swipe{color:var(--oranz-l)}
+.d1 .sl::before{content:"";position:absolute;left:7cqw;bottom:12.5cqw;width:14cqw;height:1.4cqw;background:var(--oranz);z-index:3}
+
+/* 2 Štítek */
+.d2 .sl{background:var(--krem);color:var(--asfalt)}
+.d2 .sl .ph{left:6cqw;right:6cqw;top:15cqw;height:52cqw;border:1.2cqw solid #fff;box-shadow:0 1cqw 3cqw rgba(0,0,0,.18)}
+.d2 .sl .body{position:absolute;left:7cqw;right:7cqw;top:73cqw;z-index:2}
+.d2 .sl.noimg .body{top:22cqw}
+.d2 .sl em{color:var(--oranz-d)}
+.d2 .sl .num{color:var(--ocel)}
+.d2 .sl .swipe{color:var(--oranz-d)}
+.d2 .sl .lg{filter:brightness(0);opacity:.85}
+.d2 .sl .lab{display:inline-block;background:var(--oranz);color:#fff;padding:1.8cqw 3cqw;border-radius:.8cqw}
+.d2 .sl .h{font-size:9.4cqw}
+.d2 .sl .val{font-size:17cqw}
+.d2 .sl.img .val{font-size:13cqw;margin-top:2cqw}
+.d2 .sl.img .h{font-size:8.2cqw}
+.d2 .sl.img .s{font-size:4.8cqw;margin-top:2.4cqw}
+.d2 .sl::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2.4cqw;background:var(--asfalt)}
+
+/* 3 Koňak */
+.d3 .sl{background:var(--oranz);color:#FBF3E8}
+.d3 .sl:nth-child(n){}
+.d3 .slot-wrap:nth-child(even) .sl{background:var(--asfalt);color:#fff}
+.d3 .slot-wrap:nth-child(even) .sl em{color:var(--oranz-l)}
+.d3 .slot-wrap:nth-child(even) .sl .lab{color:var(--oranz-l)}
+
+.d3 .sl .ph{right:0;top:0;width:58cqw;height:58cqw;clip-path:polygon(22% 0,100% 0,100% 100%,0 100%);filter:grayscale(1) contrast(1.15)}
+.d3 .slot-wrap:nth-child(even) .sl .ph{filter:none}
+.d3 .sl .body{position:absolute;left:7cqw;right:7cqw;bottom:17cqw;z-index:2}
+.d3 .sl.noimg .body{bottom:auto;top:20cqw}
+.d3 .sl em{color:#F1C79F}
+.d3 .sl .h{font-size:11.5cqw}
+.d3 .sl .val{font-size:24cqw}
+.d3 .sl .val.long{font-size:17cqw}
+.d3 .sl .num{opacity:.75}
+.d3 .sl .swipe{opacity:.85;top:auto;bottom:6cqw;left:7cqw;right:auto}
+
+.photo-note{font-size:14px;color:var(--muted);margin-top:4px}
+
+footer{color:var(--muted);font-size:14px;text-align:center;padding:0 0 40px}
+footer svg{width:18px;height:18px;vertical-align:-3px;margin-right:6px}
+
+@media (max-width:900px){.grid,.type,.logo-row{grid-template-columns:1fr}.swatches{grid-template-columns:repeat(3,1fr)}.demo-row{grid-template-columns:repeat(2,1fr)}.rules{grid-template-columns:1fr}}
+@media (max-width:700px){
+  body{font-size:16px}
+  .wrap{padding:0 16px}
+  .hero .wrap{padding-top:22px;padding-bottom:40px}
+  .hero-photo{inset:0;opacity:.35}
+  .topbar .logo{width:150px}
+  .topbar .by{display:none}
+  section.card{padding:22px 18px}
+  h2{font-size:28px}
+  h2 .n{width:34px;height:34px;font-size:19px}
+  .swatches{grid-template-columns:repeat(2,1fr)}
+  .sw i{height:60px}
+  .type .box .big{font-size:40px}
+  .slot-wrap{width:72vw;max-width:280px}
+  table.stack,table.stack tbody,table.stack tr,table.stack td{display:block;width:100%}
+  table.stack{border:0;border-radius:0}
+  table.stack thead{display:none}
+  table.stack tr{border:1px solid var(--line);border-radius:4px;margin-bottom:12px;overflow:hidden;background:#fff}
+  table.stack td{border-top:1px solid var(--line);padding:10px 14px}
+  table.stack td:first-child{border-top:0;background:var(--asfalt);color:#fff}
+  table.stack td[data-l]::before{content:attr(data-l);display:block;font:700 12px var(--head);text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:2px}
+  table.stack td.time::before{display:none}
+}
+@media (prefers-reduced-motion:reduce){.js section.card{opacity:1;transform:none;transition:none}}
+@media print{nav.toc,.copy,.tabs{display:none}.js .design[hidden]{display:block}.js section.card{opacity:1;transform:none;box-shadow:none;break-inside:avoid}body{background:#fff}.strip{flex-wrap:wrap;overflow:visible}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="jiskra" viewBox="0 0 220 220"><path transform="translate(10 10)" d="M97.380 49.010 L107.620 27.990Q112.000 19.000 113.240 28.923 L116.760 57.077Q118.000 67.000 127.080 62.809 L160.920 47.191Q170.000 43.000 164.575 51.400 L144.425 82.600Q139.000 91.000 148.097 95.153 L175.903 107.847Q185.000 112.000 175.104 113.439 L139.896 118.561Q130.000 120.000 134.399 128.981 L149.601 160.019Q154.000 169.000 145.571 163.620 L115.429 144.380Q107.000 139.000 102.304 147.829 L86.696 177.171Q82.000 186.000 80.916 176.059 L77.084 140.941Q76.000 131.000 67.056 135.472 L36.944 150.528Q28.000 155.000 33.380 146.571 L52.620 116.429Q58.000 108.000 49.176 103.294 L21.824 88.706Q13.000 84.000 22.923 82.760 L59.077 78.240Q69.000 77.000 64.601 68.019 L49.399 36.981Q45.000 28.000 53.480 33.300 L84.520 52.700Q93.000 58.000 97.380 49.010Z"/></symbol></svg>
+
+<header class="hero">
+  <div class="hero-photo" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="topbar"><img class="logo" src="img/logo-veterancs.png" alt="veteranCS.com"><span class="by">Připravilo ZandaVisuals</span></div>
+    <h1>Brand, carousel a&nbsp;první <em>video</em></h1>
+    <p>Dobrý den, paní Bláhová,</p>
+    <p>posílám tři věci. Návrh, o čem a jak by mohl být váš Instagram, i s barvami a písmem. Carousel, který vám uděláme zdarma. A scénář zkušebního videa s Defenderem i s postupem natáčení.</p>
+    <p>Scénář je zatím pracovní. Až bude Defender skoro hotový, zavoláme si a doladíme ho. Věty ve scénáři pak řeknete vlastními slovy, auto znáte nejlíp vy.</p>
+    <p class="legend"><span class="odhad">Takhle zvýrazněné</span> jsou náš odhad. Opravíme je podle vašich odpovědí.</p>
+    <p class="meta">Veteran CS · návrh 5. 11. 2026</p>
+  </div>
+</header>
+<div class="stripe"></div>
+
+<nav class="toc" aria-label="Obsah"><div class="wrap">
+  <a href="#brand">Brand</a><a href="#styl">Barvy a písmo</a><a href="#carousel">Carousel zdarma</a><a href="#jak">Jak video funguje</a><a href="#scenar">Scénář</a><a href="#body">V bodech</a><a href="#popisek">Popisek</a><a href="#nataceni">Natáčení</a><a href="#dal">Co bude dál</a>
+</div></nav>
+
+<main class="wrap">
+
+<section class="card" id="brand">
+  <h2><span class="n">1</span>Brand: vy a vaše dílna</h2>
+  <p>Hlavní postavou vašeho Instagramu budete vy, ne jen auta. Ukážete, co se s veteránem u vás děje, řeknete to po svém a klidně si z toho uděláte legraci.</p>
+  <div class="grid">
+    <div class="box"><b>Proč to funguje</b>Videa, kde někdo mluví do kamery, mají u vás asi 3× víc zhlédnutí než videa jen s autem a hudbou. A do kamery, jak jste psala, mluvíte ráda.</div>
+    <div class="box"><b>Jak mluvíte</b>Jako u sebe v dílně: krátké věty a vaše výrazy jako „úplný dělo“ nebo „masakr“. K divákům v jednom videu buď vykejte, nebo tykejte, ne obojí. Vtip ano, názvy aut vždy správně. Žádné reklamní věty.</div>
+  </div>
+  <div class="grid">
+    <div class="box"><b>Váš příběh</b>Manžel si v mládí sám koupil a doma na zahradě nalakoval GAZ. Pak objížděl Česko a Slovensko a vykupoval auta z garáží a zahrad. A protože se v jiných lakovnách čekalo na lak a klempíře, udělal si lakovnu vlastní. Tenhle příběh stojí za jedno samostatné video.</div>
+    <div class="box"><b>Pro koho</b>Pro majitele a sběratele veteránů, které znáte ze srazů a burz. A pro lidi, kteří veterán nemají, ale rádi se dívají, jak se ze „šrotu“ stane auto, a vzpomínají na auta z mládí.</div>
+    <div class="box"><b>Čím se lišíte</b>Vaše tři slova: kvalita, odbornost, preciznost. Ke každému autu přistupujete jednotlivě a s respektem k jeho historii a originalitě. Ve videích to neříkáme, ale ukazujeme: měření původního odstínu, vrstvy starého laku, detail hotové práce.</div>
+    <div class="box"><b>Bio na Instagramu</b>Lakovna a renovace veteránů 🖤🤎<br>Kbelnice u Jičína<br>Ukazujeme auta před a po<br>Poptávky pište do zpráv</div>
+  </div>
+  <h3>O čem budou videa</h3>
+  <ol class="steps">
+    <li><b>Co k nám přijelo:</b> auto v den příjezdu a jedna věc, proč je zajímavé.</li>
+    <li><b>Z lakovny:</b> jedna věc z práce ukázaná obrazem, třeba měření odstínu, broušení nebo lakování.</li>
+    <li><b>Hotovo:</b> odhalení auta po renovaci.</li>
+    <li><b>Ptáte se:</b> ceny, jak dlouho to trvá, jestli děláte i klempíře.</li>
+    <li><b>Auta na zahradě a v hale:</b> vtipné momenty, jako bylo vaše video s Krtečkem.</li>
+  </ol>
+  <h3>Jak videa vypadají</h3>
+  <div class="grid">
+    <div class="box"><b>Tři typy videí</b><ul>
+      <li>Vy u auta a záběry, jak vypadalo před a po.</li>
+      <li>Odhalení zakrytého auta jedním pohybem.</li>
+      <li>Rychlá odpověď na otázku z komentáře. Začíná tím, že komentář přečtete.</li>
+    </ul></div>
+    <div class="box"><b>Poznávací znamení</b>Videa o autě začínají vámi u auta a stejnou větou „Tenhle [auto] k nám přijel takhle.“ Končí 2–3 vteřinami přeřeků z natáčení.</div>
+    <div class="box"><b>Vzhled</b>V prvním záběru jste vy, auto za vámi. Titulky na všechno, co řeknete: tučné bílé písmo s černým obrysem, jedno slovo v barvě koňaku. Ukázky jsou níž v části Barvy a písmo.</div>
+    <div class="box"><b>Jak často</b>Jedno video týdně. Když je u vás jedno auto delší dobu, dejte každý týden díl z jeho renovace, ať se lidi vracejí, jak dopadne.</div>
+  </div>
+  <h3>Další videa po Defenderu</h3>
+  <ol class="steps">
+    <li><b>Oranžové Porsche 911 S:</b> konečně video „po“. Stojíte u hotového auta a řeknete, proč trvalo 5 let.</li>
+    <li><b>Jeep:</b> díl z renovace a za pár měsíců odhalení hotového auta.</li>
+    <li><b>Ptáte se:</b> „Kolik stojí lak veterána?“ Přečtete otázku a řeknete, na čem cena záleží.</li>
+    <li><b>Jak to celé začalo:</b> příběh GAZu na zahradě a proč máte vlastní lakovnu.</li>
+  </ol>
+</section>
+
+<section class="card" id="styl">
+  <h2><span class="n">2</span>Barvy, písmo a vzhled</h2>
+  <p class="style-intro">Vychází z toho, co už máte: bílé logo z vašeho webu a černá z vašich popisků. Místo jasně oranžové používáme hlubokou barvu koňaku, jako stará kůže nebo ořechové dřevo. Je pořád výrazná, ale působí dospěle, jako veterány samotné. Všechno na Instagramu pak bude vypadat jako jedna značka.</p>
+
+  <h3>Logo</h3>
+  <div class="logo-row">
+    <div class="logo-tile dark"><img src="img/logo-veterancs.png" alt="Logo veteranCS.com bíle na černé"></div>
+    <div class="logo-tile orange"><img src="img/logo-veterancs.png" alt="Logo veteranCS.com bíle na barvě koňaku"></div>
+  </div>
+  <p class="note">Logo dáváme malé do rohu, bíle na tmavé i na koňaku. Nic dalšího k němu nepřidáváme.</p>
+
+  <h3>Barvy</h3>
+  <div class="swatches">
+    <div class="sw"><i style="background:#141414"></i><div><strong>Asfalt</strong><code>#141414</code><br>pozadí, text</div></div>
+    <div class="sw"><i style="background:#9A4A1E"></i><div><strong>Koňak</strong><code>#9A4A1E</code><br>jedno slovo, štítek</div></div>
+    <div class="sw"><i style="background:#F3EEE6"></i><div><strong>Krémová</strong><code>#F3EEE6</code><br>světlé pozadí</div></div>
+    <div class="sw"><i style="background:#D08A52"></i><div><strong>Světlý koňak</strong><code>#D08A52</code><br>slovo na tmavém</div></div>
+    <div class="sw"><i style="background:#fff;border-bottom:1px solid #E0D8CC"></i><div><strong>Bílá</strong><code>#FFFFFF</code><br>titulky, logo</div></div>
+  </div>
+  <p class="note">Koňak používáme střídmě: jedno slovo, štítek, linka. Když je barevné všechno, nevynikne nic.</p>
+
+  <h3>Písmo</h3>
+  <div class="type">
+    <div class="box"><b>Nadpisy a titulky: Barlow Condensed</b><div class="big">Takhle <em>přijel</em></div>Úzké, tučné, velkými písmeny. Připomíná nápisy na starých autech a dílenských cedulích a vejde se ho hodně i na obrazovku telefonu.</div>
+    <div class="box"><b>Běžný text: Barlow</b><div class="txt">Když jde jen o nový lak, jsou to týdny.</div>Na delší věty v carouselech a na popisky. Obě písma jsou zdarma.</div>
+  </div>
+
+  <h3>Poznávací prvek: štítek</h3>
+  <p>Jako výrobní štítek na autě. Na každé obálce a v carouselech nese rok a model auta, třeba <span class="plate">1971 · Porsche 911 S</span></p>
+
+  <h3>Jak to vypadá ve videu a na profilu</h3>
+  <div class="demo-row">
+    <div><div class="phone" style="background-image:url(img/lakovani-911.jpg)"><div class="sub">Takhle <em>přijel</em></div></div><div class="demo-label">Titulky ve videu: bílé s černým obrysem, jedno slovo v barvě koňaku.</div></div>
+    <div><div class="phone" style="background-image:url(img/karoserie-oranzova.jpg)"><div class="top"><span class="plate">1971 · Porsche 911 S</span></div><div class="bottom">5 let<br>v <em>dílně</em></div></div><div class="demo-label">Obálka: štítek s autem nahoře, 2–3 slova dole.</div></div>
+    <div><div class="phone"><div class="ph">sem dáme záběr<br>vás a Defenderu</div><div class="top"><span class="plate"><span class="odhad">Land Rover Defender</span></span></div><div class="bottom">Poznali<br>byste <em>ho?</em></div></div><div class="demo-label">Obálka Defenderu. Rok doplníme podle vás.</div></div>
+    <div><div class="phone question"><div class="top"><span class="plate">Ptáte se</span></div><div class="bottom">Kolik stojí lak veterána?</div></div><div class="demo-label">Obálka pro odpovědi na otázky: celá v barvě koňaku.</div></div>
+  </div>
+  <p class="photo-note">Fotky v ukázkách jsou z vašeho webu, jen pro představu. Ve skutečných videích a obálkách budete vy a auta z vašich videí.</p>
+
+  <h3>Pravidla v kostce</h3>
+  <ul class="rules">
+    <li>Pozadí černé nebo krémové, koňak jen jako akcent.</li>
+    <li>Nadpisy vždy Barlow Condensed velkými písmeny.</li>
+    <li>Na obálce vždy štítek s rokem a modelem.</li>
+    <li>Logo malé v rohu, bílé nebo černé.</li>
+    <li>Na fotky a videa žádné filtry, skutečná barva laku je to hlavní.</li>
+    <li>Na jednom slidu nebo obálce nejvýš jedna myšlenka.</li>
+  </ul>
+</section>
+
+<section class="card" id="carousel">
+  <h2><span class="n">3</span>Carousel zdarma: Jak dlouho trvá renovace?</h2>
+  <p>Tenhle carousel (v hodnotě 1 500 Kč) vám uděláme zdarma. Černé pozadí, velké fotky z dílny a bílý text, jedno slovo v barvě koňaku. Nejvíc tak vynikne lak a auta. Slidy jdou posouvat do strany.</p>
+
+  <div class="design d1" id="d1">
+    <div class="strip"></div>
+  </div>
+  <p class="photo-note">Fotky na ukázce jsou z vašeho webu, jen pro představu. Do hotového carouselu dáme fotky Porsche a Jeepu z vašich videí.</p>
+
+  <h3>Text slidů</h3>
+  <table class="stack">
+    <thead><tr><th>Slide</th><th>Text</th></tr></thead>
+    <tbody>
+      <tr><td class="time">1</td><td data-l="Text"><b>Tohle Porsche jsme renovovali asi 5 let. Proč?</b></td></tr>
+      <tr><td class="time">2</td><td data-l="Text">Ptáte se nás často, jak dlouho trvá renovace. Odpověď: od pár týdnů po pár let.</td></tr>
+      <tr><td class="time">3</td><td data-l="Text"><b>Jen nový lak:</b> pár týdnů.</td></tr>
+      <tr><td class="time">4</td><td data-l="Text"><b>Velká renovace, třeba Jeep, který teď děláme:</b> počítáme <span class="odhad">zhruba půl roku</span>.</td></tr>
+      <tr><td class="time">5</td><td data-l="Text"><b>Oranžové Porsche 911 S:</b> asi 5 let.</td></tr>
+      <tr><td class="time">6</td><td data-l="Text">Proč tak dlouho? Čeká se na klempíře, na lak a na díly.</td></tr>
+      <tr><td class="time">7</td><td data-l="Text">U Porsche se všechno stavělo znovu.</td></tr>
+      <tr><td class="time">8</td><td data-l="Text">Jeep, který jsme vám ukázali v říjnu, teprve začíná. <span class="odhad">Až bude hotový, ukážeme ho.</span></td></tr>
+    </tbody>
+  </table>
+  <h3>Popisek ke carouselu</h3>
+  <div class="caption"><span id="caption-carousel">Jak dlouho trvá renovace veterána? Ptáte se nás na to často, tak tady to máte.
+
+Když jde jen o nový lak, jsou to týdny. U velké renovace, jako je náš Jeep, to může být <span class="odhad">klidně půl roku</span>. A oranžové Porsche 911 S se dělalo asi 5 let, protože se čekalo na klempíře, na lak a na díly.
+
+Jeep teprve začíná. <span class="odhad">Sledujte nás, ať vám neuteče, jak dopadne.</span>
+
+#veterancs #renovaceveteranu #lakovna #oldtimer #porsche911</span><button class="copy" type="button" data-copy="caption-carousel">Zkopírovat popisek</button></div>
+  <p class="note">Délka u Jeepu a slib na konci jsou náš odhad.</p>
+  <p class="note">Další témata na carousely: Kolik stojí lak veterána a na čem cena záleží · Děláte i klempíře? Co se na autě dělá, než přijde do lakovny · Auta, která u nás letos byla hotová.</p>
+</section>
+
+<section class="card" id="jak">
+  <h2><span class="n">4</span>Jak video funguje</h2>
+  <p>Na začátku stojíte před zakrytým Defenderem a ukážete, jak k vám přijel. Pak řeknete, co se s ním dělo. Auto zůstane zakryté až do konce, aby lidi chtěli vidět, jak vypadá teď. Na konci strhnete plachtu a zeptáte se, jestli by ho poznali. Délka asi 25–30 vteřin.</p>
+</section>
+
+<section class="card" id="scenar">
+  <h2><span class="n">5</span>Scénář</h2>
+  <table class="stack">
+    <thead><tr><th>Čas</th><th>Co řeknete</th><th>Text na obrazovce (doplníme my)</th><th>Co je vidět</th></tr></thead>
+    <tbody>
+      <tr><td class="time">0–3 s</td><td data-l="Co řeknete" class="quote">„Tenhle Defender k nám přijel takhle.“</td><td data-l="Text na obrazovce" class="ost">TAKHLE PŘIJEL. POZNÁTE HO NA KONCI?</td><td data-l="Co je vidět">Stojíte před zakrytým autem a do kamery ukážete telefon s videem z příjezdu. Potom video z příjezdu dáme přes celý obraz.</td></tr>
+      <tr><td class="time">3–6 s</td><td data-l="Co řeknete" class="quote">„<span class="odhad">A dneska od nás odjíždí.</span> Ale nejdřív vám řeknu, co s ním bylo.“</td><td data-l="Text na obrazovce" class="ost">DNESKA ODJÍŽDÍ</td><td data-l="Co je vidět">Sáhnete na plachtu, ale nesundáte ji.</td></tr>
+      <tr><td class="time">6–10 s</td><td data-l="Co řeknete"><span class="odhad">„Majitel chtěl, aby vypadal jako nový, ale pořád jezdil do terénu.“</span></td><td data-l="Text na obrazovce">—</td><td data-l="Co je vidět">Mluvíte do kamery u zakrytého auta.</td></tr>
+      <tr><td class="time">10–17 s</td><td data-l="Co řeknete"><span class="quote">„Takže jsme ho…</span> <span class="odhad">rozebrali, dali mu nová kola a díly a teď jde do lakovny na nový lak.“</span></td><td data-l="Text na obrazovce" class="ost"><span class="odhad">KOLA A DÍLY · NOVÝ LAK</span></td><td data-l="Co je vidět">Vaše videa z průběhu práce, pokud je máte. Jinak další videa z příjezdu.</td></tr>
+      <tr><td class="time">17–22 s</td><td data-l="Co řeknete"><span class="quote">„A nejvíc zabrat nám dalo…</span> <span class="odhad">čekání na součástky. Protože na kola a díly jsme čekali několik týdnů.“</span></td><td data-l="Text na obrazovce" class="ost">ČEKÁNÍ NA DÍLY</td><td data-l="Co je vidět">Krabice s novými díly nebo kola před montáží. Jinak video z příjezdu.</td></tr>
+      <tr class="reveal"><td class="time">22–27 s</td><td data-l="Co řeknete" class="quote">„Tak co, poznali byste ho?“</td><td data-l="Text na obrazovce" class="ost">POZNALI BYSTE HO?</td><td data-l="Co je vidět">Strhnete plachtu, hotový Defender.</td></tr>
+      <tr><td class="time">27–30 s</td><td data-l="Co řeknete">—</td><td data-l="Text na obrazovce">—</td><td data-l="Co je vidět">2–3 přeřeky z natáčení.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="card" id="body">
+  <h2><span class="n">6</span>Totéž v bodech</h2>
+  <ol class="steps">
+    <li>Postavte se před zakrytý Defender, ukažte do kamery telefon s videem z příjezdu a řekněte „Tenhle Defender k nám přijel takhle.“</li>
+    <li>„A dneska od nás odjíždí. Ale nejdřív vám řeknu, co s ním bylo.“</li>
+    <li>Jednou větou, co majitel chtěl.</li>
+    <li>2–3 věci, co jste na něm dělali.</li>
+    <li>Co dalo nejvíc zabrat a proč (třeba čekání na díly).</li>
+    <li>„Tak co, poznali byste ho?“ a strhněte plachtu.</li>
+    <li>Přeřeky nemažte, pošlete nám je. Na konci videa budou.</li>
+  </ol>
+  <p class="note">Názvy aut a dílů v titulcích zkontrolujeme, aby byly správně.</p>
+</section>
+
+<section class="card" id="popisek">
+  <h2><span class="n">7</span>Popisek k videu</h2>
+  <p>Až video zveřejníte, můžete použít tenhle popisek:</p>
+  <div class="caption"><span id="caption-text">Tenhle Land Rover Defender k nám přijel takhle a po pár týdnech od nás odjíždí.
+
+<span class="odhad">Dostal nová kola a díly a nový lak. Nejvíc zabrat dalo čekání na součástky.</span>
+
+Poznali byste ho? Napište nám do komentářů. A sledujte nás, ať vám neuteče další auto, které k nám přijede.
+
+#landrover #defender #veterancs #lakovna #predapo</span><button class="copy" type="button" data-copy="caption-text">Zkopírovat popisek</button></div>
+  <p class="note">Věty o tom, co se na Defenderu dělalo, jsou náš odhad. Upravíme je podle vašich odpovědí.</p>
+</section>
+
+<section class="card" id="nataceni">
+  <h2><span class="n">8</span>Natáčení</h2>
+  <div class="grid">
+    <div class="box"><b>Kdo</b>Vy před kamerou a někdo, kdo drží telefon. Chlapi z dílny jen tehdy, když budou chtít (stačí ruce).</div>
+    <div class="box"><b>Kde</b>Venku před lakovnou u hotového Defenderu. Denní světlo, ale ne přímé slunce do obličeje. V pozadí nic, co tam nemá být.</div>
+    <div class="box"><b>Co si připravit</b><ul>
+      <li>iPhone 15 na natáčení (nabitý, s volným místem, utřený objektiv).</li>
+      <li>Druhý telefon s videem z příjezdu, ten budete držet v ruce.</li>
+      <li>Měkkou autoplachtu nebo prostěradlo přes celé auto. Ne stavební plachtu, ať se nepoškrábe nový lak.</li>
+      <li>Mikrofon do klopy, pokud ho máte. Jinak ať je telefon do 1 metru od vás.</li>
+    </ul></div>
+    <div class="box"><b>Nastavení telefonu</b>Natáčet na výšku, 4K 30 snímků za vteřinu, objektiv 1×. Strhnutí plachty natočte ve 4K 60 snímků za vteřinu, ať ho můžeme zpomalit.</div>
+  </div>
+
+  <h3>Co natočit</h3>
+  <table class="stack">
+    <thead><tr><th>Záběr</th><th>Co</th><th>Jak</th></tr></thead>
+    <tbody>
+      <tr><td class="time">1</td><td data-l="Co">Vy před zakrytým autem s telefonem v ruce</td><td data-l="Jak">od pasu nahoru, auto za vámi, 3 pokusy</td></tr>
+      <tr><td class="time">2</td><td data-l="Co">Vy mluvíte u plachty (věty ze scénáře)</td><td data-l="Jak">stejný záběr, každou větu 3×, klidně s přeřeky</td></tr>
+      <tr><td class="time">3</td><td data-l="Co">Strhnutí plachty</td><td data-l="Jak">celé auto v záběru, plachtu táhnout k sobě, ne nahoru, 3 pokusy</td></tr>
+      <tr><td class="time">4</td><td data-l="Co">Přeřeky</td><td data-l="Jak">nic nemažte</td></tr>
+    </tbody>
+  </table>
+
+  <p class="note"><b>Videa, která už máte:</b> všechna videa z příjezdu Defenderu (5–10 v galerii) a videa z průběhu práce, pokud nějaká jsou. Nahrajte je v původní kvalitě do ZandaVisuals OS (odkaz vám pošleme), ne přes WhatsApp.</p>
+  <p class="note"><b>Natáčejte už teď:</b> když se na Defenderu pracuje, natočte prosím pár krátkých videí z práce, klidně jen ruce. Na výšku, stačí 5–10 vteřin. Použijeme je v části, kde říkáte, co se na autě dělalo.</p>
+
+  <h3>Jak může natáčecí den vypadat (stačí dopoledne)</h3>
+  <table class="stack">
+    <thead><tr><th>Čas</th><th>Co</th></tr></thead>
+    <tbody>
+      <tr><td class="time">8:30</td><td data-l="Co">auto ven, umýt, vybrat místo, zakrýt plachtou</td></tr>
+      <tr><td class="time">9:00</td><td data-l="Co">záběry 1 a 2: mluvíte, každou větu 3×</td></tr>
+      <tr><td class="time">9:45</td><td data-l="Co">záběr 3: strhnutí plachty, 3 pokusy</td></tr>
+      <tr><td class="time">10:15</td><td data-l="Co">kontrola v telefonu: je slyšet každá věta? je auto celé v záběru?</td></tr>
+      <tr><td class="time">10:30</td><td data-l="Co">nahrát všechno do ZandaVisuals OS (odkaz vám pošleme)</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="card" id="dal">
+  <h2><span class="n">9</span>Co bude dál</h2>
+  <p>Až scénář po hovoru doladíme, natočíte ho u hotového Defenderu. Do 5 dnů od chvíle, kdy budeme mít všechny záběry, vám pošleme hotové video ve 3 verzích s jiným začátkem. Začátek natáčíte jen jednou, verze se budou lišit textem a prvním záběrem. Na Instagramu si je můžete vyzkoušet jako zkušební Reels a uvidíte, který začátek funguje líp. Hudbu si přidáte sama. Když budete chtít něco změnit, máte 2 kola úprav.</p>
+  <p>Kdyby vám cokoli nebylo jasné, napište mi na WhatsApp.</p>
+  <p class="sign">Žanek, ZandaVisuals</p>
+</section>
+
+</main>
+
+<footer><svg fill="#8A847C" aria-hidden="true"><use href="#jiskra"/></svg>ZandaVisuals</footer>
+
+<script>
+/* slidy carouselu: jeden text, tři vzhledy */
+var SLIDES=[
+  {img:'lakovani-911',h:'Tohle Porsche jsme renovovali asi <em>5 let</em>. Proč?',swipe:true},
+  {h:'Ptáte se nás často, jak dlouho trvá <em>renovace</em>.',s:'Odpověď: od pár týdnů po pár let.'},
+  {img:'autolakovna',lab:'Jen nový lak',val:'pár týdnů'},
+  {lab:'Velká renovace, třeba Jeep, který teď děláme',val:'½ roku',odhad:true,valtxt:'zhruba půl roku'},
+  {img:'karoserie-oranzova',lab:'Oranžové Porsche 911 S',val:'asi 5 let'},
+  {h:'Proč tak <em>dlouho</em>?',s:'Čeká se na klempíře, na lak a na díly.'},
+  {img:'karoserie-911',h:'U Porsche se všechno stavělo <em>znovu</em>.'},
+  {h:'Jeep, který jsme vám ukázali v říjnu, teprve <em>začíná</em>.',s:'Až bude hotový, ukážeme ho.',odhad:true}
+];
+function slideHTML(d,i){
+  var cls='sl '+(d.img?'img':'noimg');
+  var h='<div class="'+cls+'">';
+  if(d.img)h+='<div class="ph" style="background-image:url(img/'+d.img+'.jpg)"></div>';
+  h+='<div class="num">'+(i+1)+' / '+SLIDES.length+'</div>';
+  if(d.swipe)h+='<div class="swipe">Posuňte →</div>';
+  h+='<div class="body">';
+  if(d.lab)h+='<div class="lab">'+d.lab+'</div><div class="val'+(d.val.length>8?' long':'')+'">'+d.val+'</div>';
+  if(d.h)h+='<p class="h">'+d.h+'</p>';
+  if(d.s)h+='<p class="s">'+d.s+'</p>';
+  h+='</div><img class="lg" src="img/logo-veterancs.png" alt=""></div>';
+  var cap='<div class="sl-cap">Slide '+(i+1)+(d.odhad?' <span class="tag">odhad</span>':'')+'</div>';
+  return '<div class="slot-wrap" role="img" aria-label="Slide '+(i+1)+'">'+h+cap+'</div>';
+}
+document.querySelectorAll('.design .strip').forEach(function(s){s.innerHTML=SLIDES.map(slideHTML).join('')});
+var tabs=document.querySelectorAll('.tab');
+tabs.forEach(function(t){t.addEventListener('click',function(){
+  tabs.forEach(function(x){var on=x===t;x.setAttribute('aria-selected',on);document.getElementById(x.getAttribute('aria-controls')).hidden=!on});
+})});
+
+document.querySelectorAll('.copy').forEach(function(b){
+  b.addEventListener('click',function(){
+    b.dataset.label=b.dataset.label||b.textContent;var t=document.getElementById(b.dataset.copy).innerText.trim();
+    var done=function(){b.textContent='Zkopírováno';b.classList.add('ok');setTimeout(function(){b.textContent=b.dataset.label;b.classList.remove('ok')},1800)};
+    if(navigator.clipboard){navigator.clipboard.writeText(t).then(done,function(){fallback(t);done()})}else{fallback(t);done()}
+  });
+});
+function fallback(t){var a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(e){}a.remove()}
+var cards=document.querySelectorAll('section.card');
+if('IntersectionObserver' in window){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.05});
+  cards.forEach(function(c){io.observe(c)});
+}else{cards.forEach(function(c){c.classList.add('in')})}
+</script>
+</body>
+</html>
