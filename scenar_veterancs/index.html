@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>document.documentElement.className="js"</script>
 <meta name="robots" content="noindex, nofollow">
-<title>Veteran CS: brand, obsah a první video</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23211A14'/%3E%3Ccircle cx='16' cy='16' r='7' fill='%239A4A1E'/%3E%3Ccircle cx='24' cy='8' r='2.5' fill='%2302C9CA'/%3E%3C/svg%3E">
+<title>Veteran CS: scénář Defenderu a carousel</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23211A14'/%3E%3Ccircle cx='16' cy='16' r='7' fill='%239A4A1E'/%3E%3Ccircle cx='24' cy='8' r='2.5' fill='%23D9A35B'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --orech:#211A14;--orech2:#2E241C;--konak:#9A4A1E;--konak-d:#7A3814;--med:#D9A35B;--tyrkys:#02C9CA;--tyrkys-d:#00999A;
+  --orech:#211A14;--orech2:#2E241C;--konak:#9A4A1E;--konak-d:#7A3814;--med:#D9A35B;
   --krem:#F3EEE6;--papir:#FBF8F3;--ocel:#8A7F72;
   --ink:#211A14;--muted:#64594d;--line:#E3D9CA;--card:#fff;
   --shadow:0 1px 2px rgba(33,26,20,.05),0 10px 28px rgba(33,26,20,.08);
@@ -41,7 +41,7 @@ header.hero{position:relative;overflow:hidden;background:var(--orech);color:#fff
 .hero p{max-width:600px;margin:0 0 12px;font-size:18px;color:#efe7dc}
 .hero .legend{color:#fff}
 .hero .meta{color:#b8aa98;font-size:14px;margin-top:22px;letter-spacing:.04em;text-transform:uppercase}
-.hero .meta i{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--tyrkys);margin-right:8px;vertical-align:1px}
+.hero .meta i{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--med);margin-right:8px;vertical-align:1px}
 .stripe{height:6px;background:var(--konak)}
 
 nav.toc{position:sticky;top:0;z-index:5;background:rgba(33,26,20,.95);backdrop-filter:blur(8px)}
@@ -56,7 +56,7 @@ section.card{background:var(--card);border:1px solid var(--line);border-radius:6
 .js section.card.in{opacity:1;transform:none}
 h2{font:800 34px/1.05 var(--head);text-transform:uppercase;letter-spacing:.005em;margin:0 0 18px;display:flex;align-items:center;gap:14px}
 h2 .n{flex:none;display:inline-grid;place-items:center;width:40px;height:40px;border-radius:4px;background:var(--orech);color:#fff;font-size:22px}
-h2 .new{font:700 13px var(--body);letter-spacing:.08em;color:var(--tyrkys-d);text-transform:uppercase;margin-left:auto}
+h2 .new{font:700 13px var(--body);letter-spacing:.08em;color:var(--konak-d);text-transform:uppercase;margin-left:auto}
 h3{font:700 22px/1.2 var(--head);text-transform:uppercase;letter-spacing:.03em;margin:32px 0 12px}
 p{margin:0 0 12px}
 b,strong{font-weight:600}
@@ -130,7 +130,7 @@ ol.steps li::before{content:counter(s);position:absolute;left:0;top:10px;width:3
 .sw div{padding:10px 12px;font-size:14px;line-height:1.35}
 .sw strong{display:block;font:700 16px var(--head);letter-spacing:.04em;text-transform:uppercase}
 .sw code{font-size:13px;color:var(--muted)}
-.sw.acc{border-color:var(--tyrkys)}
+.sw.acc{border-color:var(--med)}
 .accent-demo{display:grid;grid-template-columns:1.1fr 1fr;gap:16px;align-items:center;margin-top:16px}
 .accent-demo .box{background:var(--papir)}
 .type{display:grid;grid-template-columns:1.2fr 1fr;gap:16px}
@@ -138,7 +138,7 @@ ol.steps li::before{content:counter(s);position:absolute;left:0;top:10px;width:3
 .type .box .big em{font-style:normal;color:var(--konak)}
 .type .box .txt{font:400 19px/1.45 var(--body);margin:6px 0 8px}
 .plate{display:inline-flex;align-items:center;gap:10px;background:var(--konak);color:#fff;font:800 17px/1 var(--head);letter-spacing:.08em;text-transform:uppercase;padding:9px 14px;border-radius:3px}
-.plate::before,.plate::after{content:"";width:6px;height:6px;border-radius:50%;background:var(--tyrkys)}
+.plate::before,.plate::after{content:"";width:6px;height:6px;border-radius:50%;background:var(--med)}
 .demo-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:10px}
 .phone{position:relative;aspect-ratio:9/16;border-radius:10px;overflow:hidden;background:var(--orech2) center/cover no-repeat;color:#fff;container-type:inline-size}
 .phone.warm{filter:var(--warm)}
@@ -183,7 +183,7 @@ ol.steps li::before{content:counter(s);position:absolute;left:0;top:10px;width:3
 .sl .val{font:800 18cqw/.9 var(--head);text-transform:uppercase;margin-top:2cqw}
 .sl .val.long{font-size:14cqw}
 .sl .swipe{position:absolute;right:7cqw;top:6cqw;font:700 4.4cqw var(--head);letter-spacing:.08em;text-transform:uppercase;z-index:3;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.5)}
-.sl::before{content:"";position:absolute;left:7cqw;bottom:11.5cqw;width:14cqw;height:1.2cqw;background:var(--tyrkys);z-index:3}
+.sl::before{content:"";position:absolute;left:7cqw;bottom:11.5cqw;width:14cqw;height:1.2cqw;background:var(--med);z-index:3}
 .sl .grain-l{position:absolute;inset:0;background:var(--grain);opacity:.18;mix-blend-mode:overlay;z-index:2;pointer-events:none}
 .sl-cap{font-size:13px;color:var(--muted);margin-top:7px}
 .sl-cap .tag{color:var(--konak-d);font-weight:600;margin-left:6px}
@@ -231,6 +231,346 @@ footer svg{width:18px;height:18px;vertical-align:-3px;margin-right:6px}
 }
 @media (prefers-reduced-motion:reduce){.js section.card{opacity:1;transform:none;transition:none}.mood figure:hover img{transform:none}}
 @media print{nav.toc,.copy{display:none}.js section.card{opacity:1;transform:none;box-shadow:none;break-inside:avoid}body{background:#fff}}
+/* v03, úprava 14. 11.: kratší brand list, mood board ve čtverci, nový carousel */
+nav.toc a.jina{color:var(--med);margin-left:auto;padding-left:24px}
+.veta{font:700 clamp(24px,3.4vw,34px)/1.18 var(--head);letter-spacing:.01em;margin:18px 0 8px;padding:20px 24px;border-left:4px solid var(--konak);background:var(--papir);border-radius:0 4px 4px 0}
+.veta small{display:block;font:700 14px var(--head);letter-spacing:.08em;text-transform:uppercase;color:var(--konak-d);margin-bottom:8px}
+.poznate{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:10px 0 0;padding:0;list-style:none}
+.poznate li{border-top:4px solid var(--orech);background:var(--papir);border-radius:0 0 4px 4px;padding:14px 16px;font:700 19px/1.2 var(--head);letter-spacing:.02em;text-transform:uppercase}
+td.ano{background:#fbf6ee}
+td.ne{color:var(--muted)}
+th.ne-h{background:var(--orech2)}
+
+/* mood board: jeden čtverec */
+.nalada{display:grid;grid-template-columns:minmax(0,460px) 1fr;gap:32px;align-items:start;margin-top:14px}
+.ctverec{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(3,1fr);gap:6px;aspect-ratio:1;margin:0;padding:0;list-style:none}
+.ctverec li{min-height:0;min-width:0}
+.ctverec button{display:block;width:100%;height:100%;padding:0;border:0;border-radius:4px;overflow:hidden;cursor:zoom-in;background:var(--orech)}
+.ctverec img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
+.ctverec button:hover img,.ctverec button:focus-visible img{transform:scale(1.06)}
+.ctverec button:focus-visible{outline:3px solid var(--konak);outline-offset:2px}
+.ctverec .tip{display:flex;align-items:flex-end;height:100%;border-radius:4px;background:var(--konak);color:#fff;padding:10px;font:700 15px/1.1 var(--head);letter-spacing:.04em;text-transform:uppercase}
+.nalada .vibe{grid-template-columns:1fr;gap:12px}
+.lb{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;background:rgba(20,15,11,.93);padding:20px}
+.lb.on{display:flex}
+.lb figure{margin:0;max-width:min(92vw,720px);text-align:center}
+.lb img{max-height:78vh;max-width:100%;width:auto;margin:0 auto;border-radius:4px}
+.lb figcaption{color:#efe7dc;font-size:16px;margin-top:12px}
+.lb button{position:absolute;border:0;border-radius:4px;background:rgba(255,255,255,.12);color:#fff;font:700 15px var(--head);letter-spacing:.06em;text-transform:uppercase;padding:12px 16px;cursor:pointer}
+.lb button:hover{background:rgba(255,255,255,.24)}
+.lb .zav{top:16px;right:16px}
+.lb .pred{left:16px;bottom:16px}
+.lb .dalsi{right:16px;bottom:16px}
+
+/* barvy */
+.swatches.pet{grid-template-columns:repeat(5,1fr)}
+.stitek{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:16px}
+.stitek p{margin:0;flex:1;min-width:240px}
+
+/* profil */
+.profil{display:grid;grid-template-columns:340px 1fr;gap:28px;align-items:start;margin:8px 0 22px}
+.ig{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 16px 16px;box-shadow:var(--shadow);font:400 14px/1.4 -apple-system,"Helvetica Neue",Arial,sans-serif;color:#111}
+.ig .hl{display:flex;gap:14px;align-items:center;margin-bottom:12px}
+.ig .av{flex:none;width:74px;height:74px;border-radius:50%;background:var(--orech);display:grid;place-items:center;overflow:hidden}
+.ig .av img{width:58px}
+.ig .cis{display:flex;gap:18px;font-size:12px;color:#555}
+.ig .cis span{display:block;width:34px;height:9px;border-radius:3px;background:#e8e2d8;margin-bottom:5px}
+.ig .jm{font-weight:700}
+.ig .od{color:#00376b;font-weight:600}
+.ig .vyb{display:flex;gap:10px;margin:14px 0 12px;justify-content:space-between}
+.ig .vyb div{flex:1;text-align:center;font-size:10.5px;line-height:1.2;color:#333}
+.ig .vyb i{display:block;width:46px;height:46px;border-radius:50%;margin:0 auto 5px;background:var(--orech);border:2px solid #fff;outline:1px solid #cfc3b3}
+.ig .vyb div:nth-child(even) i{background:var(--konak)}
+.ig .pri{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
+.ig .pri div{aspect-ratio:4/5;background:var(--orech);color:#fff;display:flex;flex-direction:column;justify-content:flex-end;padding:8px;font:800 15px/1 var(--head);text-transform:uppercase;border-radius:2px}
+.ig .pri div:nth-child(2){background:var(--konak)}
+.ig .pri small{font:700 9px var(--head);letter-spacing:.08em;color:var(--med);margin-bottom:auto}
+.ig .pri div:nth-child(2) small{color:#fff}
+.ig-note{font-size:13px;color:var(--muted);margin-top:8px}
+
+/* pilíře jako karty */
+.ucely{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0 20px;padding:0;list-style:none}
+.ucely li{border-left:4px solid var(--konak);background:var(--papir);border-radius:0 4px 4px 0;padding:10px 14px;font-size:15px;line-height:1.4}
+.ucely b{display:block;font:800 18px var(--head);letter-spacing:.03em;text-transform:uppercase}
+.pil{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.pk{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--papir)}
+.pk .hd{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;background:var(--orech);color:#fff;padding:14px 18px}
+.pk .hd b{font:800 25px/1 var(--head);letter-spacing:.01em;text-transform:uppercase}
+.pk .hd span{font:700 13px var(--head);letter-spacing:.08em;text-transform:uppercase;color:var(--med)}
+.pk dl{display:grid;gap:12px;margin:0;padding:16px 18px 18px}
+.pk dt{font:700 13px var(--head);letter-spacing:.08em;text-transform:uppercase;color:var(--konak-d)}
+.pk dd{margin:2px 0 0}
+.pk .meta{display:flex;gap:6px 20px;flex-wrap:wrap;margin-top:auto;padding:12px 18px;border-top:1px solid var(--line);background:#fff;font-size:15px}
+.pk .meta b{font:700 13px var(--head);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-right:6px}
+
+.dal-box{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.dal-box p{margin:0;max-width:640px}
+a.btn{display:inline-block;font:700 17px var(--head);letter-spacing:.06em;text-transform:uppercase;background:var(--orech);color:#fff;text-decoration:none;border-radius:4px;padding:13px 22px;transition:transform .15s,background .2s}
+a.btn:hover{transform:translateY(-1px);background:#000}
+.hero p a{color:var(--med)}
+
+/* carousel (verze 16 Finál, vybral Žanek 14. 11.) */
+.cs-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:14px 0 8px}
+/* slide: fotka přes celý slide, text vlevo dole, štítek nahoře uprostřed, bez loga a bez linky */
+.cs{position:relative;aspect-ratio:4/5;overflow:hidden;container-type:inline-size;border-radius:6px;box-shadow:0 2px 12px rgba(33,26,20,.2);background:#211A14;color:#fff}
+.cs em{font-style:normal;color:#D9A35B}
+.cs .ph{position:absolute;inset:0;background-size:cover;background-repeat:no-repeat;background-position:var(--posF,center);filter:var(--warm)}
+.cs.ls .ph{inset:0 0 auto 0;height:80cqw;background-position:var(--posL,center)}
+.cs .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(33,26,20,.34) 0%,rgba(33,26,20,0) 20%)}
+.cs::after{content:"";position:absolute;left:0;right:0;top:50cqw;bottom:0;z-index:1;background:linear-gradient(180deg,rgba(33,26,20,0) 0%,rgba(33,26,20,.86) 46%,rgba(33,26,20,.97) 100%);pointer-events:none}
+.cs.ls::after{top:56cqw;bottom:auto;height:25cqw;background:linear-gradient(180deg,rgba(33,26,20,0) 0%,#211A14 96%)}
+.cs .bx{position:absolute;z-index:2;left:8cqw;right:8cqw;bottom:9cqw}
+.cs .bx::before{content:attr(data-n);display:block;font:700 3.6cqw/1 var(--head);letter-spacing:.16em;color:#D9A35B;margin-bottom:2.2cqw}
+.cs .h{font:800 6.4cqw/1.08 var(--head);letter-spacing:.015em;text-transform:uppercase;margin:0}
+.cs.t-cover .h{font-size:7.4cqw;line-height:1.05}
+.cs .s{font:500 4.3cqw/1.45 var(--body);color:#d9cfc0;margin:1.8cqw 0 0}
+.cs .lab{font:700 3.8cqw/1.25 var(--head);letter-spacing:.09em;text-transform:uppercase;color:#D9A35B}
+.cs .val{font:800 11.5cqw/.95 var(--head);text-transform:uppercase;margin-top:1cqw;white-space:nowrap}
+.cs .osa{height:1.2cqw;border-radius:1cqw;background:rgba(255,255,255,.24);margin-top:3.2cqw}
+.cs .osa i{display:block;min-width:1.2cqw;height:100%;border-radius:inherit;background:#D9A35B}
+.cs .pl{position:absolute;z-index:3;top:6cqw;left:50%;transform:translateX(-50%);display:inline-flex;align-items:center;gap:2cqw;background:#9A4A1E;color:#fff;font:800 4.2cqw/1 var(--head);letter-spacing:.09em;text-transform:uppercase;padding:2cqw 3cqw;border-radius:1cqw;white-space:nowrap}
+.cs .pl::before,.cs .pl::after{content:"";width:1.3cqw;height:1.3cqw;border-radius:50%;background:#D9A35B}
+.cs-cap{font-size:13px;color:var(--muted);margin-top:7px}
+.cs-cap .tag{color:var(--konak-d);font-weight:600;margin-left:6px}
+
+@media (max-width:900px){.poznate{grid-template-columns:repeat(2,1fr)}.profil{grid-template-columns:1fr}.ig{max-width:360px}.nalada{grid-template-columns:1fr}.ctverec{max-width:460px}.swatches.pet{grid-template-columns:repeat(3,1fr)}.pil,.ucely{grid-template-columns:1fr}.cs-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:700px){nav.toc a.jina{margin-left:0;padding-left:0}.swatches.pet{grid-template-columns:repeat(2,1fr)}.cs-grid{gap:10px}.ctverec .tip{font-size:12px;padding:6px}}
+@media (prefers-reduced-motion:reduce){.ctverec img{transition:none}.ctverec button:hover img{transform:none}}
+/* úprava 14. 11. večer: vzdušnější vzhled, mood board s malými fotkami */
+.wrap{max-width:1080px}
+main.wrap{padding-top:44px;padding-bottom:72px}
+strong{font-weight:700}
+section.card p,section.card li,section.card dd{line-height:1.65}
+section.card>p:not(.veta){max-width:720px}
+.body-list{margin:0 0 20px;padding:0;list-style:none;display:grid;gap:10px;max-width:720px}
+.body-list li{position:relative;padding-left:26px}
+.body-list li::before{content:"";position:absolute;left:0;top:.72em;width:12px;height:4px;background:var(--konak)}
+section.card{border:0;border-top:0;border-radius:18px;padding:48px 48px 44px;margin:0 0 28px;box-shadow:0 1px 2px rgba(33,26,20,.04),0 18px 44px rgba(33,26,20,.07)}
+h2{font-size:42px;gap:18px;margin-bottom:22px;align-items:flex-end}
+h2 .n{display:inline-block;white-space:nowrap;width:auto;height:auto;background:none;color:var(--konak);font:800 64px/.8 var(--head);letter-spacing:-.01em}
+h2 .n::before{content:"0"}
+h3{font-size:20px;letter-spacing:.06em;color:var(--konak-d);margin:36px 0 14px}
+section.card>p:first-of-type{font-size:19px;max-width:760px}
+.box{border-radius:12px;padding:22px 24px}
+.box:hover{transform:none;box-shadow:none}
+.box.feel{padding:28px 30px;font-size:19px}
+.veta{border-radius:0 12px 12px 0;padding:24px 28px}
+.poznate li{border-radius:0 0 12px 12px;padding:18px}
+table{border-radius:12px}
+th{padding:14px 18px}
+td{padding:16px 18px}
+.pk{border-radius:14px}
+.pk .hd{padding:18px 22px}
+.pk dl{padding:20px 22px 22px}
+.pk .meta{padding:14px 22px}
+.ucely li{border-radius:0 10px 10px 0;padding:12px 16px}
+.mix div,.purpose div{border-radius:10px}
+.sw{border:0;border-radius:12px;box-shadow:0 1px 2px rgba(33,26,20,.06),0 6px 18px rgba(33,26,20,.07)}
+.sw i{height:120px}
+.logo-tile{border-radius:12px;min-height:170px}
+.ig{border-radius:22px}
+.stitek{background:var(--papir);border-radius:12px;padding:18px 22px}
+.dal-box p{font-size:19px}
+#mood{background:var(--orech);color:#e7dccd}
+#mood h2{color:#fff}
+#mood h2 .n{color:var(--med)}
+.nalada{grid-template-columns:300px 1fr;gap:44px;align-items:center;margin-top:22px}
+.ctverec{gap:4px}
+.ctverec button,.ctverec .tip{border-radius:3px}
+.ctverec .tip{font-size:11px;padding:6px;letter-spacing:.03em}
+.nalada .vibe{grid-template-columns:1fr 1fr;gap:18px 32px}
+.nalada .vibe li::before{background:var(--med)}
+.nalada .vibe li b{color:#fff}
+@media (max-width:900px){.nalada{grid-template-columns:1fr;gap:24px}.ctverec{max-width:300px}.nalada .vibe{grid-template-columns:1fr}}
+@media (max-width:700px){main.wrap{padding-top:24px;padding-bottom:48px}section.card{padding:28px 20px;border-radius:14px}h2{font-size:30px;gap:12px}h2 .n{font-size:44px;width:auto;height:auto}.sw i{height:72px}section.card>p:first-of-type{font-size:17px}.box.feel{font-size:17px;padding:22px}}
+/* scénář: nákresy záběrů */
+.zc{display:inline-block;font:700 13px/1 var(--head);letter-spacing:.07em;text-transform:uppercase;color:#fff;background:var(--konak);border-radius:4px;padding:5px 8px;margin-right:9px;vertical-align:1px;white-space:nowrap}
+.zab{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:18px 0 6px}
+.zb{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--papir)}
+.zb img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center 58%;background:var(--krem);border-bottom:1px solid var(--line)}
+.zb .tx{padding:16px 18px 18px;display:flex;flex-direction:column;flex:1}
+.zb .c{font:700 13px/1 var(--head);letter-spacing:.09em;text-transform:uppercase;color:var(--konak-d)}
+.zb h4{font:800 23px/1.05 var(--head);text-transform:uppercase;margin:5px 0 8px}
+.zb p{margin:0 0 12px;line-height:1.5}
+.zb dl{margin:auto 0 0;padding-top:10px;border-top:1px solid var(--line);display:grid;gap:6px;font-size:15px;line-height:1.4}
+.zb dl div{display:grid;grid-template-columns:78px 1fr;gap:8px}
+.zb dt{font:700 12px/1.7 var(--head);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.zb dd{margin:0}
+@media (max-width:900px){.zab{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.zab{grid-template-columns:1fr}.zb img{aspect-ratio:1/1}}
+/* úprava 16. 11.: klidnější rytmus, zarovnání a mikro animace */
+html{scroll-behavior:smooth}
+body{line-height:1.65}
+.hero .wrap{padding-top:36px;padding-bottom:76px}
+.hero h1{margin:56px 0 26px}
+.hero p{margin-bottom:14px;line-height:1.6}
+nav.toc .wrap{gap:6px;padding-top:9px;padding-bottom:9px}
+nav.toc a{padding:8px 12px;border-radius:8px;transition:color .2s,background .2s}
+nav.toc a:hover{background:rgba(255,255,255,.08);color:#fff}
+nav.toc a.akt{color:#fff;background:rgba(255,255,255,.12)}
+nav.toc a.jina{padding-left:12px}
+main.wrap{padding-top:56px;padding-bottom:88px}
+section.card{padding:60px 56px 56px;margin:0 0 36px;scroll-margin-top:76px}
+h2{align-items:baseline;gap:18px;margin-bottom:30px}
+h2 .n{line-height:1}
+h3{margin:48px 0 18px}
+section.card p{margin:0 0 16px}
+section.card>p:last-child,.box>:last-child{margin-bottom:0}
+.note{margin-top:18px}
+.grid{gap:20px;margin:24px 0 0}
+.grid.three{gap:20px}
+.box b{margin-bottom:10px}
+.box ul{display:grid;gap:8px}
+.box li{margin:0}
+.veta{margin:26px 0 10px}
+.poznate{gap:16px;margin-top:18px}
+.body-list{gap:12px;margin:4px 0 24px}
+table{margin-top:6px}
+td,th{padding-left:20px;padding-right:20px}
+td{padding-top:18px;padding-bottom:18px}
+.swatches{gap:16px;margin-bottom:0}
+.stitek{margin-top:24px}
+.type,.logo-row{gap:20px}
+.profil{gap:40px;margin:8px 0 32px;align-items:center}
+.ucely{gap:16px;margin:22px 0 22px}
+.pil{gap:20px;margin-top:26px}
+.mix{gap:14px;margin-top:16px}
+.purpose{gap:16px;margin:22px 0 22px}
+ol.steps li{padding:16px 0 16px 54px}
+ol.steps li::before{top:14px}
+.zab{gap:22px;margin:26px 0 8px}
+.zb .tx{padding:20px 22px 22px}
+.zb h4{margin:6px 0 10px}
+.cs-grid{gap:20px;margin:22px 0 10px}
+.caption{border-radius:12px;padding:24px 24px 72px;line-height:1.65}
+.dal-box{gap:24px}
+.nalada{margin-top:28px}
+/* jemné pohyby */
+.cte{position:fixed;left:0;top:0;height:3px;width:100%;background:var(--med);transform:scaleX(0);transform-origin:0 50%;z-index:20;pointer-events:none}
+.zb,.pk,.sw,.logo-tile{transition:transform .25s ease,box-shadow .25s ease}
+.zb:hover,.pk:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(33,26,20,.1)}
+.zb img{transition:transform .5s ease}
+.zb:hover img{transform:scale(1.03)}
+.zb{isolation:isolate}
+.sw:hover{transform:translateY(-2px)}
+a.btn,.copy{transition:transform .15s ease,background .2s ease,box-shadow .2s ease}
+a.btn:hover,.copy:hover{box-shadow:0 6px 16px rgba(33,26,20,.22)}
+a.btn:active,.copy:active{transform:scale(.97)}
+tbody tr{transition:background .25s ease}
+@keyframes vstup{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.js section.card:not(.in) :is(.zb,.pk,.box,.sw,.cs-grid>div,.poznate li,.ucely li,.mix div,.purpose div,.ctverec li,ol.steps li){opacity:0}
+.js section.card.in :is(.zb,.pk,.box,.sw,.cs-grid>div,.poznate li,.ucely li,.mix div,.purpose div,.ctverec li,ol.steps li){animation:vstup .55s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i,0) * 55ms + 120ms)}
+:is(.zb,.pk,.box,.sw,.cs-grid>div,.poznate li,.ucely li,.mix div,.purpose div,.ctverec li,ol.steps li):nth-child(2){--i:1}
+:is(.zb,.pk,.box,.sw,.cs-grid>div,.poznate li,.ucely li,.mix div,.purpose div,.ctverec li,ol.steps li):nth-child(3){--i:2}
+:is(.zb,.pk,.box,.sw,.cs-grid>div,.poznate li,.ucely li,.mix div,.purpose div,.ctverec li,ol.steps li):nth-child(4){--i:3}
+:is(.zb,.pk,.box,.sw,.cs-grid>div,.poznate li,.ucely li,.mix div,.purpose div,.ctverec li,ol.steps li):nth-child(5){--i:4}
+:is(.zb,.pk,.box,.sw,.cs-grid>div,.poznate li,.ucely li,.mix div,.purpose div,.ctverec li,ol.steps li):nth-child(6){--i:5}
+:is(.zb,.pk,.box,.sw,.cs-grid>div,.poznate li,.ucely li,.mix div,.purpose div,.ctverec li,ol.steps li):nth-child(n+7){--i:6}
+@media (max-width:900px){.profil{gap:24px}}
+@media (max-width:700px){main.wrap{padding-top:28px;padding-bottom:56px}section.card{padding:32px 20px 30px;margin-bottom:22px}h2{margin-bottom:20px}h3{margin:36px 0 14px}td,th{padding-left:14px;padding-right:14px}.hero h1{margin:36px 0 20px}nav.toc a{padding:7px 9px}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.js section.card :is(.zb,.pk,.box,.sw,.cs-grid>div,.poznate li,.ucely li,.mix div,.purpose div,.ctverec li,ol.steps li){opacity:1!important;animation:none!important}.zb,.pk,.sw,.zb img{transition:none}.zb:hover,.pk:hover,.sw:hover,.zb:hover img{transform:none}.cte{display:none}}
+@media print{.cte{display:none}.js section.card :is(.zb,.pk,.box,.sw,.cs-grid>div,.poznate li,.ucely li,.mix div,.purpose div,.ctverec li,ol.steps li){opacity:1!important;animation:none!important}}
+/* karty záběrů: spodní údaje ve stejné výšce a na jedné lince */
+.zb dl{gap:8px;padding-top:14px;font-size:15px;line-height:21px}
+.zb dl div{grid-template-columns:84px 1fr;gap:10px;min-height:42px;align-items:start}
+.zb dt{font-size:12px;line-height:21px}
+section.card .zb dd{line-height:21px}
+@media (max-width:560px){.zb dl div{min-height:0}}
+/* úprava 16. 11. (Žanek: „AI slop design“): ploché části bez vnořených karet, žádné tlusté barevné okraje, žádné štítky nad nadpisy */
+::selection{background:var(--med);color:var(--orech)}
+:focus-visible{outline:2px solid var(--konak);outline-offset:3px;border-radius:4px}
+h2,h3,h4{text-wrap:balance}
+p,li,dd{text-wrap:pretty}
+td.time{font-variant-numeric:tabular-nums}
+main.wrap{padding-top:8px;padding-bottom:96px}
+section.card{background:none;border:0;border-top:1px solid var(--line);border-radius:0;box-shadow:none;padding:76px 0 68px;margin:0}
+main>section.card:first-child{border-top:0}
+h2{font-size:44px;gap:16px;margin-bottom:28px}
+h2 .n{font-size:44px;line-height:1;color:var(--konak)}
+h3{font-size:19px;color:var(--orech);margin:52px 0 18px}
+section.card>p:first-of-type{font-size:20px}
+/* povrchy: bílá plocha s vlasovou linkou, bez stínů */
+.box{background:#fff;border:1px solid var(--line);border-radius:10px;padding:24px 26px}
+.box.feel{background:var(--orech);border-color:var(--orech)}
+table{border-radius:10px;background:#fff}
+.sw{box-shadow:none;border:1px solid var(--line);border-radius:10px}
+.sw:hover{transform:none}
+.logo-tile{border-radius:10px}
+.caption{background:#fff;border:1px solid var(--line);border-left:1px solid var(--line);border-radius:10px}
+.stitek{background:none;padding:0;margin-top:28px}
+.mix div{border-radius:8px}
+/* věta pozice: velká věta mezi dvěma linkami, bez rámečku */
+.veta{background:none;border:0;border-top:1px solid var(--orech);border-bottom:1px solid var(--orech);border-radius:0;padding:26px 0 28px;margin:22px 0 0;font-size:clamp(26px,3.6vw,40px);line-height:1.14;max-width:none}
+/* řady s vlasovou linkou místo barevných okrajů */
+.poznate{gap:0;margin-top:18px;border-top:1px solid var(--line)}
+.poznate li{background:none;border:0;border-radius:0;padding:18px 20px 4px 0;font-size:20px}
+.poznate li+li{border-left:1px solid var(--line);padding-left:20px}
+.ucely,.purpose{gap:0;margin:26px 0;border-top:1px solid var(--orech)}
+.ucely li,.purpose div{background:none;border:0;border-radius:0;padding:16px 24px 0 0;font-size:16px;line-height:1.5}
+.ucely li+li,.purpose div+div{border-left:1px solid var(--line);padding-left:24px}
+.ucely b,.purpose b{font-size:22px;margin-bottom:4px}
+/* karty pilířů a záběrů: bílé, bez tmavé hlavičky a bez zvedání */
+.pk{background:#fff;border-radius:12px}
+.pk .hd{background:none;color:var(--orech);border-bottom:1px solid var(--line);padding:20px 24px 16px}
+.pk .hd span{color:var(--konak-d)}
+.pk dl{padding:20px 24px 22px}
+.pk .meta{background:none;padding:14px 24px 18px}
+.zb{background:#fff;border-radius:12px}
+.zb:hover,.pk:hover{transform:none;box-shadow:none}
+.zb h4{display:flex;align-items:baseline;gap:10px;margin:0 0 10px}
+.zb h4 i{font-style:normal;color:var(--konak)}
+.ig{box-shadow:none}
+@media (max-width:900px){.poznate li:nth-child(3){border-left:0;padding-left:0}.poznate li:nth-child(n+3){border-top:1px solid var(--line)}.ucely li,.purpose div{padding:14px 0}.ucely li+li,.purpose div+div{border-left:0;padding-left:0;border-top:1px solid var(--line)}}
+@media (max-width:700px){main.wrap{padding-top:0;padding-bottom:64px}section.card{padding:48px 0 44px;margin:0}h2,h2 .n{font-size:32px}section.card>p:first-of-type{font-size:18px}.box{padding:20px}}
+/* tmavá část nálady zůstává jako jediný panel */
+#mood{background:var(--orech);border:0;border-radius:16px;padding:64px 56px 60px;margin:8px 0 0}
+#mood+section.card{border-top:0}
+@media (max-width:700px){#mood{padding:36px 20px;border-radius:14px}}
+section.card p.veta{line-height:1.14}
+section.card .type .big{line-height:1}
+section.card .poznate li{line-height:1.2;padding-top:20px;padding-bottom:6px;counter-increment:poz}
+.poznate{counter-reset:poz}
+.poznate li::before{content:counter(poz);display:block;font:800 15px/1 var(--head);color:var(--konak);margin-bottom:10px}
+/* řady bodů: stejné sloupce s mezerou, každý má nahoře svou linku (žádné svislé dělení) */
+.poznate,.ucely,.purpose{display:grid;gap:0 32px;border-top:0;margin:24px 0 0}
+.poznate{grid-template-columns:repeat(4,1fr)}
+.ucely,.purpose{grid-template-columns:repeat(3,1fr)}
+section.card .poznate li,.ucely li,.purpose div{border:0;border-top:1px solid var(--orech);padding:16px 0 0;background:none}
+.poznate li+li,.ucely li+li,.purpose div+div{border-left:0;padding-left:0}
+section.card .poznate li{font-size:21px;line-height:1.18}
+.poznate li::before{margin-bottom:12px}
+.poznate+.note{margin-top:22px}
+.ucely+p,.purpose+p,.purpose+ul{margin-top:30px}
+/* štítek: ukázka vlevo, vysvětlení vpravo, na stejné mřížce jako vzorky barev */
+.stitek{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:32px;align-items:center;margin-top:0;padding:26px 0 0;border-top:1px solid var(--line)}
+.stitek{border-radius:0}
+.stitek .plate{justify-self:start;font-size:19px;padding:11px 16px}
+.stitek p{max-width:560px;min-width:0}
+.swatches+.body-list{margin-bottom:28px}
+@media (max-width:900px){.poznate{grid-template-columns:repeat(2,1fr);gap:28px 24px}.poznate li:nth-child(n){border-left:0;padding-left:0;border-top:1px solid var(--orech)}.ucely,.purpose{grid-template-columns:1fr;gap:20px}.ucely li,.purpose div{padding:14px 0 0}.ucely li+li,.purpose div+div{border-top:1px solid var(--orech)}}
+@media (max-width:700px){.stitek{grid-template-columns:1fr;gap:16px}}
+/* carousel verze 17 (Žankův feedback 16. 11.): bez štítků a čísel, úvod na střed, víc fotky u slidů na šířku */
+.cs .bx::before{display:none}
+.cs .pl{display:none}
+.cs.ls{--h:96cqw}
+.cs.ls .ph{height:var(--h)}
+.cs.ls::after{top:calc(var(--h) - 30cqw);height:30cqw}
+.cs .bx{bottom:8.5cqw}
+.cs.t-cover .bx{text-align:center;left:9cqw;right:9cqw;bottom:11cqw}
+.cs.t-cover .h{font-size:8.4cqw;line-height:1.04}
+.cs.t-cover .s{font-size:5cqw;margin-top:2.6cqw;color:#fff}
+.cs.t-cover::after{top:58cqw}
+/* carousel verze 18 (Žankův feedback 16. 11.): bez pruhu, text pokaždé jinde, vylepšené fotky */
+.cs .osa{display:none}
+.cs.c .bx{text-align:center;left:9cqw;right:9cqw}
+.cs.r .bx{text-align:right;left:14cqw}
+.cs.top .bx{top:8.5cqw;bottom:auto;right:14cqw}
+.cs.top::after{top:0;bottom:auto;height:62cqw;background:linear-gradient(180deg,rgba(33,26,20,.94) 0%,rgba(33,26,20,.74) 46%,rgba(33,26,20,0) 100%)}
+.cs.top .ph::after{display:none}
+.cs.t-cover::after{top:66cqw}
+.cs.t-cover .bx{bottom:10cqw}
+.cs .lab{margin-bottom:.6cqw}
+.cs .val{font-size:13cqw}
 </style>
 </head>
 <body>
@@ -240,199 +580,148 @@ footer svg{width:18px;height:18px;vertical-align:-3px;margin-right:6px}
   <div class="hero-photo" aria-hidden="true"></div>
   <div class="wrap">
     <div class="topbar"><img class="logo" src="img/logo-veterancs.png" alt="veteranCS.com"><span class="by">Připravilo ZandaVisuals</span></div>
-    <h1>Brand, obsah a&nbsp;první <em>video</em></h1>
+    <h1>Scénář: první <em>video</em></h1>
     <p>Dobrý den, paní Bláhová,</p>
-    <p>posílám návrh. Je v něm mood board, tedy nástěnka nálady: jak mají videa a fotky působit. Dál pilíře, tedy o čem budou videa, a formáty i s hudbou. Na každém slidu carouselu je vaše fotka. A ke scénáři Defenderu je přesný postup, jak natočit každý záběr.</p>
-    <p>Scénář je zatím pracovní. Až bude Defender skoro hotový, zavoláme si a doladíme ho. Věty ve scénáři pak řeknete vlastními slovy, auto znáte nejlíp vy.</p>
+    <p>posílám <strong>scénář prvního videa</strong> s Defenderem, <strong>nákresy záběrů</strong> a <strong>carousel</strong>, který vám uděláme zdarma.</p>
+    <p>Scénář je zatím pracovní. Až bude Defender skoro hotový, zavoláme si a doladíme ho.</p>
     <p class="legend"><span class="odhad">Takhle zvýrazněné</span> jsou náš odhad. Opravíme je podle vašich odpovědí.</p>
-    <p class="meta"><i></i>Veteran CS · návrh 2 · 9. 11. 2026</p>
+    <p class="meta"><i></i>Veteran CS · scénář a carousel · 16. 11. 2026</p>
   </div>
 </header>
 <div class="stripe"></div>
 
 <nav class="toc" aria-label="Obsah"><div class="wrap">
-  <a href="#brand">Brand</a><a href="#mood">Mood board</a><a href="#styl">Barvy a písmo</a><a href="#pilire">Pilíře</a><a href="#formaty">Formáty</a><a href="#carousel">Carousel zdarma</a><a href="#scenar">Scénář</a><a href="#nataceni">Jak to natočit</a><a href="#dal">Co bude dál</a>
+  <a href="#scenar">Scénář</a><a href="#nataceni">Jak to natočit</a><a href="#carousel">Carousel zdarma</a><a href="#dal">Co bude dál</a><a class="jina" href="brand-list.html">Brand list</a>
 </div></nav>
 
 <main class="wrap">
 
-<section class="card" id="brand">
-  <h2><span class="n">1</span>Brand: vy a vaše dílna</h2>
-  <p>Hlavní postavou vašeho Instagramu budete vy, ne jen auta. Ukážete, co se s veteránem u vás děje, řeknete to po svém a klidně si z toho uděláte legraci.</p>
-  <div class="grid">
-    <div class="box feel"><b>Jaký pocit má Instagram budit</b>Teplý a nostalgický. Jako když listujete starým rodinným albem nebo jedete s otevřeným okýnkem na sraz. Auta ukazujeme i v jízdě, v krajině a v teplém světle, nejen zaparkovaná v hale. Dílnu ukazujeme pořád tak, jak je: práci, lak a lidi kolem aut.</div>
-    <div class="box"><b>Proč to funguje</b>Videa, kde někdo mluví do kamery, mají u vás asi 3× víc zhlédnutí než videa jen s autem a hudbou. A do kamery, jak jste psala, mluvíte ráda.</div>
-    <div class="box"><b>Jak mluvíte</b>Jako u sebe v dílně: krátké věty a vaše výrazy jako „úplný dělo“ nebo „masakr“. K divákům v jednom videu buď vykejte, nebo tykejte, ne obojí. Vtip ano, názvy aut vždy správně. Žádné reklamní věty.</div>
-  </div>
-  <div class="grid">
-    <div class="box"><b>Váš příběh</b>Manžel si v mládí sám koupil a doma na zahradě nalakoval GAZ. Pak objížděl Česko a Slovensko a vykupoval auta z garáží a zahrad. A protože se v jiných lakovnách čekalo na lak a klempíře, udělal si lakovnu vlastní. Tenhle příběh stojí za jedno samostatné video.</div>
-    <div class="box"><b>Pro koho</b>Pro majitele a sběratele veteránů, které znáte ze srazů a burz. A pro lidi, kteří veterán nemají, ale rádi se dívají, jak se ze „šrotu“ stane auto, a vzpomínají na auta z mládí.</div>
-    <div class="box"><b>Čím se lišíte</b>Vaše tři slova: kvalita, odbornost, preciznost. Ke každému autu přistupujete jednotlivě a s respektem k jeho historii a originalitě. Ve videích to neříkáme, ale ukazujeme: měření původního odstínu, vrstvy starého laku, detail hotové práce.</div>
-    <div class="box"><b>Bio na Instagramu</b>Lakovna a renovace veteránů 🖤🤎<br>Kbelnice u Jičína<br>Ukazujeme auta před a po<br>Poptávky pište do zpráv</div>
-  </div>
-</section>
-
-<section class="card" id="mood">
-  <h2><span class="n">2</span>Mood board<span class="new">nové</span></h2>
-  <p>Takhle mají vaše videa a fotky působit. Fotky jsou z internetu, jen pro představu nálady. Ve vašich videích budou vaše auta.</p>
-  <div class="mood">
-    <figure><div class="grain"><img src="mood/01.jpg" alt="Rezavý americký sedan, muž v kostkované košili za volantem" loading="lazy"></div><figcaption>rez, chrom a kostkovaná košile</figcaption></figure>
-    <figure><div class="grain"><img src="mood/03.jpg" alt="Smějící se žena u tyrkysového veteránu" loading="lazy"></div><figcaption>smích u auta, barvy jako z polaroidu</figcaption></figure>
-    <figure><div class="grain"><img src="mood/05.jpg" alt="Rozmazaný výhled z okna starého auta na podzimní stromy" loading="lazy"></div><figcaption>výhled z okna, krajina se rozmazává</figcaption></figure>
-    <figure><div class="grain"><img src="mood/10.jpg" alt="Hnědé Porsche 911 u horské farmy, vedle krávy" loading="lazy"></div><figcaption>auto u statku</figcaption></figure>
-    <figure><div class="grain"><img src="mood/07.jpg" alt="Palubní deska starého Mercedesu při západu slunce" loading="lazy"></div><figcaption>palubní deska a západ slunce</figcaption></figure>
-    <figure><div class="grain"><img src="mood/02.jpg" alt="Starší pár v červeném kabrioletu zezadu" loading="lazy"></div><figcaption>výlet ve dvou</figcaption></figure>
-    <figure><div class="grain"><img src="mood/09.jpg" alt="Oranžová Volha pod jeřabinou" loading="lazy"></div><figcaption>auto pod stromem</figcaption></figure>
-    <figure><div class="grain"><img src="mood/06.jpg" alt="Ruka na volantu, za oknem les" loading="lazy"></div><figcaption>ruka na volantu, les</figcaption></figure>
-    <figure><div class="grain"><img src="mood/04.jpg" alt="Dvojice s kazeťákem u pickupu v noci" loading="lazy"></div><figcaption>večer u auta, kazeťák</figcaption></figure>
-    <figure><div class="grain"><img src="mood/08.jpg" alt="Děti na kolech ve zlatém světle s odleskem v objektivu" loading="lazy"></div><figcaption>zlatá hodina, odlesk v objektivu</figcaption></figure>
-    <figure><div class="grain"><img src="mood/11.jpg" alt="Zelený Mercedes W123 v podzimním lese" loading="lazy"></div><figcaption>podzimní les</figcaption></figure>
-  </div>
-  <ul class="vibe">
-    <li><b>Světlo</b>Ráno a večer, slunce nízko, zboku nebo proti. Polední slunce ne.</li>
-    <li><b>Barvy</b>Teplé. Med, koňak, zeleň stromů, krémová. Stíny spíš do hněda než do černa.</li>
-    <li><b>Zrno</b>Jemné, jako na starém filmu. Obraz trochu měkčí, občas odlesk slunce v objektivu.</li>
-    <li><b>Záběry</b>Z okna auta, ruka na volantu, palubní deska, auto mezi stromy nebo v polích, lidi u auta, kteří se smějí.</li>
-    <li><b>Pohyb</b>Auto jede a krajina se rozmazává. Řídí pomocník, vy točíte ze sedadla spolujezdce a telefon držíte v klidu.</li>
-    <li><b>Lak</b>Zblízka na lak barvy neupravujeme. Odstín musí odpovídat skutečnosti. Při jízdě můžete i hotové auto lehce oteplit.</li>
-  </ul>
-  <h3>Jak toho docílit v telefonu</h3>
-  <p>Točte ráno nebo večer. Barvy pak doladíme ve střihu: teplota mírně do teplé a jemné zrno. Když video stříháte sama, v CapCutu to jde stejně. U detailů laku nic z toho.</p>
-  <div class="compare">
-    <figure><div class="im"></div><figcaption>Fotka z vašeho webu bez úprav</figcaption></figure>
-    <figure><div class="im warm grain"></div><figcaption>Totéž teplejší a s jemným zrnem</figcaption></figure>
-  </div>
-</section>
-
-<section class="card" id="styl">
-  <h2><span class="n">3</span>Barvy, písmo a vzhled</h2>
-  <p>Vychází z toho, co už máte: bílé logo z vašeho webu a černá z vašich popisků. Místo jasně oranžové používáme hlubokou barvu koňaku, jako stará kůže. Hlavní plocha je teď krémová nebo vaše fotka. Tmavá barva je teplá ořechová, ne čistě černá. A přibyla jedna kontrastní barva do detailů.</p>
-
-  <h3>Logo</h3>
-  <div class="logo-row">
-    <div class="logo-tile dark"><img src="img/logo-veterancs.png" alt="Logo veteranCS.com bíle na ořechové"></div>
-    <div class="logo-tile orange"><img src="img/logo-veterancs.png" alt="Logo veteranCS.com bíle na barvě koňaku"></div>
-  </div>
-  <p class="note">Logo dáváme malé do rohu, bíle na tmavé i na koňaku. Nic dalšího k němu nepřidáváme.</p>
-
-  <h3>Barvy</h3>
-  <div class="swatches">
-    <div class="sw"><i style="background:#F3EEE6"></i><div><strong>Krémová</strong><code>#F3EEE6</code><br>hlavní světlé pozadí</div></div>
-    <div class="sw"><i style="background:#211A14"></i><div><strong>Ořech</strong><code>#211A14</code><br>text, tmavé proužky</div></div>
-    <div class="sw"><i style="background:#9A4A1E"></i><div><strong>Koňak</strong><code>#9A4A1E</code><br>jedno slovo, štítek</div></div>
-    <div class="sw"><i style="background:#D9A35B"></i><div><strong>Med</strong><code>#D9A35B</code><br>slovo na fotce a tmavém</div></div>
-    <div class="sw acc"><i style="background:#02C9CA"></i><div><strong>Tyrkys</strong><code>#02C9CA</code><br>jen detaily</div></div>
-    <div class="sw"><i style="background:#fff;border-bottom:1px solid #E3D9CA"></i><div><strong>Bílá</strong><code>#FFFFFF</code><br>titulky, logo</div></div>
-  </div>
-  <div class="accent-demo">
-    <div class="box"><b>Tyrkys jen v detailech</b>Je z vašeho webu a připomíná tyrkysové veterány. Proti koňaku a krémové je to nejsilnější kontrast, a proto stačí kousek: tenká linka nebo tečky na štítku. Na jednom slidu nebo obálce nejvýš jeden takový detail. Nikdy na text, pozadí ani celé slovo.</div>
-    <div><span class="plate">1971 · Porsche 911 S</span><p class="note">Štítek s rokem a modelem zůstává. Tečky na něm jsou tyrkysové a počítají se jako jeden detail.</p></div>
-  </div>
-
-  <h3>Písmo</h3>
-  <div class="type">
-    <div class="box"><b>Nadpisy a titulky: Barlow Condensed</b><div class="big">Takhle <em>přijel</em></div>Úzké, tučné, velkými písmeny. Připomíná nápisy na starých autech a dílenských cedulích a vejde se ho hodně i na obrazovku telefonu.</div>
-    <div class="box"><b>Běžný text: Barlow</b><div class="txt">Když jde jen o nový lak, jsou to týdny.</div>Na delší věty v carouselech a na popisky. Obě písma jsou zdarma.</div>
-  </div>
-
-  <h3>Jak to vypadá ve videu a na profilu</h3>
-  <div class="demo-row">
-    <div><div class="phone" style="background-image:url(img/lakovani-911.jpg)"><div class="sub">Takhle <em>přijel</em></div></div><div class="demo-label">Titulky ve videu: bílé s černým obrysem, jedno slovo v medové.</div></div>
-    <div><div class="phone warm grain" style="background-image:url(img/mercedes-w115.jpg);background-position:30% center"><div class="top"><span class="plate">Na cestách</span></div><div class="bottom">Cesta<br>na <em>sraz</em></div></div><div class="demo-label">Obálka videa Jízda: teplé světlo a jemné zrno.</div></div>
-    <div><div class="phone" style="background-image:url(img/karoserie-oranzova.jpg)"><div class="top"><span class="plate">1971 · Porsche 911 S</span></div><div class="bottom">5 let<br>v <em>dílně</em></div></div><div class="demo-label">Obálka: štítek s autem nahoře, 2–3 slova dole.</div></div>
-    <div><div class="phone question"><div class="top"><span class="plate">Ptáte se</span></div><div class="bottom">Kolik stojí lak veterána?</div></div><div class="demo-label">Obálka pro odpovědi na otázky: celá v barvě koňaku.</div></div>
-  </div>
-  <p class="photo-note">Fotky v ukázkách jsou z vašeho webu, jen pro představu. Ve skutečných videích a obálkách budete vy a auta z vašich videí.</p>
-
-  <h3>Pravidla v kostce</h3>
-  <ul class="rules">
-    <li>Pozadí krémové nebo fotka, u obálky Ptáte se koňak. Tmavá ořechová jen jako proužek pod textem.</li>
-    <li>Nadpisy vždy Barlow Condensed velkými písmeny.</li>
-    <li>Na obálce vždy štítek: rok a model auta, nebo název pilíře (Na cestách, Ptáte se).</li>
-    <li>Logo malé v rohu, vždy bílé.</li>
-    <li>Záběry z jízdy a nálady teplé s jemným zrnem. Zblízka na lak bez filtru.</li>
-    <li>Tyrkys nejvýš jeden detail na slidu.</li>
-    <li>Na jednom slidu nebo obálce nejvýš jedna myšlenka.</li>
-  </ul>
-</section>
-
-<section class="card" id="pilire">
-  <h2><span class="n">4</span>O čem budou videa: 5 pilířů</h2>
+<section class="card" id="scenar">
+  <h2><span class="n">1</span>První video: Defender</h2>
+  <p><strong>Stojíte před zakrytým Defenderem</strong> a ukážete, jak k vám přijel. Pak řeknete, co se s ním dělo.</p>
+  <p>Auto zůstane <strong>zakryté až do konce</strong>. Celé video má <strong>asi 25–30 vteřin</strong>.</p>
+  <h3>Scénář</h3>
   <table class="stack">
-    <thead><tr><th>Pilíř</th><th>O čem</th><th>K čemu</th></tr></thead>
+    <thead><tr><th>Čas</th><th>Co řeknete</th><th>Co je vidět</th></tr></thead>
     <tbody>
-      <tr><td class="nm">Na cestách</td><td data-l="O čem">Staré auto, jak jezdí nebo jak vypadá v krajině. Z okna, za volantem, mezi stromy. Nálada a stará česká písnička.</td><td data-l="K čemu"><b>Dosah.</b> Hodně u vás fungují videa, kde jsou retro auta a stará česká písnička, třeba Žigulíky. Na cestách na to navazuje: stejná nálada, jen auto jede.</td></tr>
-      <tr><td class="nm">Domluva</td><td data-l="O čem">Jak to u vás chodí, z vašeho pohledu. Hovor s majitelem, první prohlídka auta, výběr odstínu, předání klíčů.</td><td data-l="K čemu"><b>Důvěra a poptávka.</b> Lidi uvidí, jak se s vámi domlouvá, ještě než vám napíšou.</td></tr>
-      <tr><td class="nm">V dílně</td><td data-l="O čem">Jedna věc z práce obrazem. Měření odstínu, vrstvy starého laku, pyrolýza.</td><td data-l="K čemu"><b>Důvěra.</b> Kvalitu neříkáte, ukazujete ji.</td></tr>
-      <tr><td class="nm">Před a po</td><td data-l="O čem">Takhle přijel, takhle odjíždí. Odhalení zakrytého auta.</td><td data-l="K čemu"><b>Dosah a důvěra.</b></td></tr>
-      <tr><td class="nm">Ptáte se</td><td data-l="O čem">Odpovědi na otázky z komentářů a zpráv: ceny, jak dlouho to trvá, jestli děláte i klempířské opravy.</td><td data-l="K čemu"><b>Poptávka.</b> Kdo se chystá auto svěřit, dostane odpověď dřív, než se zeptá.</td></tr>
+      <tr><td class="time">0–3 s</td><td data-l="Co řeknete" class="quote">„Tenhle Defender k nám přijel takhle.“</td><td data-l="Co je vidět"><span class="zc">Záběr 1</span>Ukážete telefon s videem z příjezdu.</td></tr>
+      <tr><td class="time">3–6 s</td><td data-l="Co řeknete" class="quote">„<span class="odhad">A dneska od nás odjíždí.</span> Ale nejdřív vám řeknu, co s ním bylo.“</td><td data-l="Co je vidět"><span class="zc">Záběr 2</span>Sáhnete na plachtu, ale nesundáte ji.</td></tr>
+      <tr><td class="time">6–10 s</td><td data-l="Co řeknete"><span class="odhad">„Majitel chtěl, aby vypadal jako nový, ale pořád jezdil do terénu.“</span></td><td data-l="Co je vidět"><span class="zc">Záběr 2</span>Mluvíte u zakrytého auta.</td></tr>
+      <tr><td class="time">10–17 s</td><td data-l="Co řeknete"><span class="quote">„Takže jsme ho…</span> <span class="odhad">rozebrali, dali mu nová kola a díly a teď jde do lakovny na nový lak.“</span></td><td data-l="Co je vidět"><span class="zc">Záběr 3</span>Vaše videa z práce na autě.</td></tr>
+      <tr><td class="time">17–22 s</td><td data-l="Co řeknete"><span class="quote">„A nejvíc zabrat nám dalo…</span> <span class="odhad">čekání na součástky. Protože na kola a díly jsme čekali několik týdnů.“</span></td><td data-l="Co je vidět"><span class="zc">Záběr 3</span>Krabice s díly nebo kola před montáží.</td></tr>
+      <tr class="reveal"><td class="time">22–25 s</td><td data-l="Co řeknete">nic, jen zvuk plachty</td><td data-l="Co je vidět"><span class="zc">Záběr 4 a 6</span>Strhnete plachtu. Mezi tím krátké detaily auta.</td></tr>
+      <tr class="reveal"><td class="time">25–27 s</td><td data-l="Co řeknete" class="quote">„Tak co, poznali byste ho?“</td><td data-l="Co je vidět"><span class="zc">Záběr 5</span>Stojíte u hotového auta.</td></tr>
+      <tr><td class="time">27–30 s</td><td data-l="Co řeknete">nic</td><td data-l="Co je vidět">2–3 přeřeky z natáčení.</td></tr>
     </tbody>
   </table>
-  <h3>Tři účely videa</h3>
-  <p>Každé video má jeden hlavní účel, někdy pomůže i druhému. Úspěšný Instagram potřebuje všechny tři.</p>
-  <div class="purpose">
-    <div><b>Dosah</b>Uvidí vás lidi, kteří vás zatím neznají.</div>
-    <div><b>Důvěra</b>Uvidí, jak pracujete, a začnou vás sledovat.</div>
-    <div><b>Poptávka</b>Vědí, co udělat, když chtějí auto k vám.</div>
-  </div>
-  <h3>Jak to střídat</h3>
-  <p>Jedno video týdně. Za měsíc:</p>
-  <div class="mix">
-    <div><b>Týden 1</b>Na cestách</div>
-    <div><b>Týden 2</b>Domluva</div>
-    <div><b>Týden 3</b>V dílně nebo Před a po</div>
-    <div><b>Týden 4</b>Ptáte se</div>
-  </div>
-  <p class="note">Krátké jízdy můžete přidat kdykoli navíc, jsou rychlé na natočení.</p>
+  <p class="note">Věty řekněte vlastními slovy. Jak má který záběr vypadat, najdete v části 2.</p>
+
+  <h3>Popisek k videu</h3>
+  <div class="caption"><span id="caption-text">Tenhle Land Rover Defender k nám přijel takhle a po pár týdnech od nás odjíždí.
+
+<span class="odhad">Dostal nová kola a díly a nový lak. Nejvíc zabrat dalo čekání na součástky.</span>
+
+Poznali byste ho? Napište nám do komentářů. A sledujte nás, ať vám neuteče další auto, které k nám přijede.
+
+#landrover #defender #veterancs #lakovna #predapo</span><button class="copy" type="button" data-copy="caption-text">Zkopírovat popisek</button></div>
 </section>
 
-<section class="card" id="formaty">
-  <h2><span class="n">5</span>Formáty videí</h2>
-  <table class="stack small">
-    <thead><tr><th>Formát</th><th>Co v něm je</th><th>Délka</th><th>Hudba</th><th>Účel</th></tr></thead>
-    <tbody>
-      <tr><td class="nm">Jízda<small>pilíř Na cestách</small></td><td data-l="Co v něm je">3–5 záběrů: z okna, ruka na volantu, auto projede kolem telefonu, krajina. Jedna věta na obrazovce, auto a rok, třeba „[auto], [rok]. Cesta na sraz.“</td><td data-l="Délka">7–15 s</td><td data-l="Hudba">stará česká písnička nese celé video</td><td data-l="Účel" class="ucel">Dosah</td></tr>
-      <tr><td class="nm">Hádejte rok<small>pilíř Na cestách</small></td><td data-l="Co v něm je">Tři auta vedle sebe na zahradě. Na obrazovce „Který je nejstarší?“ Pak u každého auta rok, od nejmladšího.</td><td data-l="Délka">15–25 s</td><td data-l="Hudba">nostalgická písnička</td><td data-l="Účel" class="ucel">Dosah</td></tr>
-      <tr><td class="nm">Předání<small>pilíř Domluva</small></td><td data-l="Co v něm je">Majitel si přijede pro hotové auto. Klíče, první nastartování, odjezd z areálu. Pak 2–3 záběry auta na silnici.</td><td data-l="Délka">15–25 s</td><td data-l="Hudba">od chvíle, kdy auto vyjede, nostalgická písnička</td><td data-l="Účel" class="ucel">Dosah, poptávka</td></tr>
-      <tr><td class="nm">Domluva z vašeho pohledu<small>pilíř Domluva</small></td><td data-l="Co v něm je">Telefon držíte vy, nebo ho máte na hrudi. Hovor s majitelem na hlasitý odposlech, nebo první prohlídka: „Tak co s ním chcete dělat?“ Titulky na všechno. Majitel jen se svolením, klidně jen ruce a hlas.</td><td data-l="Délka">20–40 s</td><td data-l="Hudba">potichu nebo vůbec, rozhovor musí být slyšet</td><td data-l="Účel" class="ucel">Důvěra, poptávka</td></tr>
-      <tr><td class="nm">Takhle přijel<small>pilíř Před a po</small></td><td data-l="Co v něm je">Vy u zakrytého auta, co se dělalo, na konci odhalení. Takový je scénář Defenderu.</td><td data-l="Délka">25–30 s</td><td data-l="Hudba">potichu pod řečí</td><td data-l="Účel" class="ucel">Dosah, důvěra</td></tr>
-      <tr><td class="nm">Jedna věc z lakovny<small>pilíř V dílně</small></td><td data-l="Co v něm je">Jeden úkon zblízka: měření odstínu, vrstvy laku, broušení. Řeknete jednou větou, co se děje.</td><td data-l="Délka">15–25 s</td><td data-l="Hudba">zvuk dílny, hudba potichu</td><td data-l="Účel" class="ucel">Důvěra</td></tr>
-      <tr><td class="nm">Ptáte se<small>pilíř Ptáte se</small></td><td data-l="Co v něm je">Přečtete otázku z komentáře a odpovíte.</td><td data-l="Délka">20–30 s</td><td data-l="Hudba">bez hudby nebo potichu</td><td data-l="Účel" class="ucel">Poptávka</td></tr>
-    </tbody>
-  </table>
-  <p class="note">U formátu je první uvedený účel ten hlavní. Každý formát jde opakovat s jiným autem. Předání a Jízda tvoří dvojici: auto od vás odjíždí a v dalším videu už jede krajinou.</p>
+<section class="card" id="nataceni">
+  <h2><span class="n">2</span>Jak to natočit</h2>
+  <p><strong>Šest záběrů.</strong> U každého je nákres, jak má vypadat, odkud ho natočit a kolikrát. Čísla sedí na štítky ve scénáři.</p>
+  <div class="zab">
+    <article class="zb"><img src="nakresy/z1.jpg" alt="Nákres: žena stojí vlevo před zakrytým autem a ukazuje telefon do kamery" loading="lazy">
+      <div class="tx"><h4><i>1</i>Úvod s telefonem</h4>
+      <p>Stojíte vlevo v záběru, za vámi <strong>zakryté auto</strong>. V ruce telefon s videem z příjezdu, displejem ke kameře.</p>
+      <dl><div><dt>Odkud</dt><dd>2 metry před vámi, ve výšce očí</dd></div><div><dt>Kolikrát</dt><dd>3×</dd></div></dl></div></article>
+    <article class="zb"><img src="nakresy/z2.jpg" alt="Nákres: žena mluví do kamery a má ruku na plachtě, která zakrývá auto" loading="lazy">
+      <div class="tx"><h4><i>2</i>Mluvíte u plachty</h4>
+      <p>Řeknete <strong>všechny věty od 3. do 22. vteřiny</strong>. Přes poslední dvě pak dáme záběry z práce. Na plachtu jen sáhnete.</p>
+      <dl><div><dt>Odkud</dt><dd>stejné místo jako záběr 1</dd></div><div><dt>Kolikrát</dt><dd>každou větu 3×</dd></div></dl></div></article>
+    <article class="zb"><img src="nakresy/z3.jpg" alt="Nákres: ruce v rukavicích dotahují kolo, vedle krabice s díly" loading="lazy">
+      <div class="tx"><h4><i>3</i>Ruce při práci</h4>
+      <p>Kola, krabice s díly, broušení. Jen ruce, bez mluvení. <strong>Točte už teď</strong>, dokud se na autě pracuje.</p>
+      <dl><div><dt>Odkud</dt><dd>z boku, 30–50 cm od rukou</dd></div><div><dt>Kolikrát</dt><dd>4–5 videí po 5 vteřinách</dd></div></dl></div></article>
+    <article class="zb"><img src="nakresy/z4.jpg" alt="Nákres: žena u zadního rohu strhává plachtu z auta, auto je vidět celé" loading="lazy">
+      <div class="tx"><h4><i>4</i>Strhnutí plachty</h4>
+      <p><strong>Celé auto v záběru.</strong> Stojíte u zadního rohu a táhnete plachtu k sobě dozadu.</p>
+      <dl><div><dt>Odkud</dt><dd>4–5 metrů šikmo zepředu, ve výšce pasu</dd></div><div><dt>Kolikrát</dt><dd>3×, plachtu vždy urovnat</dd></div></dl></div></article>
+    <article class="zb"><img src="nakresy/z5.jpg" alt="Nákres: žena stojí u odkrytého auta a ukazuje na něj rukou" loading="lazy">
+      <div class="tx"><h4><i>5</i>Otázka na konec</h4>
+      <p>Plachta je dole. Telefon vraťte na místo záběru 1 a zeptejte se: <strong>„Tak co, poznali byste ho?“</strong></p>
+      <dl><div><dt>Odkud</dt><dd>2 metry před vámi, ve výšce očí</dd></div><div><dt>Kolikrát</dt><dd>3×</dd></div></dl></div></article>
+    <article class="zb"><img src="nakresy/z6.jpg" alt="Nákres: detail předního světla a masky auta" loading="lazy">
+      <div class="tx"><h4><i>6</i>Detaily auta</h4>
+      <p><strong>3–4 detaily</strong> hotového auta: znak, světlo, odlesk v laku.</p>
+      <dl><div><dt>Odkud</dt><dd>30–60 cm, telefonem pomalu podél</dd></div><div><dt>Kolikrát</dt><dd>každý detail 2×</dd></div></dl></div></article>
+  </div>
+  <p class="note">Nákresy jsou jen pro představu. Auto i místo budou vaše.</p>
+
   <div class="grid">
-    <div class="box"><b>Hudba</b>Nostalgická, nebo staré české písničky, jak to máte u videa se Žigulíky. U Jízdy a Předání písnička nese video. U mluvených videí ji dejte potichu pod řeč. Když nějaká písnička v nabídce Instagramu chybí, bývá to tím, že firemní účty mají menší výběr hudby. Napište nám a najdeme náhradu.</div>
-    <div class="box"><b>Další videa po Defenderu</b><ul>
-      <li><b style="display:inline;font:inherit;font-weight:600;text-transform:none;letter-spacing:0">Oranžové Porsche 911 S:</b> konečně video „po“. Stojíte u hotového auta a řeknete, proč trvalo 5 let.</li>
-      <li><b style="display:inline;font:inherit;font-weight:600;text-transform:none;letter-spacing:0">Porsche na cestách:</b> hotové 911 S na silnici, z okna a za volantem, se starou českou písničkou.</li>
-      <li><b style="display:inline;font:inherit;font-weight:600;text-transform:none;letter-spacing:0">Jeep:</b> díl z renovace a za pár měsíců odhalení hotového auta.</li>
-      <li><b style="display:inline;font:inherit;font-weight:600;text-transform:none;letter-spacing:0">Ptáte se:</b> „Kolik stojí lak veterána?“ a na čem cena záleží.</li>
-      <li><b style="display:inline;font:inherit;font-weight:600;text-transform:none;letter-spacing:0">Jak to celé začalo:</b> příběh GAZu na zahradě a proč máte vlastní lakovnu.</li>
+    <div class="box"><b>Co si připravit</b><ul>
+      <li><strong>Telefon na natáčení</strong>, nabitý a s utřeným objektivem.</li>
+      <li><strong>Druhý telefon</strong> s videem z příjezdu, ten držíte v ruce.</li>
+      <li><strong>Měkkou plachtu</strong> nebo prostěradlo přes celé auto, ať se nepoškrábe lak.</li>
+      <li><strong>Stativ</strong>, nebo něco, o co telefon opřete.</li>
+      <li><strong>Pomocníka</strong>, který hlídá telefon a přenáší ho.</li>
+    </ul></div>
+    <div class="box"><b>Na co si dát pozor</b><ul>
+      <li>Točte <strong>na výšku</strong>, venku před lakovnou.</li>
+      <li><strong>Slunce zboku</strong> nebo za mraky. Ne do obličeje a ne za vámi.</li>
+      <li><strong>Zvuk:</strong> mikrofon do klopy. Když ho nemáte, dejte si do kapsy pomocníkův telefon se zapnutým diktafonem.</li>
+      <li><strong>Plachtu a detaily</strong> točte v 60 snímcích za vteřinu, ať je můžeme zpomalit.</li>
+      <li><strong>Přeřeky nemažte</strong>, pošlete nám je. Budou na konci videa.</li>
     </ul></div>
   </div>
+  <p class="note"><strong>Pošlete nám i videa, která už máte:</strong> z příjezdu Defenderu a z práce na něm. V původní kvalitě přes odkaz, který vám pošleme, ne přes WhatsApp.</p>
 </section>
 
 <section class="card" id="carousel">
-  <h2><span class="n">6</span>Carousel zdarma: Jak dlouho trvá renovace?</h2>
-  <p>Tenhle carousel (v hodnotě 1 500 Kč) vám uděláme zdarma. Na každém slidu je fotka z vaší dílny přes celý slide, text je dole na tmavém proužku. Zvýrazněné slovo je v medové barvě, tyrkysová je jen tenká linka pod textem.</p>
-  <div class="cgrid" id="slides"></div>
-  <p class="photo-note">Fotky na ukázce jsou z vašeho webu, jen pro představu. Do hotového carouselu dáme fotky Porsche a Jeepu z vašich videí v plném rozlišení.</p>
+  <h2><span class="n">3</span>Carousel zdarma: Jak dlouho trvá renovace?</h2>
+  <p>Tenhle carousel (v hodnotě 1 500 Kč) vám uděláme zdarma. Odpovídá na otázku, kterou dostáváte často.</p>
+  <div class="cs-grid">
+    <div><div class="cs t-cover" role="img" aria-label="Slide 1: Tohle Porsche jsme dělali asi 5 let. Proč tak dlouho?">
+      <div class="ph" style="background-image:url(img/porsche-911s-venku-stred.jpg);--posF:60% 40%;background-size:auto 140%"></div>
+      <div class="bx"><p class="h">Tohle Porsche jsme dělali asi <em>5 let</em>.</p><p class="s">Proč tak dlouho?</p></div>
+    </div><div class="cs-cap">Slide 1</div></div>
 
-  <h3>Text slidů</h3>
-  <table class="stack">
-    <thead><tr><th>Slide</th><th>Text</th></tr></thead>
-    <tbody>
-      <tr><td class="time">1</td><td data-l="Text"><b>Tohle Porsche jsme renovovali asi 5 let. Proč?</b></td></tr>
-      <tr><td class="time">2</td><td data-l="Text">Ptáte se nás často, jak dlouho trvá renovace. Odpověď: od pár týdnů po pár let.</td></tr>
-      <tr><td class="time">3</td><td data-l="Text"><b>Jen nový lak:</b> pár týdnů.</td></tr>
-      <tr><td class="time">4</td><td data-l="Text"><b>Velká renovace, třeba Jeep, který teď děláme:</b> počítáme <span class="odhad">zhruba půl roku</span>.</td></tr>
-      <tr><td class="time">5</td><td data-l="Text"><b>Oranžové Porsche 911 S:</b> asi 5 let.</td></tr>
-      <tr><td class="time">6</td><td data-l="Text">Proč tak dlouho? Čeká se na klempíře, na lak a na díly.</td></tr>
-      <tr><td class="time">7</td><td data-l="Text">U Porsche se všechno stavělo znovu.</td></tr>
-      <tr><td class="time">8</td><td data-l="Text">Jeep, který jsme vám ukázali v říjnu, teprve začíná. <span class="odhad">Až bude hotový, ukážeme ho.</span></td></tr>
-    </tbody>
-  </table>
+    <div><div class="cs t-text ls" style="--h:100cqw" role="img" aria-label="Slide 2: Ptáte se nás pořád: jak dlouho trvá renovace? Každé auto potřebuje něco jiného.">
+      <div class="ph" style="background-image:url(img/lakovna-hala.jpg);--posL:36% 80%"></div>
+      <div class="bx"><p class="h">Ptáte se nás pořád: jak dlouho trvá <em>renovace</em>?</p><p class="s">Každé auto potřebuje něco jiného.</p></div>
+    </div><div class="cs-cap">Slide 2</div></div>
+
+    <div><div class="cs t-data ls c" style="--h:86cqw" role="img" aria-label="Slide 3: Jen nový lak: pár týdnů">
+      <div class="ph" style="background-image:url(img/karoserie-cervena.jpg);--posL:center 58%"></div>
+      <div class="bx"><div class="lab">Jen nový lak</div><div class="val">pár týdnů</div></div>
+    </div><div class="cs-cap">Slide 3</div></div>
+
+    <div><div class="cs t-data top" role="img" aria-label="Slide 4: Velká renovace. U Jeepu, co teď děláme, počítáme: ½ roku">
+      <div class="ph" style="background-image:url(img/jeep-video-hq.jpg);--posF:center top"></div>
+      <div class="bx"><div class="lab">Velká renovace. U Jeepu, co teď děláme, počítáme</div><div class="val">½ roku</div></div>
+    </div><div class="cs-cap">Slide 4<span class="tag">odhad</span></div></div>
+
+    <div><div class="cs t-data r" role="img" aria-label="Slide 5: Oranžové Porsche 911 S: asi 5 let">
+      <div class="ph" style="background-image:url(img/porsche-911s-denisa.jpg);--posF:center 40%"></div>
+      <div class="bx"><div class="lab">Oranžové Porsche 911 S</div><div class="val">asi 5 let</div></div>
+    </div><div class="cs-cap">Slide 5</div></div>
+
+    <div><div class="cs t-text ls" style="--h:96cqw" role="img" aria-label="Slide 6: Proč tak dlouho? Nejdřív se čeká na klempíře. Až potom jde auto na lak. A součástky trvají, než přijdou.">
+      <div class="ph" style="background-image:url(img/karoserie-oranzova.jpg);--posL:center 40%"></div>
+      <div class="bx"><p class="h">Proč tak <em>dlouho</em>?</p><p class="s">Nejdřív se čeká na klempíře. Až potom jde auto na lak. A součástky trvají, než přijdou.</p></div>
+    </div><div class="cs-cap">Slide 6</div></div>
+
+    <div><div class="cs t-text ls c" style="--h:96cqw" role="img" aria-label="Slide 7: U Porsche se všechno stavělo odznova.">
+      <div class="ph" style="background-image:url(img/lakovani-911.jpg);--posL:28% 60%"></div>
+      <div class="bx"><p class="h">U Porsche se všechno stavělo <em>odznova</em>.</p></div>
+    </div><div class="cs-cap">Slide 7</div></div>
+
+    <div><div class="cs t-end" role="img" aria-label="Slide 8: A Jeep? Ten teprve začíná. Až bude hotový, ukážeme vám ho.">
+      <div class="ph" style="background-image:url(img/jeep-predek-hq.jpg);--posF:center 35%"></div>
+      <div class="bx"><p class="h">A Jeep? Ten teprve <em>začíná</em>.</p><p class="s">Až bude hotový, ukážeme vám ho.</p></div>
+    </div><div class="cs-cap">Slide 8<span class="tag">odhad</span></div></div>
+  </div>
+  <p class="photo-note">Fotky jsou z vašich videí a z vašeho webu. Snímky z videí jsme zvětšili a doladili; do hotového carouselu rádi použijeme vaše fotky v plné kvalitě.</p>
+
   <h3>Popisek ke carouselu</h3>
   <div class="caption"><span id="caption-carousel">Jak dlouho trvá renovace veterána? Ptáte se nás na to často, tak tady to máte.
 
@@ -444,133 +733,23 @@ Jeep teprve začíná. <span class="odhad">Sledujte nás, ať vám neuteče, jak
   <p class="note">Délka u Jeepu a slib na konci jsou náš odhad.</p>
 </section>
 
-<section class="card" id="scenar">
-  <h2><span class="n">7</span>První video: Defender</h2>
-  <p>Na začátku stojíte před zakrytým Defenderem a ukážete, jak k vám přijel. Pak řeknete, co se s ním dělo. Auto zůstane zakryté až do konce, aby lidi chtěli vidět, jak vypadá teď. Na konci strhnete plachtu a zeptáte se, jestli by ho poznali. Délka asi 25–30 vteřin.</p>
-  <h3>Scénář</h3>
-  <table class="stack">
-    <thead><tr><th>Čas</th><th>Co řeknete</th><th>Text na obrazovce (doplníme my)</th><th>Co je vidět</th><th>Záběr</th></tr></thead>
-    <tbody>
-      <tr><td class="time">0–3 s</td><td data-l="Co řeknete" class="quote">„Tenhle Defender k nám přijel takhle.“</td><td data-l="Text na obrazovce" class="ost">TAKHLE PŘIJEL. POZNÁTE HO NA KONCI?</td><td data-l="Co je vidět">Stojíte před zakrytým autem a do kamery ukážete telefon s videem z příjezdu. Potom video z příjezdu dáme přes celý obraz.</td><td data-l="Záběr">Z1 + vaše videa z příjezdu</td></tr>
-      <tr><td class="time">3–6 s</td><td data-l="Co řeknete" class="quote">„<span class="odhad">A dneska od nás odjíždí.</span> Ale nejdřív vám řeknu, co s ním bylo.“</td><td data-l="Text na obrazovce" class="ost">DNESKA ODJÍŽDÍ</td><td data-l="Co je vidět">Sáhnete na plachtu, ale nesundáte ji.</td><td data-l="Záběr">Z2</td></tr>
-      <tr><td class="time">6–10 s</td><td data-l="Co řeknete"><span class="odhad">„Majitel chtěl, aby vypadal jako nový, ale pořád jezdil do terénu.“</span></td><td data-l="Text na obrazovce">—</td><td data-l="Co je vidět">Mluvíte do kamery u zakrytého auta.</td><td data-l="Záběr">Z2</td></tr>
-      <tr><td class="time">10–17 s</td><td data-l="Co řeknete"><span class="quote">„Takže jsme ho…</span> <span class="odhad">rozebrali, dali mu nová kola a díly a teď jde do lakovny na nový lak.“</span></td><td data-l="Text na obrazovce" class="ost"><span class="odhad">KOLA A DÍLY · NOVÝ LAK</span></td><td data-l="Co je vidět">Vaše videa z průběhu práce, pokud je máte. Jinak další videa z příjezdu.</td><td data-l="Záběr">Z3</td></tr>
-      <tr><td class="time">17–22 s</td><td data-l="Co řeknete"><span class="quote">„A nejvíc zabrat nám dalo…</span> <span class="odhad">čekání na součástky. Protože na kola a díly jsme čekali několik týdnů.“</span></td><td data-l="Text na obrazovce" class="ost">ČEKÁNÍ NA DÍLY</td><td data-l="Co je vidět">Krabice s novými díly nebo kola před montáží. Jinak video z příjezdu.</td><td data-l="Záběr">Z3</td></tr>
-      <tr class="reveal"><td class="time">22–25 s</td><td data-l="Co řeknete">—</td><td data-l="Text na obrazovce">—</td><td data-l="Co je vidět">Strhnete plachtu, hotový Defender. Mezi tím krátké detaily auta.</td><td data-l="Záběr">Z4, Z6</td></tr>
-      <tr class="reveal"><td class="time">25–27 s</td><td data-l="Co řeknete" class="quote">„Tak co, poznali byste ho?“</td><td data-l="Text na obrazovce" class="ost">POZNALI BYSTE HO?</td><td data-l="Co je vidět">Stojíte u hotového auta a ptáte se do kamery.</td><td data-l="Záběr">Z5</td></tr>
-      <tr><td class="time">27–30 s</td><td data-l="Co řeknete">—</td><td data-l="Text na obrazovce">—</td><td data-l="Co je vidět">2–3 přeřeky z natáčení.</td><td data-l="Záběr">Z7</td></tr>
-    </tbody>
-  </table>
-
-  <h3>Totéž v bodech</h3>
-  <ol class="steps">
-    <li>Postavte se před zakrytý Defender, ukažte do kamery telefon s videem z příjezdu a řekněte „Tenhle Defender k nám přijel takhle.“</li>
-    <li>„A dneska od nás odjíždí. Ale nejdřív vám řeknu, co s ním bylo.“</li>
-    <li>Jednou větou, co majitel chtěl.</li>
-    <li>2–3 věci, co jste na něm dělali.</li>
-    <li>Co dalo nejvíc zabrat a proč (třeba čekání na díly).</li>
-    <li>Strhněte plachtu, vraťte se na místo u telefonu A a zeptejte se: „Tak co, poznali byste ho?“</li>
-    <li>Přeřeky nemažte, pošlete nám je. Na konci videa budou.</li>
-  </ol>
-  <p class="note">Názvy aut a dílů v titulcích zkontrolujeme, aby byly správně.</p>
-
-  <h3>Popisek k videu</h3>
-  <div class="caption"><span id="caption-text">Tenhle Land Rover Defender k nám přijel takhle a po pár týdnech od nás odjíždí.
-
-<span class="odhad">Dostal nová kola a díly a nový lak. Nejvíc zabrat dalo čekání na součástky.</span>
-
-Poznali byste ho? Napište nám do komentářů. A sledujte nás, ať vám neuteče další auto, které k nám přijede.
-
-#landrover #defender #veterancs #lakovna #predapo</span><button class="copy" type="button" data-copy="caption-text">Zkopírovat popisek</button></div>
-  <p class="note">Věty o tom, co se na Defenderu dělalo, jsou náš odhad. Upravíme je podle vašich odpovědí.</p>
-</section>
-
-<section class="card" id="nataceni">
-  <h2><span class="n">8</span>Jak to natočit<span class="new">záběr po záběru</span></h2>
-  <p>Auto stojí bokem ke kameře, vy u předního rohu. Telefon A stojí 2 metry před vámi ve výšce očí. Pro strhnutí plachty se telefon posune na místo B, 4–5 metrů šikmo od předního rohu, ve výšce pasu. Slunce má svítit zboku nebo být za mraky. Ne přímo do obličeje a ne za vámi.</p>
-  <div class="plan">
-    <svg viewBox="0 0 720 360" role="img" aria-label="Plánek místa natáčení shora: auto, vaše místo, telefon A a telefon B">
-      <rect x="0" y="0" width="720" height="360" fill="#FBF8F3"/>
-      <text x="20" y="30" class="tm">pohled shora</text>
-      <!-- auto -->
-      <rect x="190" y="70" width="300" height="120" rx="22" fill="#E9DFD0" stroke="#211A14" stroke-width="2"/>
-      <rect x="208" y="86" width="264" height="88" rx="14" fill="none" stroke="#9A4A1E" stroke-width="2" stroke-dasharray="7 6"/>
-      <text x="340" y="126" text-anchor="middle" class="tb">DEFENDER</text>
-      <text x="340" y="148" text-anchor="middle" class="tm">pod plachtou</text>
-      <text x="500" y="135" class="tm">předek →</text>
-      <!-- Denisa Z1 Z2 Z5 -->
-      <circle cx="455" cy="222" r="15" fill="#9A4A1E"/>
-      <text x="478" y="218" class="t">vy (Z1, Z2, Z5)</text>
-      <!-- Denisa Z4 -->
-      <circle cx="205" cy="222" r="15" fill="none" stroke="#9A4A1E" stroke-width="3"/>
-      <text x="40" y="226" class="t">vy při Z4</text>
-      <path d="M190 222 L150 222" stroke="#9A4A1E" stroke-width="3" marker-end="url(#ar)"/>
-      <text x="60" y="252" class="tm">plachtu táhnete k sobě, dozadu</text>
-      <!-- kamera A -->
-      <rect x="440" y="300" width="30" height="20" rx="4" fill="#211A14"/>
-      <path d="M455 300 L430 240 M455 300 L480 240" stroke="#211A14" stroke-width="1.5" stroke-dasharray="4 4"/>
-      <text x="430" y="315" text-anchor="end" class="t">telefon A · 2 m · výška očí</text>
-      <!-- kamera B -->
-      <rect x="625" y="235" width="30" height="20" rx="4" fill="#211A14"/>
-      <path d="M628 237 L490 190 M630 240 L190 190" stroke="#211A14" stroke-width="1.5" stroke-dasharray="4 4" opacity=".6"/>
-      <text x="640" y="276" text-anchor="middle" class="t">telefon B · 4–5 m</text>
-      <text x="640" y="294" text-anchor="middle" class="tm">šikmo, výška pasu (Z4)</text>
-      <!-- slunce -->
-      <circle cx="40" cy="340" r="11" fill="#D9A35B"/>
-      <text x="60" y="345" class="tm">slunce zboku nebo za mraky, ne za vámi</text>
-      <defs><marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#9A4A1E"/></marker></defs>
-    </svg>
-  </div>
-
-  <table class="stack small">
-    <thead><tr><th>Záběr</th><th>Ve videu</th><th>Co je v záběru</th><th>Odkud</th><th>Pohyb</th><th>Zvuk</th><th>Kolikrát</th></tr></thead>
-    <tbody>
-      <tr><td class="time">Z1</td><td data-l="Ve videu">0–3 s</td><td data-l="Co je v záběru">Vy od pasu nahoru vlevo v obraze, za vámi zakryté auto přes celou šířku. V ruce telefon s videem z příjezdu, displejem ke kameře.</td><td data-l="Odkud">A: 2 m, výška očí, objektiv 1×</td><td data-l="Pohyb">žádný, telefon na stativu nebo opřený</td><td data-l="Zvuk">mikrofon v klopě nebo diktafon v kapse</td><td data-l="Kolikrát">3×</td></tr>
-      <tr><td class="time">Z2</td><td data-l="Ve videu">3–10 s v obraze, hlas až do 22 s</td><td data-l="Co je v záběru">Mluvíte u plachty, věty ze scénáře. Na „Ale nejdřív vám řeknu…“ sáhnete na plachtu.</td><td data-l="Odkud">A: stejné místo. Každou větu 2× takhle a 1× o krok blíž (od hrudi nahoru).</td><td data-l="Pohyb">žádný</td><td data-l="Zvuk">mikrofon v klopě nebo diktafon v kapse</td><td data-l="Kolikrát">každá věta 3×</td></tr>
-      <tr><td class="time">Z3</td><td data-l="Ve videu">10–22 s</td><td data-l="Co je v záběru">Ruce při práci na Defenderu: kola, krabice s díly, broušení.</td><td data-l="Odkud">30–50 cm od rukou, z boku</td><td data-l="Pohyb">pomalu podél, 2–3 s</td><td data-l="Zvuk">zvuk dílny, nemluvit</td><td data-l="Kolikrát">4–5 krátkých, po 5 s</td></tr>
-      <tr><td class="time">Z4</td><td data-l="Ve videu">22–25 s</td><td data-l="Co je v záběru">Strhnutí plachty. Celé auto v záběru, předek a bok. Stojíte u zadního rohu a táhnete plachtu k sobě dozadu.</td><td data-l="Odkud">B: 4–5 m šikmo od předního rohu, výška pasu</td><td data-l="Pohyb">žádný. 4K 60 snímků.</td><td data-l="Zvuk">zvuk plachty</td><td data-l="Kolikrát">3×, mezi pokusy plachtu znovu urovnat</td></tr>
-      <tr><td class="time">Z5</td><td data-l="Ve videu">25–27 s</td><td data-l="Co je v záběru">Hned po odhalení u auta: „Tak co, poznali byste ho?“</td><td data-l="Odkud">A: od pasu nahoru</td><td data-l="Pohyb">žádný</td><td data-l="Zvuk">mikrofon v klopě nebo diktafon v kapse</td><td data-l="Kolikrát">3×</td></tr>
-      <tr><td class="time">Z6</td><td data-l="Ve videu">22–25 s, mezi Z4, asi 1 s každý</td><td data-l="Co je v záběru">3–4 detaily hotového auta: znak, světlo, odlesk v laku.</td><td data-l="Odkud">30–60 cm</td><td data-l="Pohyb">pomalu podél, 3 s. 4K 60 snímků.</td><td data-l="Zvuk">bez řeči</td><td data-l="Kolikrát">každý 2×</td></tr>
-      <tr><td class="time">Z7</td><td data-l="Ve videu">konec</td><td data-l="Co je v záběru">Přeřeky.</td><td data-l="Odkud">jakkoli</td><td data-l="Pohyb">—</td><td data-l="Zvuk">—</td><td data-l="Kolikrát">nic nemažte</td></tr>
-    </tbody>
-  </table>
-  <p class="note"><b>Navíc, když zbude čas:</b> pro další video Jízda. Defender vyjede z areálu a projede kolem telefonu ve výšce kola. A 2–3 záběry z okna jedoucího auta: řídí pomocník, vy točíte ze sedadla spolujezdce. Nejlíp ráno nebo večer. Auto zákazníka jen s jeho svolením.</p>
-
-  <div class="grid">
-    <div class="box"><b>Kdo</b>Vy před kamerou a pomocník, který hlídá telefon na stativu a přenáší ho mezi místy A a B. Chlapi z dílny jen tehdy, když budou chtít (stačí ruce).</div>
-    <div class="box"><b>Kde</b>Venku před lakovnou u hotového Defenderu. Denní světlo, ale ne přímé slunce do obličeje. V pozadí nic, co tam nemá být.</div>
-    <div class="box"><b>Co si připravit</b><ul>
-      <li>iPhone 15 na natáčení (nabitý, s volným místem, utřený objektiv).</li>
-      <li>Druhý telefon s videem z příjezdu, ten budete držet v ruce.</li>
-      <li>Měkkou autoplachtu nebo prostěradlo přes celé auto. Ne stavební plachtu, ať se nepoškrábe nový lak.</li>
-      <li>Stativ, nebo něco, o co telefon opřete ve výšce očí.</li>
-      <li>Mikrofon do klopy, pokud ho máte. Jinak ať pomocník zapne diktafon na svém telefonu a dá vám ho do kapsy.</li>
-    </ul></div>
-    <div class="box"><b>Nastavení telefonu</b>Natáčet na výšku, 4K 30 snímků za vteřinu, objektiv 1×. Strhnutí plachty a detaily natočte ve 4K 60 snímků za vteřinu, ať je můžeme zpomalit.</div>
-  </div>
-
-  <p class="note"><b>Videa, která už máte:</b> všechna videa z příjezdu Defenderu (5–10 v galerii) a videa z průběhu práce, pokud nějaká jsou. Nahrajte je v původní kvalitě do ZandaVisuals OS (odkaz vám pošleme), ne přes WhatsApp.</p>
-  <p class="note"><b>Natáčejte už teď:</b> když se na Defenderu pracuje, natočte prosím pár krátkých videí z práce, klidně jen ruce (záběr Z3). Na výšku, stačí 5–10 vteřin.</p>
-
-  <h3>Jak může natáčecí den vypadat (stačí dopoledne)</h3>
-  <table class="stack">
-    <thead><tr><th>Čas</th><th>Co</th></tr></thead>
-    <tbody>
-      <tr><td class="time">8:30</td><td data-l="Co">auto ven, umýt, vybrat místo, zakrýt plachtou</td></tr>
-      <tr><td class="time">9:00</td><td data-l="Co">Z1 a Z2: mluvíte, každou větu 3×</td></tr>
-      <tr><td class="time">9:45</td><td data-l="Co">Z4: plachtu strhněte 3× z místa B. Potom telefon zpátky na A, plachtu sundejte a natočte Z5 3×.</td></tr>
-      <tr><td class="time">10:15</td><td data-l="Co">Z6: detaily hotového auta</td></tr>
-      <tr><td class="time">10:30</td><td data-l="Co">kontrola v telefonu: je slyšet každá věta? je auto celé v záběru?</td></tr>
-      <tr><td class="time">10:45</td><td data-l="Co">nahrát všechno do ZandaVisuals OS (odkaz vám pošleme)</td></tr>
-    </tbody>
-  </table>
-</section>
-
 <section class="card" id="dal">
-  <h2><span class="n">9</span>Co bude dál</h2>
-  <p>Až scénář po hovoru doladíme, natočíte ho u hotového Defenderu. Do 5 dnů od chvíle, kdy budeme mít všechny záběry, vám pošleme hotové video ve 3 verzích s jiným začátkem. Začátek natáčíte jen jednou, verze se budou lišit textem a prvním záběrem. Na Instagramu si je můžete vyzkoušet jako zkušební Reels a uvidíte, který začátek funguje líp. Hudbu si přidáte sama. Když budete chtít něco změnit, máte 2 kola úprav.</p>
-  <p>Kdyby vám cokoli nebylo jasné, napište mi na WhatsApp.</p>
+  <h2><span class="n">4</span>Co bude dál</h2>
+  <ol class="steps">
+    <li><strong>Zavoláme si</strong> a scénář doladíme. Pak ho natočíte u hotového Defenderu.</li>
+    <li><strong>Do 5 dnů</strong> od chvíle, kdy budeme mít všechny záběry, vám pošleme hotové video ve <strong>3 verzích</strong> s jiným začátkem. Začátek točíte jen jednou, verze poskládáme my.</li>
+    <li>Verze si můžete na Instagramu <strong>vyzkoušet jako zkušební Reels</strong> a uvidíte, který začátek funguje líp. Hudbu si přidáte sama.</li>
+    <li>Když budete chtít něco změnit, máte <strong>2 kola úprav</strong>.</li>
+  </ol>
+  <p class="note">Kdyby vám cokoli nebylo jasné, napište mi na WhatsApp.</p>
   <p class="sign">Žanek, ZandaVisuals</p>
+</section>
+
+<section class="card" id="dalsi">
+  <div class="dal-box">
+    <p>Barvy, písmo, mood board a pilíře videí najdete v brand listu.</p>
+    <a class="btn" href="brand-list.html">Brand list</a>
+  </div>
 </section>
 
 </main>
@@ -578,30 +757,6 @@ Poznali byste ho? Napište nám do komentářů. A sledujte nás, ať vám neute
 <footer><svg fill="#8A7F72" aria-hidden="true"><use href="#jiskra"/></svg>ZandaVisuals</footer>
 
 <script>
-var SLIDES=[
-  {img:'lakovani-911',h:'Tohle Porsche jsme renovovali asi <em>5 let</em>. Proč?',swipe:true},
-  {img:'karoserie-cervena',h:'Ptáte se nás často, jak dlouho trvá <em>renovace</em>.',s:'Odpověď: od pár týdnů po pár let.'},
-  {img:'lakovna-hala',lab:'Jen nový lak',val:'pár týdnů'},
-  {img:'kataforeza',lab:'Velká renovace, třeba Jeep, který teď děláme',val:'½ roku',odhad:true},
-  {img:'karoserie-oranzova',lab:'Oranžové Porsche 911 S',val:'asi 5 let'},
-  {img:'tatra-cekani',h:'Proč tak <em>dlouho</em>?',s:'Čeká se na klempíře, na lak a na díly.'},
-  {img:'karoserie-cerna',h:'U Porsche se všechno stavělo <em>znovu</em>.'},
-  {img:'jeep-video',pos:'center 15%',h:'Jeep, který jsme vám ukázali v říjnu, teprve <em>začíná</em>.',s:'Až bude hotový, ukážeme ho.',odhad:true}
-];
-document.getElementById('slides').innerHTML=SLIDES.map(function(d,i){
-  var h='<div><div class="sl" role="img" aria-label="Slide '+(i+1)+'">';
-  h+='<div class="ph" style="background-image:url(img/'+d.img+'.jpg)'+(d.pos?';background-position:'+d.pos:'')+'"></div><div class="grain-l"></div>';
-  h+='<div class="num">'+(i+1)+' / '+SLIDES.length+'</div>';
-  if(d.swipe)h+='<div class="swipe">Posuňte →</div>';
-  h+='<div class="body">';
-  if(d.lab)h+='<div class="lab">'+d.lab+'</div><div class="val'+(d.val.length>8?' long':'')+'">'+d.val+'</div>';
-  if(d.h)h+='<p class="h">'+d.h+'</p>';
-  if(d.s)h+='<p class="s">'+d.s+'</p>';
-  h+='</div><img class="lg" src="img/logo-veterancs.png" alt=""></div>';
-  h+='<div class="sl-cap">Slide '+(i+1)+(d.odhad?'<span class="tag">odhad</span>':'')+'</div></div>';
-  return h;
-}).join('');
-
 document.querySelectorAll('.copy').forEach(function(b){
   b.addEventListener('click',function(){
     b.dataset.label=b.dataset.label||b.textContent;var t=document.getElementById(b.dataset.copy).innerText.trim();
@@ -615,6 +770,24 @@ if('IntersectionObserver' in window){
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.05});
   cards.forEach(function(c){io.observe(c)});
 }else{cards.forEach(function(c){c.classList.add('in')})}
+</script>
+<div class="cte" id="cte" aria-hidden="true"></div>
+<script>
+(function(){
+  var c=document.getElementById('cte'),t=false;
+  function pos(){t=false;var h=document.documentElement.scrollHeight-innerHeight;c.style.transform='scaleX('+(h>0?Math.min(1,scrollY/h):0)+')'}
+  addEventListener('scroll',function(){if(!t){t=true;requestAnimationFrame(pos)}},{passive:true});pos();
+  var od=[].slice.call(document.querySelectorAll('nav.toc a[href^="#"]')),m={};
+  od.forEach(function(a){var s=document.getElementById(a.getAttribute('href').slice(1));if(s)m[s.id]=a});
+  if(!('IntersectionObserver' in window))return;
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    if(!e.isIntersecting)return;
+    od.forEach(function(a){a.classList.remove('akt')});
+    var a=m[e.target.id];a.classList.add('akt');
+    var n=a.parentNode;if(n.scrollWidth>n.clientWidth)n.scrollTo({left:a.offsetLeft-n.clientWidth/2+a.offsetWidth/2,behavior:'smooth'});
+  })},{rootMargin:'-30% 0px -60% 0px'});
+  Object.keys(m).forEach(function(id){io.observe(document.getElementById(id))});
+})();
 </script>
 </body>
 </html>
