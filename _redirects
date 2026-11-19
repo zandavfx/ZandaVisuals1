@@ -3,3 +3,41 @@
 # Soubory stránky jsou v /formular-app/, ať je tohle pravidlo nechytí.
 /formular/:slug/  /formular-app/  200
 /formular/:slug   /formular-app/  200
+
+# Klientské stránky (Žanek 19. 11. 2026): jednotně /klient/<klient>/scenar a /klient/<klient>/brand-list.
+# Staré adresy už klienti dostali, proto trvale přesměrovat (konkrétní pravidla před obecnými).
+/scenar_veterancs/brand-list.html  /klient/veterancs/brand-list  301
+/scenar_veterancs/brand-list       /klient/veterancs/brand-list  301
+/scenar_veterancs/index.html       /klient/veterancs/scenar      301
+/scenar_veterancs/                 /klient/veterancs/scenar      301
+/scenar_veterancs                  /klient/veterancs/scenar      301
+/scenar_veterancs/*                /klient/veterancs/:splat      301
+/scenar_vikendovepeceni/brand-list.html  /klient/vikendovepeceni/brand-list  301
+/scenar_vikendovepeceni/brand-list       /klient/vikendovepeceni/brand-list  301
+/scenar_vikendovepeceni/index.html       /klient/vikendovepeceni/brand-list  301
+/scenar_vikendovepeceni/                 /klient/vikendovepeceni/brand-list  301
+/scenar_vikendovepeceni                  /klient/vikendovepeceni/brand-list  301
+/scenar_vikendovepeceni/*                /klient/vikendovepeceni/:splat      301
+/scenar_letenkujeme/index.html  /klient/letenkujeme/scenar  301
+/scenar_letenkujeme/            /klient/letenkujeme/scenar  301
+/scenar_letenkujeme             /klient/letenkujeme/scenar  301
+/scenar_letenkujeme/*           /klient/letenkujeme/:splat  301
+/scenare/jan_albrecht/index.html  /klient/janalbrecht/scenar  301
+/scenare/jan_albrecht/            /klient/janalbrecht/scenar  301
+/scenare/jan_albrecht             /klient/janalbrecht/scenar  301
+/scenare/jan_albrecht/*           /klient/janalbrecht/:splat  301
+/scenare/Dominik_gregor_13_9/index.html  /klient/dominikgregor/scenar  301
+/scenare/Dominik_gregor_13_9/            /klient/dominikgregor/scenar  301
+/scenare/Dominik_gregor_13_9             /klient/dominikgregor/scenar  301
+/scenare/Dominik_gregor_13_9/*           /klient/dominikgregor/:splat  301
+/scenare_test/book_therapy/index.html  /klient/booktherapy/scenar  301
+/scenare_test/book_therapy/            /klient/booktherapy/scenar  301
+/scenare_test/book_therapy             /klient/booktherapy/scenar  301
+/scenare_test/book_therapy/*           /klient/booktherapy/:splat  301
+# Holá složka klienta vede na scénář, u Víkendového pečení (scénář zatím jen návrh) na brand list.
+/klient/vikendovepeceni/  /klient/vikendovepeceni/brand-list  302
+/klient/veterancs/        /klient/veterancs/scenar            302
+/klient/letenkujeme/      /klient/letenkujeme/scenar          302
+/klient/janalbrecht/      /klient/janalbrecht/scenar          302
+/klient/dominikgregor/    /klient/dominikgregor/scenar        302
+/klient/booktherapy/      /klient/booktherapy/scenar          302
