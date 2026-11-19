@@ -1,0 +1,6 @@
+Víkendové pečení — barvy (brand manuál, verze 1, 18. 11. 2026)
+
+Porcelán: #FBFAF7  RGB 251, 250, 247  — Plocha stories
+Kakao: #3A2A21  RGB 58, 42, 33  — Text, logo a tmavé plochy
+Dub: #9C5F2A  RGB 156, 95, 42  — Zvýraznění: číslo kroku, gramy, odkaz, ikony
+Hruška: #E3CF8F  RGB 227, 207, 143  — Jemný podklad pod tip nebo cenu, drobenka
