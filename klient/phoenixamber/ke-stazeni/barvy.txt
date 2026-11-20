@@ -1,0 +1,20 @@
+Phoenix Amber · barvy (brand manuál v08 Les a jantar, 19. 11. 2026)
+
+Křída   #F3EFE6   RGB 243, 239, 230  54 %   Hlavní barva: pozadí stránek, stories a e-shopu
+Smrk    #213F35   RGB 33, 63, 53     24 %   Text, logo, pásy kapitol, konec videa
+Mech    #5F7D6A   RGB 95, 125, 106   7 %   Kresby, linky, druhá plocha
+Jantar  #D9661A   RGB 217, 102, 26   12 %   Lesklý detail: jedno slovo v nadpisu, velká čísla, kresba. Malá čísla tmavým jantarem #A9470E
+Stín    #5D6A63   RGB 93, 106, 99    3 %   Popisky a drobné údaje
+
+Lesk jantaru (přechod): #A9470E → #D9661A → #F6B25A, světlý odlesk #FFE3AE.
+Na bílé jantarem jen od 56 px, menší čísla tmavým jantarem #A9470E. Na zelené jen světlým jantarem #F6B25A.
+
+Odstíny jantaru jen na kamínky a ilustrace:
+#F3EAD3
+#EFD98F
+#E2A63A
+#B5651D
+#8A6A33
+#4F7FAE
+
+Písmo: Zodiak (nadpisy, kurzíva na zvýraznění), Switzer (text, tučně 600 na důležité slovo). Zdroj: fontshare.com
